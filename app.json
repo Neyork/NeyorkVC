@@ -1,0 +1,76 @@
+{
+    "name": "NeyorkVC",
+    "description": "Music allow you to stream music trought the telegram voice chat feature.",
+    "keywords": ["music", "voice chat", "telegram", "Yukki", "Yukki Music", "Private Music"],
+    "repository": "https://github.com/aryazakaria01/YuiMusicNew",
+    "stack": "container",
+    "env": {
+        "SESSION_NAME": {
+            "description": "fill with the pyrogram session string from account",
+            "required": true
+        },
+        "OWNER_ID": {
+            "description": "fill with your telegram id as the owner of the bot",
+            "required": true,
+            "value": "2084559061"
+        },
+        "ASS_ID": {
+            "description": "fill with telegram id of account",
+            "required": true,
+            "value": "2140453401"
+        },
+        "LOG_GROUP_ID": {
+            "description": "create a private group and get the group id, add your bot as admin to the group too",
+            "required": true,
+            "value": "-1001592259671"
+        },
+        "API_ID": {
+            "description": "your Api ID from my.telegram.org/apps",
+            "required": true,
+            "value": "12786534"
+        },
+        "API_HASH": {
+            "description": "your Api Hash from my.telegram.org/apps",
+            "required": true,
+            "value": "8914b623b3cd41ef54bcc4fa2116d615"
+        },
+        "SUPPORT_GROUP": {
+            "description": "Isi dengan username group tanpa @",
+            "required": true,
+            "value": ""
+        },
+         "UPDATES_CHANNEL": {
+            "description": "Isi dengan username channel tanpa @",
+            "required": true,
+            "value": ""
+        },
+        "SUDO_USERS": {
+            "description": "fill with the user id who can access all function in your bot (separate with space).",
+            "required": true,
+            "value": "2084559061"
+        },
+        "DURATION_LIMIT": {
+            "description": "filled, don't change this !",
+            "required": true,
+            "value": "540000"
+        },
+        "BOT_TOKEN": {
+            "description": "fill with your bot token get from @BotFather on telegram",
+            "required": false,
+            "value": "2072760204:AAFYjm0_GDFQOwAgDNacj_t7J9M47egah80"
+        },
+        "MONGO_DB_URI": {
+            "description": "fill with the mongodb url get from mongodb.cloud.com (don't use mine below !)",
+            "required": false,
+            "value": "mongodb+srv://userbot:userbot@cluster0.wulcq.mongodb.net/test?retryWrites=true&w=majority"
+        }
+    },
+    "buildpacks": [
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
