@@ -1,301 +1,191 @@
-from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
-                            InlineKeyboardMarkup, InputMediaPhoto, Message)
+import os
+from typing import Dict
+import random
+from pytgcalls import PyTgCalls
+from pytgcalls.types import Update
+from pytgcalls.types.input_stream import InputAudioStream
+from pytgcalls.types.input_stream import InputStream
+from Music import app, BOT_USERNAME
+from Music import config
+from pyrogram import Client
+from asyncio import QueueEmpty
+from Music.MusicUtilities.database.queue import (is_active_chat, add_active_chat, remove_active_chat, music_on, is_music_playing, music_off)
+from Music.MusicUtilities.tgcallsrun import queues
+from Music.config import LOG_GROUP_ID
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from Music.MusicUtilities.helpers.inline import play_keyboard
+from Music.MusicUtilities.database.assistant import (_get_assistant, get_assistant, save_assistant)
+import os
+from os import path
+from Music import BOT_USERNAME
+import asyncio
+import yt_dlp
+from Music.converter import converter
+from pyrogram.types import Message
+from Music.MusicUtilities.database.theme import (_get_theme, get_theme, save_theme)
+from Music.MusicUtilities.helpers.gets import (get_url, themes, random_assistant)
+from Music.MusicUtilities.helpers.thumbnails import gen_thumb
+from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
+from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
+from Music.MusicUtilities.helpers.inline import (play_keyboard, search_markup, play_markup, playlist_markup, audio_markup)
+from Music.MusicUtilities.tgcallsrun import (convert, download)
+from pyrogram import filters
+from typing import Union
+from youtubesearchpython import VideosSearch
+from pyrogram.errors import UserAlreadyParticipant, UserNotParticipant
+from pyrogram.types import Message, Audio, Voice
+from pyrogram.types import (CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, Message, )
+flex = {}
+smexy = Client(config.SESSION_NAME, config.API_ID, config.API_HASH)
+pytgcalls = PyTgCalls(smexy)
 
-from Music import db_mem
-
-
-def url_markup(videoid, duration, user_id, query, query_type):
-    buttons = [
-        [
-            InlineKeyboardButton(
-                text="❮",
-                callback_data=f"slider B|{query_type}|{query}|{user_id}",
-            ),
-            InlineKeyboardButton(
-                text="🎵",
-                callback_data=f"MusicStream {videoid}|{duration}|{user_id}",
-            ),
-            InlineKeyboardButton(
-                text="🎥",
-                callback_data=f"Choose {videoid}|{duration}|{user_id}",
-            ),
-            InlineKeyboardButton(
-                text="❯",
-                callback_data=f"slider F|{query_type}|{query}|{user_id}",
-            ),
-        ],
-        [
-            InlineKeyboardButton(
-                text="🔎 More Results",
-                callback_data=f"Search {query}|{user_id}",
-            ),
-            InlineKeyboardButton(
-                text="🗑 Close Search",
-                callback_data=f"forceclose {query}|{user_id}",
-            ),
-        ],
-    ]
-    return buttons
-
-
-def url_markup2(videoid, duration, user_id):
-    buttons = [
-        [
-            InlineKeyboardButton(
-                text="🎵 Play Music",
-                callback_data=f"MusicStream {videoid}|{duration}|{user_id}",
-            ),
-            InlineKeyboardButton(
-                text="🎥 Play Video",
-                callback_data=f"Choose {videoid}|{duration}|{user_id}",
-            ),
-        ],
-        [
-            InlineKeyboardButton(
-                text="🗑 Close Search",
-                callback_data=f"forceclose {videoid}|{user_id}",
-            )
-        ],
-    ]
-    return buttons
+@pytgcalls.on_kicked()
+async def on_kicked(client: PyTgCalls, chat_id: int) -> None:
+    try:
+        queues.clear(chat_id)
+    except QueueEmpty:
+        pass
+    await remove_active_chat(chat_id)
+            
+@pytgcalls.on_closed_voice_chat()
+async def on_closed(client: PyTgCalls, chat_id: int) -> None:
+    try:
+        queues.clear(chat_id)
+    except QueueEmpty:
+        pass
+    await remove_active_chat(chat_id)
 
 
-def search_markup(
-    ID1,
-    ID2,
-    ID3,
-    ID4,
-    ID5,
-    duration1,
-    duration2,
-    duration3,
-    duration4,
-    duration5,
-    user_id,
-    query,
-):
-    buttons = [
-        [
-            InlineKeyboardButton(
-                text="1️⃣", callback_data=f"Music {ID1}|{duration1}|{user_id}"
-            ),
-            InlineKeyboardButton(
-                text="2️⃣", callback_data=f"Music {ID2}|{duration2}|{user_id}"
-            ),
-            InlineKeyboardButton(
-                text="3️⃣", callback_data=f"Music {ID3}|{duration3}|{user_id}"
-            ),
-        ],
-        [
-            InlineKeyboardButton(
-                text="4️⃣", callback_data=f"Music {ID4}|{duration4}|{user_id}"
-            ),
-            InlineKeyboardButton(
-                text="5️⃣", callback_data=f"Music {ID5}|{duration5}|{user_id}"
-            ),
-        ],
-        [
-            InlineKeyboardButton(
-                text="<", callback_data=f"popat 1|{query}|{user_id}"
-            ),
-            InlineKeyboardButton(
-                text="🗑 Close", callback_data=f"forceclose {query}|{user_id}"
-            ),
-            InlineKeyboardButton(
-                text=">", callback_data=f"popat 1|{query}|{user_id}"
-            ),
-        ],
-    ]
-    return buttons
+@pytgcalls.on_stream_end()
+async def on_stream_end(client: PyTgCalls, update: Update) -> None:
+    chat_id = update.chat_id
+    try:
+        queues.task_done(chat_id)
+        if queues.is_empty(chat_id):
+            await remove_active_chat(chat_id)               
+            await pytgcalls.leave_group_call(chat_id)
+        else:
+            afk = queues.get(chat_id)['file']
+            f1 = (afk[0])
+            f2 = (afk[1])
+            f3 = (afk[2])
+            finxx = (f"{f1}{f2}{f3}")
+            if str(finxx) != "raw":  
+                mystic = await app.send_message(chat_id, "Downloading Next Music From Playlist...")
+                url = (f"https://www.youtube.com/watch?v={afk}")
+                ctitle = (await app.get_chat(chat_id)).title
+                logger_text=f"""Playing Next From Playlist
+
+Group :- {chat_id}
+Title :- {ctitle}
+
+Downloading....
+
+{url}"""
+                okay = await smexy.send_message(LOG_GROUP_ID, f"{logger_text}", disable_web_page_preview=True)
+                try:
+                    with yt_dlp.YoutubeDL(ytdl_opts) as ytdl:
+                        x = ytdl.extract_info(url, download=False)
+                except Exception as e:
+                    return await mystic.edit(f"❌ Failed to download this video.\n\n**Reason**:{e}") 
+                
+                chat_title = ctitle                
+                videoid = afk
+                title = (x["title"])
+                def my_hook(d):
+                    if d['status'] == 'downloading':
+                        percentage = d['_percent_str']
+                        per = (str(percentage)).replace(".","", 1).replace("%","", 1)
+                        per = int(per)
+                        eta = d['eta']
+                        speed = d['_speed_str']
+                        size = d['_total_bytes_str']
+                        bytesx = d['total_bytes']
+                        if str(bytesx) in flex:
+                            pass
+                        else:
+                            flex[str(bytesx)] = 1
+                        if flex[str(bytesx)] == 1:
+                            flex[str(bytesx)] += 1
+                            mystic.edit(f"Downloading {title[:50]}\n\n**File Size:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec")
+                        if per > 500:    
+                            if flex[str(bytesx)] == 2:
+                                flex[str(bytesx)] += 1
+                                mystic.edit(f"Downloading {title[:50]}...\n\n**File Size:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec")
+                                print(f"[{videoid}] Downloaded {percentage} at a speed of {speed} in {chat_title} | ETA: {eta} seconds")
+                        if per > 800:    
+                            if flex[str(bytesx)] == 3:
+                                flex[str(bytesx)] += 1
+                                mystic.edit(f"Downloading {title[:50]}....\n\n**File Size:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec")
+                                print(f"[{videoid}] Downloaded {percentage} at a speed of {speed} in {chat_title} | ETA: {eta} seconds")
+                        if per == 1000:    
+                            if flex[str(bytesx)] == 4:
+                                flex[str(bytesx)] = 1
+                                mystic.edit(f"Downloading {title[:50]}.....\n\n**File Size:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec") 
+                                print(f"[{videoid}] Downloaded {percentage} at a speed of {speed} in {chat_title} | ETA: {eta} seconds")
+                loop = asyncio.get_event_loop()
+                xx = await loop.run_in_executor(None, download, url, my_hook)
+                file = await convert(xx)
+                await pytgcalls.change_stream(
+                    chat_id, 
+                    InputStream(
+                        InputAudioStream(
+                            file,
+                        ),
+                    ),
+                )
+                thumbnail = (x["thumbnail"])
+                duration = (x["duration"])
+                duration = round(x["duration"] / 60)
+                theme = random.choice(themes)
+                ctitle = await CHAT_TITLE(ctitle)
+                f2 = open(f'search/{afk}id.txt', 'r')        
+                userid =(f2.read())
+                thumb = await gen_thumb(thumbnail, title, userid, theme, ctitle)
+                user_id = userid
+                videoid = afk
+                buttons = play_markup(videoid, user_id)
+                await mystic.delete()
+                semx = await app.get_users(userid)
+                await app.send_photo(chat_id,
+                photo= thumb,
+                reply_markup=InlineKeyboardMarkup(buttons),    
+                caption=(f"🎥 <b>__Started Playing:__ </b>[{title[:25]}]({url}) \n⏳ <b>__Duration:__</b> {duration} Mins\n💡 <b>__Info:__</b> [More Information](https://t.me/{BOT_USERNAME}?start=info_{videoid})\n👤**__Requested by:__** {semx.mention}")
+            )   
+                os.remove(thumb)
+            else:      
+                await pytgcalls.change_stream(
+                    chat_id, 
+                    InputStream(
+                        InputAudioStream(
+                            afk,
+                        ),
+                    ),
+                )
+                _chat_ = ((str(afk)).replace("_","", 1).replace("/","", 1).replace(".","", 1))
+                f2 = open(f'search/{_chat_}title.txt', 'r')        
+                title =(f2.read())
+                f3 = open(f'search/{_chat_}duration.txt', 'r')        
+                duration =(f3.read())
+                f4 = open(f'search/{_chat_}username.txt', 'r')        
+                username =(f4.read())
+                f4 = open(f'search/{_chat_}videoid.txt', 'r')        
+                videoid =(f4.read())
+                user_id = 1
+                videoid = str(videoid)
+                if videoid == "smex1":
+                    buttons = audio_markup(videoid, user_id)
+                else:
+                    buttons = play_markup(videoid, user_id)
+                await app.send_photo(chat_id,
+                photo=f"downloads/{_chat_}final.png",
+                reply_markup=InlineKeyboardMarkup(buttons),
+                caption=f"🎥 <b>__Started Playing:__</b> {title} \n⏳ <b>__Duration:__</b> {duration} \n👤 <b>__Requested by:__ </b> {username}",
+                )
+                return
+           
+    except Exception as e:
+        print(e) 
 
 
-def search_markup2(
-    ID6,
-    ID7,
-    ID8,
-    ID9,
-    ID10,
-    duration6,
-    duration7,
-    duration8,
-    duration9,
-    duration10,
-    user_id,
-    query,
-):
-    buttons = [
-        [
-            InlineKeyboardButton(
-                text="6️⃣",
-                callback_data=f"Music {ID6}|{duration6}|{user_id}",
-            ),
-            InlineKeyboardButton(
-                text="7️⃣",
-                callback_data=f"Music {ID7}|{duration7}|{user_id}",
-            ),
-            InlineKeyboardButton(
-                text="8️⃣",
-                callback_data=f"Music {ID8}|{duration8}|{user_id}",
-            ),
-        ],
-        [
-            InlineKeyboardButton(
-                text="9️⃣",
-                callback_data=f"Music {ID9}|{duration9}|{user_id}",
-            ),
-            InlineKeyboardButton(
-                text="🔟",
-                callback_data=f"Music {ID10}|{duration10}|{user_id}",
-            ),
-        ],
-        [
-            InlineKeyboardButton(
-                text="<", callback_data=f"popat 2|{query}|{user_id}"
-            ),
-            InlineKeyboardButton(
-                text="🗑 Close", callback_data=f"forceclose {query}|{user_id}"
-            ),
-            InlineKeyboardButton(
-                text=">", callback_data=f"popat 2|{query}|{user_id}"
-            ),
-        ],
-    ]
-    return buttons
-
-
-def secondary_markup(videoid, user_id):
-    buttons = [
-        [
-            InlineKeyboardButton(text="▶️", callback_data=f"resumecb"),
-            InlineKeyboardButton(text="⏸️", callback_data=f"pausecb"),
-            InlineKeyboardButton(text="⏭️", callback_data=f"skipcb"),
-            InlineKeyboardButton(text="⏹️", callback_data=f"stopcb"),
-        ],
-        [
-            InlineKeyboardButton(
-                text="🔗 More Menu", callback_data=f"other {videoid}|{user_id}"
-            ),
-            InlineKeyboardButton(text="🗑 Close Menu", callback_data=f"close"),
-        ],
-    ]
-    return buttons
-
-
-def secondary_markup2(videoid, user_id):
-    buttons = [
-        [
-            InlineKeyboardButton(text="▶️", callback_data=f"resumecb"),
-            InlineKeyboardButton(text="⏸️", callback_data=f"pausecb"),
-            InlineKeyboardButton(text="⏭️", callback_data=f"skipcb"),
-            InlineKeyboardButton(text="⏹️", callback_data=f"stopcb"),
-        ],
-        [
-            InlineKeyboardButton(text="🗑 Close Menu", callback_data=f"close"),
-        ],
-    ]
-    return buttons
-
-
-def primary_markup(videoid, user_id, current_time, total_time):
-    if videoid not in db_mem:
-        db_mem[videoid] = {}
-    db_mem[videoid]["check"] = 2
-    buttons = [
-        [
-            InlineKeyboardButton(
-                text=f"{total_time} ------------------ {current_time}",
-                callback_data=f"timer_checkup_markup {videoid}|{user_id}",
-            )
-        ],
-        [
-            InlineKeyboardButton(text="▶️", callback_data=f"resumecb"),
-            InlineKeyboardButton(text="⏸️", callback_data=f"pausecb"),
-            InlineKeyboardButton(text="⏭️", callback_data=f"skipcb"),
-            InlineKeyboardButton(text="⏹️", callback_data=f"stopcb"),
-        ],
-        [
-            InlineKeyboardButton(
-                text="🔗 More Menu", callback_data=f"other {videoid}|{user_id}"
-            ),
-            InlineKeyboardButton(text="🗑 Close Menu", callback_data=f"close"),
-        ],
-    ]
-    return buttons
-
-
-def timer_markup(videoid, user_id, current_time, total_time):
-    buttons = [
-        [
-            InlineKeyboardButton(
-                text=f"{total_time} ------------------ {current_time}",
-                callback_data=f"timer_checkup_markup {videoid}|{user_id}",
-            )
-        ],
-        [
-            InlineKeyboardButton(text="▶️", callback_data=f"resumecb"),
-            InlineKeyboardButton(text="⏸️", callback_data=f"pausecb"),
-            InlineKeyboardButton(text="⏭️", callback_data=f"skipcb"),
-            InlineKeyboardButton(text="⏹️", callback_data=f"stopcb"),
-        ],
-        [
-            InlineKeyboardButton(
-                text="🔗 More Menu", callback_data=f"other {videoid}|{user_id}"
-            ),
-            InlineKeyboardButton(text="🗑 Close Menu", callback_data=f"close"),
-        ],
-    ]
-    return buttons
-
-
-def audio_markup(videoid, user_id, current_time, total_time):
-    if videoid not in db_mem:
-        db_mem[videoid] = {}
-    db_mem[videoid]["check"] = 2
-    buttons = [
-        [
-            InlineKeyboardButton(
-                text=f"{total_time} ------------------ {current_time}",
-                callback_data=f"timer_checkup_markup {videoid}|{user_id}",
-            )
-        ],
-        [
-            InlineKeyboardButton(text="▶️", callback_data=f"resumecb"),
-            InlineKeyboardButton(text="⏸️", callback_data=f"pausecb"),
-            InlineKeyboardButton(text="⏭️", callback_data=f"skipcb"),
-            InlineKeyboardButton(text="⏹️", callback_data=f"stopcb"),
-        ],
-        [InlineKeyboardButton(text="🗑 Close Menu", callback_data=f"close")],
-    ]
-    return buttons
-
-
-def audio_timer_markup_start(videoid, user_id, current_time, total_time):
-    buttons = [
-        [
-            InlineKeyboardButton(
-                text=f"{total_time} ------------------ {current_time}",
-                callback_data=f"timer_checkup_markup {videoid}|{user_id}",
-            )
-        ],
-        [
-            InlineKeyboardButton(text="▶️", callback_data=f"resumecb"),
-            InlineKeyboardButton(text="⏸️", callback_data=f"pausecb"),
-            InlineKeyboardButton(text="⏭️", callback_data=f"skipcb"),
-            InlineKeyboardButton(text="⏹️", callback_data=f"stopcb"),
-        ],
-        [InlineKeyboardButton(text="🗑 Close Menu", callback_data=f"close")],
-    ]
-    return buttons
-
-
-audio_markup2 = InlineKeyboardMarkup(
-    [
-        [
-            InlineKeyboardButton(text="▶️", callback_data=f"resumecb"),
-            InlineKeyboardButton(text="⏸️", callback_data=f"pausecb"),
-            InlineKeyboardButton(text="⏭️", callback_data=f"skipcb"),
-            InlineKeyboardButton(text="⏹️", callback_data=f"stopcb"),
-        ],
-        [InlineKeyboardButton("🗑 Close Menu", callback_data="close")],
-    ]
-)
+run = pytgcalls.start
