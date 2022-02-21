@@ -5,5 +5,5 @@ from Music.MusicUtilities.tgcallsrun.queues import (clear, get, is_empty, put, t
 from Music.MusicUtilities.tgcallsrun.downloader import download
 from Music.MusicUtilities.tgcallsrun.convert import convert
 from Music.MusicUtilities.tgcallsrun.music import db_mem
-from Music.MusicUtilities.tgcallsrun.music import smexy as ASS_ACC
+from Music.MusicUtilities.tgcallsrun.music import pytgcalls as call_py
 smexy = 1
