@@ -1,11 +1,11 @@
 from typing import Dict, List, Union
 
-from Music import SUDOERS, app
-from Music.Utilities.Database import (_get_authusers, add_nonadmin_chat, delete_authuser,
+from Music import SUDO_USERS, OWNER_ID
+from Music.MusicUtilities.database import (_get_authusers, add_nonadmin_chat, delete_authuser,
                             get_authuser, get_authuser_count,
                             get_authuser_names, is_nonadmin_chat,
                             remove_nonadmin_chat, save_authuser)
-from Music.Utilities.changers import int_to_alpha
+from Music.MusicUtilities.database.changers import int_to_alpha
 
 
 def AdminRightsCheck(mystic):

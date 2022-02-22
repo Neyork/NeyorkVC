@@ -1,5 +1,5 @@
-from Music import BOT_USERNAME, LOG_GROUP_ID, app
-from Music.Utilities.Database import blacklisted_chats, is_gbanned_user, is_on_off
+from Music import BOT_TOKEN, LOG_GROUP_ID, MONGO_DB_URI
+from Music.MusicUtilities.database import blacklisted_chats, is_gbanned_user, is_on_off
 
 
 def checker(mystic):

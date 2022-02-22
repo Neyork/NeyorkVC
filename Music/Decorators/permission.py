@@ -1,6 +1,6 @@
 from typing import Dict, List, Union
 
-from Music import BOT_ID, app
+from Music import BOT_TOKEN, MONGO_DB_URI
 
 
 def PermissionCheck(mystic):

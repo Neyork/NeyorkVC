@@ -1,6 +1,6 @@
 from config import LOG_GROUP_ID
-from Music.Converter.Clients.cli import LOG_CLIENT
-from Music.Utilities.Database import is_on_off
+from Music.converter.Clients.cli import LOG_CLIENT
+from Music.MusicUtilities.database import is_on_off
 
 
 def logging(mystic):
