@@ -1,3 +1,5 @@
+from Music.Decorators.assistant import (_get_assistant, get_as_names, get_assistant,
+                        save_assistant)
 from Music.MusicUtilities.database.queue import (
   add_active_chat,
   get_active_chats,
