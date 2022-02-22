@@ -12,8 +12,8 @@ from Music import (BOT_USERNAME, BOT_ID, BOT_NAME,
 from Music.converter import convert
 from Music.MusicUtilities.tgcallsrun.downloader import download
 from Music.MusicUtilities.tgcallsrun.Tgdownloader import telegram_download
-from Music.MusicUtilities.database import (get_active_chats, get_video_limit,
-                            is_active_video_chat)
+from Music.MusicUtilities.database import (get_active_chats, is_music_playing,
+                            is_active_chat)
 from Music.Decorators.assistant import AssistantAdd
 from Music.Decorators.checker import checker
 from Music.Decorators.logger import logging
