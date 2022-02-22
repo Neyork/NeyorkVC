@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 from pyrogram.errors.exceptions import FloodWait
 
-from Music import MUSIC_BOT_NAME, app, db_mem
+from Music import BOT_TOKEN, app, db_mem
 from Music.Utilities.formatters import bytes
 from Music.Utilities.ping import get_readable_time
 
