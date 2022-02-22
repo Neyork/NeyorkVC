@@ -10,9 +10,9 @@ import Music
 from Music import (BOT_USERNAME, BOT_ID, BOT_NAME,
                    ASSID, app, dbb)
 from Music.converter import convert
-from Music.Utilities.PyTgCalls.Downloader import download
-from Music.Utilities.PyTgCalls.Tgdownloader import telegram_download
-from Music.Utilities.Database import (get_active_video_chats, get_video_limit,
+from Music.MusicUtilities.PyTgCalls.Downloader import download
+from Music.MusicUtilities.PyTgCalls.Tgdownloader import telegram_download
+from Music.MusicUtilities.Database import (get_active_video_chats, get_video_limit,
                             is_active_video_chat)
 from Music.Decorators.assistant import AssistantAdd
 from Music.Decorators.checker import checker
@@ -20,14 +20,14 @@ from Music.Decorators.logger import logging
 from Music.Decorators.permission import PermissionCheck
 from Music.Inline import (livestream_markup, playlist_markup, search_markup,
                           search_markup2, url_markup, url_markup2)
-from Music.Utilities.changers import seconds_to_min, time_to_seconds
-from Music.Utilities.chat import specialfont_to_normal
-from Music.Utilities.stream import start_stream, start_stream_audio
-from Music.Utilities.theme import check_theme
-from Music.Utilities.thumbnails import gen_thumb
-from Music.Utilities.url import get_url
-from Music.Utilities.videostream import start_stream_video
-from Music.Utilities.youtube import (get_yt_info_id, get_yt_info_query,
+from Music.MusicUtilities.changers import seconds_to_min, time_to_seconds
+from Music.MusicUtilities.chat import specialfont_to_normal
+from Music.MusicUtilities.stream import start_stream, start_stream_audio
+from Music.MusicUtilities.theme import check_theme
+from Music.MusicUtilities.thumbnails import gen_thumb
+from Music.MusicUtilities.url import get_url
+from Music.MusicUtilities.videostream import start_stream_video
+from Music.MusicUtilities.youtube import (get_yt_info_id, get_yt_info_query,
                                      get_yt_info_query_slider)
 
 loop = asyncio.get_event_loop()
