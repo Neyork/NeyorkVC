@@ -6,9 +6,9 @@ from pyrogram.errors import UserAlreadyParticipant, UserNotParticipant
 from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
                             InlineKeyboardMarkup, InputMediaPhoto, Message)
 
-from Music import BOT_ID, MUSIC_BOT_NAME, app, random_assistant
-from Music.Utilities.Database import get_assistant, save_assistant
-from Music.Utilities.assistant import get_assistant_details
+from Music import BOT_ID, BOT_TOKEN, app, random_assistant
+from Music.MusicUtilities.database import get_assistant, save_assistant
+from Music.Decorators.assistant import get_assistant_details
 
 
 @app.on_callback_query(filters.regex("unban_assistant"))
