@@ -7,7 +7,7 @@ from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
                             InlineKeyboardMarkup, InputMediaPhoto, Message)
 
 from Music import API_ID, BOT_TOKEN, OWNER_ID, API_HASH
-from Music.MusicUtilities.database import get_assistant, save_assistant
+from Music.MusicUtilities.database import get_active_chats, is_music_playing
 from Music.Decorators.assistant import get_assistant_details
 
 
