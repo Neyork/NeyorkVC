@@ -10,9 +10,9 @@ import Music
 from Music import (BOT_USERNAME, BOT_ID, BOT_NAME,
                    ASSID, app, dbb)
 from Music.converter import convert
-from Music.MusicUtilities.PyTgCalls.Downloader import download
-from Music.MusicUtilities.PyTgCalls.Tgdownloader import telegram_download
-from Music.MusicUtilities.Database import (get_active_video_chats, get_video_limit,
+from Music.MusicUtilities.tgcallsrun.Downloader import download
+from Music.MusicUtilities.tgcallsrun.Tgdownloader import telegram_download
+from Music.MusicUtilities.database import (get_active_video_chats, get_video_limit,
                             is_active_video_chat)
 from Music.Decorators.assistant import AssistantAdd
 from Music.Decorators.checker import checker
