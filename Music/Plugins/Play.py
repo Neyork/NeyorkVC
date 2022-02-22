@@ -9,10 +9,10 @@ from youtube_search import YoutubeSearch
 import Music
 from Music import (BOT_USERNAME, BOT_ID, BOT_NAME,
                    ASSID, app, dbb)
-from Music.Core.PyTgCalls.Converter import convert
-from Music.Core.PyTgCalls.Downloader import download
-from Music.Core.PyTgCalls.Tgdownloader import telegram_download
-from Music.Database import (get_active_video_chats, get_video_limit,
+from Music.Converter import convert
+from Music.Utilities.PyTgCalls.Downloader import download
+from Music.Utilities.PyTgCalls.Tgdownloader import telegram_download
+from Music.Utilities.Database import (get_active_video_chats, get_video_limit,
                             is_active_video_chat)
 from Music.Decorators.assistant import AssistantAdd
 from Music.Decorators.checker import checker
