@@ -6,7 +6,7 @@ from pyrogram.errors import UserAlreadyParticipant, UserNotParticipant
 from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
                             InlineKeyboardMarkup, InputMediaPhoto, Message)
 
-from Music import BOT_ID, BOT_TOKEN, app, random_assistant
+from Music import OWNER_ID, BOT_TOKEN, API_ID, API_HASH
 from Music.MusicUtilities.database import get_assistant, save_assistant
 from Music.Decorators.assistant import get_assistant_details
 
