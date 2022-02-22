@@ -5,8 +5,8 @@ from datetime import datetime, timedelta
 from pyrogram.errors.exceptions import FloodWait
 
 from Music import BOT_TOKEN, app, db_mem
-from Music.Utilities.formatters import bytes
-from Music.Utilities.ping import get_readable_time
+from Music.MusicUtilities.database.formatters import bytes
+from Music.MusicUtilities.database.ping import get_readable_time
 
 
 async def telegram_download(message, mystic):
