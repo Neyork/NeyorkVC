@@ -127,10 +127,7 @@ loop = asyncio.get_event_loop()
 @app.on_message(
     filters.command(["play", f"play@{BOT_USERNAME}"]) & filters.group
 )
-@checker
-@logging
-@PermissionCheck
-@AssistantAdd
+
 async def play(_, message: Message):
     await message.delete()
     if message.chat.id not in db_mem:
@@ -285,7 +282,7 @@ async def play(_, message: Message):
         )
 
 
-@app.on_callback_query(filters.regex(pattern=r"MusicStream"))
+@Client.on_callback_query(filters.regex(pattern=r"MusicStream"))
 async def Music_Stream(_, CallbackQuery):
     if CallbackQuery.message.chat.id not in db_mem:
         db_mem[CallbackQuery.message.chat.id] = {}
@@ -347,7 +344,7 @@ async def Music_Stream(_, CallbackQuery):
     )
 
 
-@app.on_callback_query(filters.regex(pattern=r"Search"))
+@Client.on_callback_query(filters.regex(pattern=r"Search"))
 async def search_query_more(_, CallbackQuery):
     callback_data = CallbackQuery.data.strip()
     callback_request = callback_data.split(None, 1)[1]
@@ -384,7 +381,7 @@ async def search_query_more(_, CallbackQuery):
     )
 
 
-@app.on_callback_query(filters.regex(pattern=r"popat"))
+@Client.on_callback_query(filters.regex(pattern=r"popat"))
 async def popat(_, CallbackQuery):
     callback_data = CallbackQuery.data.strip()
     callback_request = callback_data.split(None, 1)[1]
@@ -439,7 +436,7 @@ async def popat(_, CallbackQuery):
         return
 
 
-@app.on_callback_query(filters.regex(pattern=r"slider"))
+@Client.on_callback_query(filters.regex(pattern=r"slider"))
 async def slider_query_results(_, CallbackQuery):
     callback_data = CallbackQuery.data.strip()
     callback_request = callback_data.split(None, 1)[1]
