@@ -1,7 +1,7 @@
 from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
                             InlineKeyboardMarkup, InputMediaPhoto, Message)
 
-from Music.config import BOT_TOKEN, SUPPORT_CHANNEL, SUPPORT_GROUP
+from Music.config import BOT_TOKEN, UPDATES_CHANNEL, SUPPORT_GROUP
 from Music import BOT_TOKEN
 
 
