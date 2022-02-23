@@ -8,7 +8,7 @@ from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
 
 from Music import API_ID, BOT_TOKEN, OWNER_ID, API_HASH
 from Music.MusicUtilities.database import get_active_chats, is_music_playing
-from Music.Decorators.assistant import get_assistant
+from Music.Decorators.assistant import save_assistant
 
 
 @app.on_callback_query(filters.regex("unban_assistant"))
