@@ -1,35 +1,126 @@
-import asyncio
+import os
+import time
 from os import path
-
+import random
+import asyncio
+import shutil
+from pytube import YouTube
+from yt_dlp import YoutubeDL
+from Music import converter
+import yt_dlp
+import shutil
+import psutil
+from pyrogram import Client
+from pyrogram.types import Message, Voice
+from pytgcalls import StreamType
+from pytgcalls.types.input_stream import InputAudioStream, InputStream
+from sys import version as pyver
+from Music.config import UPDATES_CHANNEL, SUPPORT_GROUP
+from Music import (
+    dbb,
+    app,
+    BOT_USERNAME,
+    BOT_ID,
+    BOT_NAME,
+    ASSID,
+    ASSNAME,
+    ASSUSERNAME,
+    ASSMENTION,
+)
+from Music.MusicUtilities.tgcallsrun import (
+    music,
+    convert,
+    download,
+    clear,
+    get,
+    is_empty,
+    put,
+    task_done,
+    ASS_ACC,
+)
+from Music.MusicUtilities.database.queue import (
+    get_active_chats,
+    is_active_chat,
+    add_active_chat,
+    remove_active_chat,
+    music_on,
+    is_music_playing,
+    music_off,
+)
+from Music.MusicUtilities.database.onoff import (
+    is_on_off,
+    add_on,
+    add_off,
+)
+from Music.MusicUtilities.database.chats import (
+    get_served_chats,
+    is_served_chat,
+    add_served_chat,
+    get_served_chats,
+)
+from Music.MusicUtilities.helpers.inline import (
+    play_keyboard,
+    search_markup,
+    play_markup,
+    playlist_markup,
+    audio_markup,
+    play_list_keyboard,
+)
+from Music.MusicUtilities.database.blacklistchat import (
+    blacklisted_chats,
+    blacklist_chat,
+    whitelist_chat,
+)
+from Music.MusicUtilities.database.gbanned import (
+    get_gbans_count,
+    is_gbanned_user,
+    add_gban_user,
+    add_gban_user,
+)
+from Music.MusicUtilities.database.theme import (
+    _get_theme,
+    get_theme,
+    save_theme,
+)
+from Music.MusicUtilities.database.assistant import (
+    _get_assistant,
+    get_assistant,
+    save_assistant,
+)
+from Music.config import DURATION_LIMIT
+from Music.MusicUtilities.helpers.decorators import errors
+from Music.MusicUtilities.helpers.filters import command
+from Music.MusicUtilities.helpers.gets import (
+    get_url,
+    themes,
+    random_assistant,
+    ass_det,
+)
+from Music.MusicUtilities.helpers.logger import LOG_CHAT
+from Music.MusicUtilities.helpers.thumbnails import gen_thumb
+from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
+from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
+from Music.MusicUtilities.helpers.inline import (
+    play_keyboard,
+    search_markup2,
+    search_markup,
+)
 from pyrogram import filters
-from pyrogram.types import (InlineKeyboardMarkup, InputMediaPhoto, Message,
-                            Voice)
-from youtube_search import YoutubeSearch
-
-import Music
-from Music import (BOT_USERNAME, BOT_ID, BOT_NAME,
-                   ASSID, app, dbb)
-from Music.converter import convert
-from Music.MusicUtilities.tgcallsrun.downloader import download
-from Music.MusicUtilities.tgcallsrun.Tgdownloader import telegram_download
-from Music.MusicUtilities.database import (get_active_chats, is_music_playing,
-                            is_active_chat)
-from Music.Decorators.assistant import AssistantAdd
-from Music.Decorators.checker import checker
-from Music.Decorators.logger import logging
-from Music.Decorators.permission import PermissionCheck
-from Music.Inline import (livestream_markup, playlist_markup, search_markup,
-                          search_markup2, url_markup, url_markup2)
-from Music.MusicUtilities.changers import seconds_to_min, time_to_seconds
-from Music.MusicUtilities.chat import specialfont_to_normal
-from Music.MusicUtilities.stream import start_stream, start_stream_audio
-from Music.MusicUtilities.theme import check_theme
-from Music.MusicUtilities.thumbnails import gen_thumb
-from Music.MusicUtilities.url import get_url
-from Music.MusicUtilities.videostream import start_stream_video
-from Music.MusicUtilities.youtube import (get_yt_info_id, get_yt_info_query,
-                                     get_yt_info_query_slider)
-
+from typing import Union
+import subprocess
+from asyncio import QueueEmpty
+import shutil
+import os
+from youtubesearchpython import VideosSearch
+from pyrogram.errors import UserAlreadyParticipant, UserNotParticipant
+from pyrogram.types import Message, Audio, Voice
+from pyrogram.types import (
+    CallbackQuery,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    InputMediaPhoto,
+    Message,
+)
 loop = asyncio.get_event_loop()
 
 
