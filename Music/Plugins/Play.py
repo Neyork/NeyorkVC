@@ -130,8 +130,8 @@ loop = asyncio.get_event_loop()
 
 async def play(_, message: Message):
     await message.delete()
-    if message.chat.id in BANNED_USERS:
-        BANNED_USERS[message.chat.id] = {}
+    if message.chat.id in db_mem:
+        db_mem[message.chat.id] = {}
     if message.sender_chat:
         return await message.reply_text(
             "You're an __Anonymous Admin__ in this Chat Group!\nRevert back to User Account From Admin Rights."
