@@ -1,7 +1,7 @@
 from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
                             InlineKeyboardMarkup, InputMediaPhoto, Message)
 
-from Music import db_mem
+from Music import BANNED_USERS
 
 
 def others_markup(videoid, user_id):

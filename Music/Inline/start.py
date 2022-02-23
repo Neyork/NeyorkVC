@@ -1,8 +1,8 @@
 from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
                             InlineKeyboardMarkup, InputMediaPhoto, Message)
 
-from config import MUSIC_BOT_NAME, SUPPORT_CHANNEL, SUPPORT_GROUP
-from Music import BOT_USERNAME
+from Music.config import BOT_TOKEN, SUPPORT_CHANNEL, SUPPORT_GROUP
+from Music import BOT_TOKEN
 
 
 def setting_markup2():
