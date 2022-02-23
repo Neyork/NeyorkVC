@@ -130,7 +130,7 @@ loop = asyncio.get_event_loop()
 
 async def play(_, message: Message):
     await message.delete()
-    if message.chat.id not in db_mem:
+    if chat_id in BANNED_USERS:
         db_mem[message.chat.id] = {}
     if message.sender_chat:
         return await message.reply_text(
