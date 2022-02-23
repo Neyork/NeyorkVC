@@ -2,7 +2,7 @@ import asyncio
 import time
 from datetime import datetime, timedelta
 
-from pyrogram.errors.exceptions import FloodWait
+from pyrogram.errors.exceptions import UserAlreadyParticipant, UserNotParticipant
 
 from Music import BOT_TOKEN, app, db_mem
 from Music.MusicUtilities.helpers.formatter import get_readable_time
