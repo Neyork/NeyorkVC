@@ -63,8 +63,8 @@ from Music.MusicUtilities.Inline import (
     search_markup,
     download_markup,
     playlist_markup,
-    audio_markup,
-    fetch_playlist,
+    url_markup,
+    url_markup2,
 )
 from Music.MusicUtilities.database.blacklistchat import (
     blacklisted_chats,
@@ -102,8 +102,8 @@ from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
 from Music.MusicUtilities.Inline import (
     primary_markup,
-    search_markup2,
-    search_markup,
+    url_markup2,
+    url_markup,
 )
 from pyrogram import filters
 from typing import Union

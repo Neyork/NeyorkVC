@@ -93,8 +93,8 @@ from Music.MusicUtilities.Inline import (
     primary_markup,
     download_markup,
     fetch_playlist,
-    audio_markup2,
-    paste_queue_markup,
+    url_markup,
+    url_markup2,
 )
 from Music.MusicUtilities.tgcallsrun import (
     music,
