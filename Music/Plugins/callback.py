@@ -83,14 +83,14 @@ from Music.MusicUtilities.database.assistant import (
     save_assistant,
 )
 from Music.MusicUtilities.Inline import (
-    play_keyboard,
+    primary_markup,
     search_markup,
     play_markup,
     playlist_markup,
     audio_markup,
 )
 from Music.MusicUtilities.Inline import (
-    play_keyboard,
+    primary_markup,
     confirm_keyboard,
     play_list_keyboard,
     close_keyboard,
@@ -154,7 +154,7 @@ from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
 from Music.MusicUtilities.Inline import (
-    play_keyboard,
+    primary_markup,
     search_markup,
     play_markup,
     playlist_markup,
