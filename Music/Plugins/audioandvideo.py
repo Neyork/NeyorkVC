@@ -16,7 +16,7 @@ import os
 from os import path
 from Music.MusicUtilities.helpers.thumbnails import down_thumb
 from Music import app
-from Music.MusicUtilities.helpers.inline import others_markup, play_markup
+from Music.MusicUtilities.Inline import others_markup, play_markup
 from pykeyboard import InlineKeyboard
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton
