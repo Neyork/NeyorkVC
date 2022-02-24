@@ -59,12 +59,12 @@ from Music.MusicUtilities.database.chats import (
     get_served_chats,
 )
 from Music.MusicUtilities.Inline import (
-    play_keyboard,
+    primary_markup,
     search_markup,
     play_markup,
     playlist_markup,
     audio_markup,
-    play_list_keyboard,
+    fetch_playlist,
 )
 from Music.MusicUtilities.database.blacklistchat import (
     blacklisted_chats,
