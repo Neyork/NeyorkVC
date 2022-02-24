@@ -130,8 +130,8 @@ loop = asyncio.get_event_loop()
 
 async def play(_, message: Message):
     await message.delete()
-    if message.chat.id in db_mem:
-        db_mem[message.chat.id] = {}
+    if message.chat.id in dbb:
+        dbb[message.chat.id] = {}
     if message.sender_chat:
         return await message.reply_text(
             "You're an __Anonymous Admin__ in this Chat Group!\nRevert back to User Account From Admin Rights."
@@ -152,7 +152,7 @@ async def play(_, message: Message):
             "🔄 Processing Audio... Please Wait!"
         )
         try:
-            read = db_mem[message.chat.id]["live_check"]
+            read = dbb[message.chat.id]["live_check"]
             if read:
                 return await mystic.edit(
                     "Live Streaming Playing...Stop it to play music"
@@ -213,7 +213,7 @@ async def play(_, message: Message):
             "🔄 Processing Video... Please Wait!"
         )
         try:
-            read = db_mem[message.chat.id]["live_check"]
+            read = dbb[message.chat.id]["live_check"]
             if read:
                 return await mystic.edit(
                     "Live Streaming Playing...Stop it to play music"
@@ -284,10 +284,10 @@ async def play(_, message: Message):
 
 @Client.on_callback_query(filters.regex(pattern=r"MusicStream"))
 async def Music_Stream(_, CallbackQuery):
-    if CallbackQuery.message.chat.id not in db_mem:
-        db_mem[CallbackQuery.message.chat.id] = {}
+    if CallbackQuery.message.chat.id not in dbb:
+        dbb[CallbackQuery.message.chat.id] = {}
     try:
-        read1 = db_mem[CallbackQuery.message.chat.id]["live_check"]
+        read1 = dbb[CallbackQuery.message.chat.id]["live_check"]
         if read1:
             return await CallbackQuery.answer(
                 "Live Streaming Playing...Stop it to play music",
@@ -330,8 +330,8 @@ async def Music_Stream(_, CallbackQuery):
     theme = await check_theme(chat_id)
     chat_title = await specialfont_to_normal(chat_title)
     thumb = await gen_thumb(thumbnail, title, user_id, theme, chat_title)
-    if chat_id not in db_mem:
-        db_mem[chat_id] = {}
+    if chat_id not in dbb:
+        dbb[chat_id] = {}
     await start_stream(
         CallbackQuery,
         raw_path,
