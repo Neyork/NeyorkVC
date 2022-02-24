@@ -86,13 +86,13 @@ from Music.MusicUtilities.Inline import (
     primary_markup,
     search_markup,
     timer_markup,
-    playlist_markup,
+    choose_markup,
     audio_markup,
 )
 from Music.MusicUtilities.Inline import (
     primary_markup,
     download_markup,
-    fetch_playlist,
+    choose_markup,
     url_markup,
     url_markup2,
 )
