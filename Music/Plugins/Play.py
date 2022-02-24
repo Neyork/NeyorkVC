@@ -241,7 +241,7 @@ async def play(_, message: Message):
             duration_sec,
             thumb,
             videoid,
-        ) = get_yt_info_query(query)
+        ) = ytdl_opts(query)
         await mystic.delete()
         buttons = url_markup2(videoid, duration_min, message.from_user.id)
         return await message.reply_photo(
@@ -270,7 +270,7 @@ async def play(_, message: Message):
             duration_sec,
             thumb,
             videoid,
-        ) = get_yt_info_query(query)
+        ) = ytdl_opts(query)
         await mystic.delete()
         buttons = url_markup(
             videoid, duration_min, message.from_user.id, query, 0
@@ -460,7 +460,7 @@ async def slider_query_results(_, CallbackQuery):
             duration_sec,
             thumb,
             videoid,
-        ) = get_yt_info_query_slider(query, query_type)
+        ) = ytdl_opts_slider(query, query_type)
         buttons = url_markup(
             videoid, duration_min, user_id, query, query_type
         )
@@ -483,7 +483,7 @@ async def slider_query_results(_, CallbackQuery):
             duration_sec,
             thumb,
             videoid,
-        ) = get_yt_info_query_slider(query, query_type)
+        ) = ytdl_opts_slider(query, query_type)
         buttons = url_markup(
             videoid, duration_min, user_id, query, query_type
         )
