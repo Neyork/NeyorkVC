@@ -61,7 +61,7 @@ from Music.MusicUtilities.database.chats import (
 from Music.MusicUtilities.Inline import (
     primary_markup,
     search_markup,
-    play_markup,
+    download_markup,
     playlist_markup,
     audio_markup,
     fetch_playlist,
@@ -101,7 +101,7 @@ from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
 from Music.MusicUtilities.Inline import (
-    play_keyboard,
+    primary_markup,
     search_markup2,
     search_markup,
 )
