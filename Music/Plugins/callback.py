@@ -85,7 +85,7 @@ from Music.MusicUtilities.database.assistant import (
 from Music.MusicUtilities.Inline import (
     primary_markup,
     search_markup,
-    play_markup,
+    timer_markup,
     playlist_markup,
     audio_markup,
 )
@@ -156,7 +156,7 @@ from Music.MusicUtilities.helpers.ytdl import ytdl_opts
 from Music.MusicUtilities.Inline import (
     primary_markup,
     search_markup,
-    play_markup,
+    timer_markup,
     playlist_markup,
 )
 import requests
