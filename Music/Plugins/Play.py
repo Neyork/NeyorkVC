@@ -355,7 +355,7 @@ async def search_query_more(_, CallbackQuery):
             show_alert=True,
         )
     await CallbackQuery.answer("Searching More Results")
-    results = YoutubeSearch(query, max_results=5).to_dict()
+    results = YoutubeDL(query, max_results=5).to_dict()
     med = InputMediaPhoto(
         media="Utils/Result.JPEG",
         caption=(
@@ -483,7 +483,7 @@ async def slider_query_results(_, CallbackQuery):
             duration_sec,
             thumb,
             videoid,
-        ) = ytdl_opts_slider(query, query_type)
+        ) = ytdl_opts>_slider(query, query_type)
         buttons = url_markup(
             videoid, duration_min, user_id, query, query_type
         )
