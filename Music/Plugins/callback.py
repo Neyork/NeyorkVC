@@ -91,10 +91,10 @@ from Music.MusicUtilities.Inline import (
 )
 from Music.MusicUtilities.Inline import (
     primary_markup,
-    confirm_keyboard,
-    play_list_keyboard,
-    close_keyboard,
-    confirm_group_keyboard,
+    download_markup,
+    fetch_playlist,
+    audio_markup2,
+    paste_queue_markup,
 )
 from Music.MusicUtilities.tgcallsrun import (
     music,
