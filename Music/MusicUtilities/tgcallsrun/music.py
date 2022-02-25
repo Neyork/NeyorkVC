@@ -13,7 +13,7 @@ from Music.MusicUtilities.database.queue import (is_active_chat, add_active_chat
 from Music.MusicUtilities.tgcallsrun import queues
 from Music.config import LOG_GROUP_ID
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from Music.MusicUtilities.helpers.inline import audio_markup
+from Music.MusicUtilities.helpers.play import audio_markup
 from Music.MusicUtilities.database.assistant import (_get_assistant, get_assistant, save_assistant)
 import os
 from os import path
