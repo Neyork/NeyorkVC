@@ -145,7 +145,7 @@ Downloading....
                 thumb = await gen_thumb(thumbnail, title, userid, theme, ctitle)
                 user_id = userid
                 videoid = afk
-                buttons = play_markup(videoid, user_id)
+                buttons = url_markup(videoid, duration, user_id, query, query_type)
                 await mystic.delete()
                 semx = await app.get_users(userid)
                 await app.send_photo(chat_id,
@@ -175,9 +175,9 @@ Downloading....
                 user_id = 1
                 videoid = str(videoid)
                 if videoid == "smex1":
-                    buttons = audio_markup(videoid, user_id)
+                    buttons = url_markup(videoid, duration, user_id, query, query_type)
                 else:
-                    buttons = play_markup(videoid, user_id)
+                    buttons = url_markup(videoid, duration, user_id, query, query_type)
                 await app.send_photo(chat_id,
                 photo=f"downloads/{_chat_}final.png",
                 reply_markup=InlineKeyboardMarkup(buttons),
