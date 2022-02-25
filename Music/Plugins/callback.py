@@ -546,7 +546,7 @@ Personal Playlist Playing."""
                     ctitle = CallbackQuery.message.chat.title
                     ctitle = await CHAT_TITLE(ctitle)
                     thumb = await gen_thumb(thumbnail, title, userid, theme, ctitle)  
-                    buttons = url_markup2(videoid, duration, user_id)
+                    buttons = url_markup(videoid, duration, user_id, query, query_type)
                     m = await CallbackQuery.message.reply_photo(
                     photo=thumb,
                     choose_markup=InlineKeyboardMarkup(buttons),    
