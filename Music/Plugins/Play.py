@@ -346,7 +346,7 @@ async def search_query_more(_, CallbackQuery):
             show_alert=True,
         )
     await CallbackQuery.answer("Searching More Results")
-    results = YoutubeDL(query, max_results=5).to_dict()
+    results = YoutubeDL(query, max_results=5).to_union()
     med = InputMediaPhoto(
         media="Utils/Result.JPEG",
         caption=(
@@ -382,7 +382,7 @@ async def popat(_, CallbackQuery):
         return await CallbackQuery.answer(
             "This is not for you! Search You Own Song", show_alert=True
         )
-    results = YoutubeSearch(query, max_results=10).to_dict()
+    results = YoutubeSearch(query, max_results=10).to_union()
     if int(i) == 1:
         buttons = search_markup2(
             results[5]["id"],
