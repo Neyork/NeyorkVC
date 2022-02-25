@@ -55,7 +55,7 @@ from Music.MusicUtilities.database.playlist import (
 )
 from Music.MusicUtilities.helpers.inline import (
     primary_markup,
-    choose_markup,
+    search_markup,
     audio_markup,
     url_markup,
     url_markup2,
