@@ -247,7 +247,7 @@ async def stop_cmd(_, message):
                 userid =(f2.read())
                 thumb = await gen_thumb(thumbnail, title, userid, theme, ctitle)
                 user_id = userid
-                buttons = play_markup(videoid, user_id)
+                buttons = url_markup(videoid, duration, user_id, query, query_type)
                 await mystic.delete()
                 semx = await app.get_users(userid)
                 await message.reply_photo(
@@ -277,9 +277,9 @@ async def stop_cmd(_, message):
                 user_id = 1
                 videoid = str(videoid)
                 if videoid == "smex1":
-                    buttons = audio_markup(videoid, user_id)
+                    buttons = url_markup(videoid, duration, user_id, query, query_type)
                 else:
-                    buttons = play_markup(videoid, user_id)
+                    buttons = url_markup(videoid, duration, user_id, query, query_type)
                 await message.reply_photo(
                 photo=f"downloads/{_chat_}final.png",
                 reply_markup=InlineKeyboardMarkup(buttons),

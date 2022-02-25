@@ -34,7 +34,7 @@ async def closesmex(_,CallbackQuery):
     callback_request = callback_data.split(None, 1)[1]
     userid = CallbackQuery.from_user.id 
     videoid, user_id = callback_request.split("|")    
-    buttons = url_markup2(videoid, user_id)
+    buttons = url_markup(videoid, duration, user_id, query, query_type)
     await CallbackQuery.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(buttons))
 
     
@@ -44,7 +44,7 @@ async def goback(_,CallbackQuery):
     callback_request = callback_data.split(None, 1)[1]
     userid = CallbackQuery.from_user.id 
     videoid, user_id = callback_request.split("|")    
-    buttons = url_markup(videoid, user_id)
+    buttons = url_markup(videoid, duration, user_id, query, query_type)
     await CallbackQuery.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(buttons))
 
 @Client.on_callback_query(filters.regex(pattern=r"good"))
@@ -53,7 +53,7 @@ async def good(_,CallbackQuery):
     callback_request = callback_data.split(None, 1)[1]
     userid = CallbackQuery.from_user.id 
     videoid, user_id = callback_request.split("|")    
-    buttons = url_markup2(videoid, user_id)
+    buttons = url_markup(videoid, duration, user_id, query, query_type)
     await CallbackQuery.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(buttons))    
     
 @Client.on_callback_query(filters.regex("close"))
