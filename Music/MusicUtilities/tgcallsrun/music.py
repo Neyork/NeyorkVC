@@ -13,7 +13,7 @@ from Music.MusicUtilities.database.queue import (is_active_chat, add_active_chat
 from Music.MusicUtilities.tgcallsrun import queues
 from Music.config import LOG_GROUP_ID
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from Music.MusicUtilities.helpers.inline import choose_markup
+from Music.MusicUtilities.helpers.inline import search_markup2
 from Music.MusicUtilities.database.assistant import (_get_assistant, get_assistant, save_assistant)
 import os
 from os import path
@@ -27,7 +27,7 @@ from Music.MusicUtilities.helpers.gets import (get_url, themes, random_assistant
 from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
-from Music.MusicUtilities.helpers.inline import (choose_markup, search_markup, livestream_markup, playlist_markup, audio_markup)
+from Music.MusicUtilities.helpers.inline import (search_markup2, search_markup, play_markup, playlist_markup, audio_markup)
 from Music.MusicUtilities.tgcallsrun import (convert, download)
 from pyrogram import filters
 from typing import Union
@@ -144,7 +144,7 @@ Downloading....
                 thumb = await gen_thumb(thumbnail, title, userid, theme, ctitle)
                 user_id = userid
                 videoid = afk
-                buttons = choose_markup(videoid, user_id)
+                buttons = play_markup(videoid, user_id)
                 await mystic.delete()
                 semx = await app.get_users(userid)
                 await app.send_photo(chat_id,
@@ -174,7 +174,7 @@ Downloading....
                 user_id = 1
                 videoid = str(videoid)
                 if videoid == "smex1":
-                    buttons = livestream_markup(videoid, user_id)
+                    buttons = audio_markup(videoid, user_id)
                 else:
                     buttons = play_markup(videoid, user_id)
                 await app.send_photo(chat_id,
