@@ -368,7 +368,7 @@ async def play(_, message: Message):
             await LOG_CHAT(message, what)
             user_name = message.from_user.first_name
             thumb ="cache/photo_2021-11-20_01-01-55.jpg"
-            buttons = url_markup(user_id, query)
+            buttons = url_markup(videoid, duration, user_id, query, query_type)
             hmo = await message.reply_photo(
             photo=thumb, 
             caption=("**Usage:** /play [Music Name or Youtube Link or Reply to Audio]\n\nIf you want to play Playlists! Select the one from Below."),    
@@ -401,7 +401,7 @@ async def play(_, message: Message):
             return await mystic.edit_text(f"❌ Soung Not Found.\n**Possible Reason:**{e}")
         thumb ="cache/photo_2021-11-17_22-43-02.jpg"
         await mystic.delete()   
-        buttons = url_markup(user_id, query)
+        buttons = url_markup(videoid, duration, user_id, query, query_type)
         hmo = await message.reply_photo(
             photo=thumb, 
             caption=(f"**List Of Result**\n\n『1』<b>{title1[:25]}</b>\n┣ 🔥 __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID1})__</u>\n\n『2』<b>{title2[:25]}</b>\n┣ 🔥 __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID2})__</u>\n\n『3』<b>{title3[:25]}</b>\n┣ 🔥 __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID3})__</u>\n\n『4』<b>{title4[:25]}</b>\n┣ 🔥 __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID4})__</u>\n\n『5』<b>{title5[:25]}</b>\n┣ 🔥 __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID5})__</u>"),    
@@ -427,12 +427,12 @@ async def play(_, message: Message):
             f28 = open(f'search/{_chat_}videoid.txt', 'w')
             f28.write(f"{videoid}") 
             f28.close()
-            buttons = url_markup(user_id, query)
+            buttons = url_markup(videoid, duration, user_id, query, query_type)
         else:
             f28 = open(f'search/{_chat_}videoid.txt', 'w')
             f28.write(f"{videoid}") 
             f28.close()
-            buttons = audio_markup(videoid, user_id)
+            buttons = url_markup(videoid, duration, user_id, query, query_type)
         checking = f"[{message.from_user.first_name}](tg://user?id={message.from_user.id})"
         await message.reply_photo(
             photo=thumb,
@@ -458,12 +458,12 @@ async def play(_, message: Message):
             f28 = open(f'search/{_chat_}videoid.txt', 'w')
             f28.write(f"{videoid}") 
             f28.close()
-            buttons = url_markup(user_id, query)
+            buttons = url_markup(videoid, duration, user_id, query, query_type)
         else:
             f28 = open(f'search/{_chat_}videoid.txt', 'w')
             f28.write(f"{videoid}") 
             f28.close()
-            buttons = url_markup2(videoid, duration, user_id)
+            buttons = url_markup(videoid, duration, user_id, query, query_type)
         await message.reply_photo(
         photo=thumb,
         reply_markup=InlineKeyboardMarkup(buttons),    
@@ -565,7 +565,7 @@ async def startyuplay(_,CallbackQuery):
     await mystic.delete()
     if await is_active_chat(chat_id):
         position = await put(chat_id, file=file)
-        buttons = url_markup2(videoid, duration, user_id)
+        buttons = url_markup(videoid, duration, user_id, query, query_type)
         _chat_ = ((str(file)).replace("_","", 1).replace("/","", 1).replace(".","", 1))
         cpl=(f"downloads/{_chat_}final.png")     
         shutil.copyfile(thumb, cpl) 
@@ -601,7 +601,7 @@ async def startyuplay(_,CallbackQuery):
             ),
             stream_type=StreamType().local_stream,
         )
-        buttons = url_markup(videoid, user_id)
+        buttons = url_markup(videoid, duration, user_id, query, query_type)
         await mystic.delete()
         m = await CallbackQuery.message.reply_photo(
         photo=thumb,
@@ -664,20 +664,7 @@ async def popat(_,CallbackQuery):
     except Exception as e:
         return await mystic.edit_text(f"❌ Soung Not Found.\n**Possible Reason:**{e}")
     if i == 1:
-        buttons = search_markup2(
-    ID6,
-    ID7,
-    ID8,
-    ID9,
-    ID10,
-    duration6,
-    duration7,
-    duration8,
-    duration9,
-    duration10,
-    user_id,
-    query,
-)
+        buttons = url_markup(videoid, duration, user_id, query, query_type)
         await CallbackQuery.edit_message_text(
             f"『6』<b>{title6[:25]}</b>\n┣ ⚡ __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID6})__</u>\n\n『7』<b>{title7[:25]}</b>\n┣ ⚡ __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID7})__</u>\n\n『8』<b>{title8[:25]}</b>\n┣ ⚡ __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID8})__</u>\n\n『9』<b>{title9[:25]}</b>\n┣ ⚡ __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID9})__</u>\n\n『10』<b>{title10[:25]}</b>\n┣ ⚡ Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID10})__</u>",    
             reply_markup=InlineKeyboardMarkup(buttons),
@@ -685,7 +672,7 @@ async def popat(_,CallbackQuery):
         disable_web_page_preview=True
         return    
     if i == 2:
-        buttons = url_markup(user_id, query)
+        buttons = url_markup(videoid, duration, user_id, query, query_type)
         await CallbackQuery.edit_message_text(
             f"『1』<b>{title1[:25]}</b>\n┣ ⚡ __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID1})__</u>\n\n『2』<b>{title2[:25]}</b>\n┣ ⚡ __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID2})__</u>\n\n『3』<b>{title3[:25]}</b>\n┣ ⚡ __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID3})__</u>\n\n『4』<b>{title4[:25]}</b>\n┣ ⚡ __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID4})__</u>\n\n『5』<b>{title5[:25]}</b>\n┣ ⚡ __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID5})__</u>",    
             reply_markup=InlineKeyboardMarkup(buttons),
@@ -698,7 +685,7 @@ async def play_playlist_cmd(_, message):
     thumb ="cache/photo_2021-11-20_01-01-55.jpg"
     user_id = message.from_user.id
     user_name = message.from_user.first_name
-    buttons = playlist_markup(user_name, user_id)
+    buttons = url_markup(videoid, duration, user_id, query, query_type)
     await message.reply_photo(
     photo=thumb, 
     caption=("**__Music's Playlist Feature__**\n\nSelect the Playlist you want to play!."),    
