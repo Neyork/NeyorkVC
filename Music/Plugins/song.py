@@ -38,8 +38,8 @@ from Music.MusicUtilities.database.chats import (
 from Music.MusicUtilities.helpers.inline import (
     primary_markup,
     search_markup,
-    play_markup,
-    playlist_markup,
+    song_markup,
+    song_download_markup,
     audio_markup,
     choose_markup,
 )
