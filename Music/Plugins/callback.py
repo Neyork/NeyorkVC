@@ -91,7 +91,7 @@ from Music.MusicUtilities.helpers.Inline import (
 )
 from Music.MusicUtilities.helpers.Inline import (
     primary_markup,
-    confirm_keyboard,
+    check_markup,
     playlist_markup,
     fetch_playlist,
     choose_markup,
