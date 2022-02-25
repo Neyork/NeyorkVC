@@ -84,8 +84,8 @@ from Music.MusicUtilities.helpers.ytdl import ytdl_opts
 from Music.MusicUtilities.helpers.inline import (
     primary_markup,
     search_markup,
-    play_markup,
-    playlist_markup,
+    url_markup,
+    url_markup2,
 )
 from pyrogram import filters
 from typing import Union
