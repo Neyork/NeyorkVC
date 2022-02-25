@@ -1,7 +1,7 @@
 from pyrogram import Client
 from Music.config import API_ID, API_HASH
 from Music.MusicUtilities.helpers.others import download_markup, others_markup
-from Music.MusicUtilities.helpers.play import (audio_markup, audio_markup2, audio_timer_markup_start,
+from Music.MusicUtilities.helpers.inline import (audio_markup, audio_markup2, audio_timer_markup_start,
                    primary_markup, search_markup, search_markup2,
                    secondary_markup, secondary_markup2, timer_markup,
                    url_markup, url_markup2)
