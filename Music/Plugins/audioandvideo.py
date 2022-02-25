@@ -16,7 +16,7 @@ import os
 from os import path
 from Music.MusicUtilities.helpers.thumbnails import down_thumb
 from Music import app
-from Music.MusicUtilities.Inline import choose_markup, livestream_markup
+from Music.MusicUtilities.helpers.inline import others_markup, play_markup
 from pykeyboard import InlineKeyboard
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton
@@ -34,7 +34,7 @@ async def closesmex(_,CallbackQuery):
     callback_request = callback_data.split(None, 1)[1]
     userid = CallbackQuery.from_user.id 
     videoid, user_id = callback_request.split("|")    
-    buttons = livestream_markup(videoid, user_id)
+    buttons = others_markup(videoid, user_id)
     await CallbackQuery.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(buttons))
 
     
@@ -44,7 +44,7 @@ async def goback(_,CallbackQuery):
     callback_request = callback_data.split(None, 1)[1]
     userid = CallbackQuery.from_user.id 
     videoid, user_id = callback_request.split("|")    
-    buttons = choose_markup(videoid, user_id)
+    buttons = play_markup(videoid, user_id)
     await CallbackQuery.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(buttons))
 
 @Client.on_callback_query(filters.regex(pattern=r"good"))

@@ -61,10 +61,10 @@ from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
 from Music.MusicUtilities.helpers.inline import (
-    primary_markup,
+    play_keyboard,
     search_markup,
-    url_markup,
-    url_markup2,
+    play_markup,
+    playlist_markup,
     audio_markup,
 )
 from Music.MusicUtilities.tgcallsrun import (convert, download)

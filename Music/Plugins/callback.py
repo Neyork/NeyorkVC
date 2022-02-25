@@ -82,19 +82,19 @@ from Music.MusicUtilities.database.assistant import (
     get_assistant,
     save_assistant,
 )
-from Music.MusicUtilities.Inline import (
-    primary_markup,
+from Music.MusicUtilities.helpers.inline import (
+    play_keyboard,
     search_markup,
-    timer_markup,
-    choose_markup,
+    play_markup,
+    playlist_markup,
     audio_markup,
 )
-from Music.MusicUtilities.Inline import (
-    primary_markup,
-    download_markup,
-    choose_markup,
-    url_markup,
-    url_markup2,
+from Music.MusicUtilities.helpers.inline import (
+    play_keyboard,
+    confirm_keyboard,
+    play_list_keyboard,
+    close_keyboard,
+    confirm_group_keyboard,
 )
 from Music.MusicUtilities.tgcallsrun import (
     music,
@@ -153,10 +153,10 @@ from Music.MusicUtilities.helpers.gets import (
 from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
-from Music.MusicUtilities.Inline import (
-    primary_markup,
+from Music.MusicUtilities.helpers.inline import (
+    play_keyboard,
     search_markup,
-    timer_markup,
+    play_markup,
     playlist_markup,
 )
 import requests
@@ -546,10 +546,10 @@ Personal Playlist Playing."""
                     ctitle = CallbackQuery.message.chat.title
                     ctitle = await CHAT_TITLE(ctitle)
                     thumb = await gen_thumb(thumbnail, title, userid, theme, ctitle)  
-                    buttons = url_markup(videoid, duration, user_id, query, query_type)
+                    buttons = play_markup(videoid, user_id)
                     m = await CallbackQuery.message.reply_photo(
                     photo=thumb,
-                    choose_markup=InlineKeyboardMarkup(buttons),    
+                    reply_markup=InlineKeyboardMarkup(buttons),    
                     caption=(f"🎥 <b>__Playing:__ </b>[{title[:25]}]({url}) \n⏳ <b>__Duration:__</b> {duration} \n💡 <b>__Info:__</b> [More Information](https://t.me/{BOT_USERNAME}?start=info_{videoid})\n👤**__Requested by:__** {checking}")
                 )   
                     os.remove(thumb)
@@ -586,7 +586,7 @@ Personal Playlist Playing."""
                 pass
         else:
             await CallbackQuery.message.reply_text(
-                    text=msg, choose_markup=key
+                    text=msg, reply_markup=key
                 )
             await m.delete()
     if str(smex) == "group":
@@ -692,10 +692,10 @@ Group Playlist Playing."""
                     ctitle = CallbackQuery.message.chat.title
                     ctitle = await CHAT_TITLE(ctitle)
                     thumb = await gen_thumb(thumbnail, title, userid, theme, ctitle)
-                    buttons = url_markup2(videoid, duration, user_id)
+                    buttons = play_markup(videoid, user_id)
                     m = await CallbackQuery.message.reply_photo(
                     photo=thumb,
-                    url_markup2=InlineKeyboardMarkup(buttons),    
+                    reply_markup=InlineKeyboardMarkup(buttons),    
                     caption=(f"🎥 <b>__Playing:__ </b>[{title[:25]}]({url}) \n⏳ <b>__Duration:__</b> {duration} \n💡 <b>__Info:__</b> [More Information](https://t.me/{BOT_USERNAME}?start=info_{videoid})\n👤**__Requested by:__** {checking}")
                 )   
                     os.remove(thumb)

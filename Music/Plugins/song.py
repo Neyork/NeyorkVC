@@ -36,12 +36,12 @@ from Music.MusicUtilities.database.chats import (
     get_served_chats,
 )
 from Music.MusicUtilities.helpers.inline import (
-    primary_markup,
+    play_keyboard,
     search_markup,
-    url_markup,
-    url_markup2,
+    play_markup,
+    playlist_markup,
     audio_markup,
-    choose_markup,
+    play_list_keyboard,
 )
 from Music.MusicUtilities.database.blacklistchat import (
     blacklisted_chats,
