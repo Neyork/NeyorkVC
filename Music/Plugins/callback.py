@@ -354,7 +354,7 @@ async def skipvc(_,CallbackQuery):
                 userid =(f2.read())
                 thumb = await gen_thumb(thumbnail, title, userid, theme, ctitle)
                 user_id = userid
-                buttons = url_markup(videoid, user_id)
+                buttons = url_markup(videoid, duration, user_id, query, query_type)
                 await mystic.delete()
                 semx = await app.get_users(userid)
                 user_id = CallbackQuery.from_user.id
@@ -389,7 +389,7 @@ async def skipvc(_,CallbackQuery):
                 if videoid == "smex1":
                     buttons = audio_markup(videoid, user_id)
                 else:
-                    buttons = url_markup(videoid, user_id)
+                    buttons = url_markup(videoid, duration, user_id, query, query_type)
                 user_id = CallbackQuery.from_user.id
                 user_name = CallbackQuery.from_user.first_name
                 rpk = "["+user_name+"](tg://user?id="+str(user_id)+")"    
@@ -546,7 +546,7 @@ Personal Playlist Playing."""
                     ctitle = CallbackQuery.message.chat.title
                     ctitle = await CHAT_TITLE(ctitle)
                     thumb = await gen_thumb(thumbnail, title, userid, theme, ctitle)  
-                    buttons = url_markup(videoid, user_id)
+                    buttons = url_markup(videoid, duration, user_id, query, query_type)
                     m = await CallbackQuery.message.reply_photo(
                     photo=thumb,
                     reply_markup=InlineKeyboardMarkup(buttons),    
@@ -692,7 +692,7 @@ Group Playlist Playing."""
                     ctitle = CallbackQuery.message.chat.title
                     ctitle = await CHAT_TITLE(ctitle)
                     thumb = await gen_thumb(thumbnail, title, userid, theme, ctitle)
-                    buttons = url_markup(videoid, user_id)
+                    buttons = url_markup(videoid, duration, user_id, query, query_type)
                     m = await CallbackQuery.message.reply_photo(
                     photo=thumb,
                     reply_markup=InlineKeyboardMarkup(buttons),    
