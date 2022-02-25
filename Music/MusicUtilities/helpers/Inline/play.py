@@ -9,7 +9,7 @@ from Music import BOT_NAME
 from Music.config import SUPPORT_GROUP, UPDATES_CHANNEL
 
 
-def url_markup(videoid, duration, user_id, query, query_type):
+def url_markup(duration, user_id, query):
     buttons = [
         [
             InlineKeyboardButton(
@@ -43,7 +43,7 @@ def url_markup(videoid, duration, user_id, query, query_type):
     return buttons
 
 
-def url_markup2(videoid, duration, user_id):
+def url_markup2(videoid, duration, user_id, query):
     buttons = [
         [
             InlineKeyboardButton(
