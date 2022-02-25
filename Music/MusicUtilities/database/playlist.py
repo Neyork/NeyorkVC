@@ -1,4 +1,4 @@
-from typing import Callable, Union, List
+from typing import Dict, Union, List
 from Music import db
 
 playlistdb = db.playlist
