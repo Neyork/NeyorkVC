@@ -35,7 +35,7 @@ from Music.MusicUtilities.database.chats import (
     add_served_chat,
     get_served_chats,
 )
-from Music.MusicUtilities.helpers.inline import (
+from Music.MusicUtilities.helpers.Inline import (
     primary_markup,
     search_markup,
     url_markup,

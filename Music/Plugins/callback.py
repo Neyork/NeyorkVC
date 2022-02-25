@@ -82,14 +82,14 @@ from Music.MusicUtilities.database.assistant import (
     get_assistant,
     save_assistant,
 )
-from Music.MusicUtilities.helpers.inline import (
+from Music.MusicUtilities.helpers.Inline import (
     primary_markup,
     search_markup,
     url_markup,
     playlist_markup,
     audio_markup,
 )
-from Music.MusicUtilities.helpers.inline import (
+from Music.MusicUtilities.helpers.Inline import (
     primary_markup,
     confirm_keyboard,
     playlist_markup,
@@ -153,7 +153,7 @@ from Music.MusicUtilities.helpers.gets import (
 from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
-from Music.MusicUtilities.helpers.inline import (
+from Music.MusicUtilities.helpers.Inline import (
     primary_markup,
     search_markup,
     url_markup,

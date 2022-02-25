@@ -53,7 +53,7 @@ from Music.MusicUtilities.database.playlist import (
     save_playlist,
     delete_playlist,
 )
-from Music.MusicUtilities.helpers.inline import (
+from Music.MusicUtilities.helpers.Inline import (
     primary_markup,
     choose_markup,
     playlist_markup,
@@ -81,7 +81,7 @@ from Music.MusicUtilities.helpers.gets import (
 from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
-from Music.MusicUtilities.helpers.inline import (
+from Music.MusicUtilities.helpers.Inline import (
     primary_markup,
     search_markup,
     url_markup,

@@ -60,7 +60,7 @@ from pytgcalls.types.input_stream import InputStream
 from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
-from Music.MusicUtilities.helpers.inline import (
+from Music.MusicUtilities.helpers.Inline import (
     primary_markup,
     search_markup,
     url_markup,

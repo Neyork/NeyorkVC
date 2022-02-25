@@ -58,7 +58,7 @@ from Music.MusicUtilities.database.chats import (
     add_served_chat,
     get_served_chats,
 )
-from Music.MusicUtilities.helpers.inline import (
+from Music.MusicUtilities.helpers.Inline import (
     primary_markup,
     search_markup,
     url_markup,
@@ -100,7 +100,7 @@ from Music.MusicUtilities.helpers.logger import LOG_CHAT
 from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
-from Music.MusicUtilities.helpers.inline import (
+from Music.MusicUtilities.helpers.Inline import (
     primary_markup,
     search_markup2,
     search_markup,

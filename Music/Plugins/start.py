@@ -22,8 +22,8 @@ from Music.MusicUtilities.database.auth import (_get_authusers, add_nonadmin_cha
                    get_authuser, get_authuser_count, get_authuser_names,
                    is_nonadmin_chat, remove_nonadmin_chat, save_authuser)
 from Music.MusicUtilities.database.blacklistchat import blacklist_chat, blacklisted_chats, whitelist_chat
-from Music.MusicUtilities.helpers.inline import private_panel, setting_markup
-from Music.MusicUtilities.helpers.inline import (custommarkup, dashmarkup, setting_markup,
+from Music.MusicUtilities.helpers.Inline import private_panel, setting_markup
+from Music.MusicUtilities.helpers.Inline import (custommarkup, dashmarkup, setting_markup,
                           start_pannel, usermarkup, volmarkup)
 from Music.MusicUtilities.helpers.thumbnails import down_thumb
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts
