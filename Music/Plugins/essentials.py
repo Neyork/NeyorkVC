@@ -22,7 +22,7 @@ from Music.MusicUtilities.helpers.logger import LOG_CHAT
 from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl
-from Music.MusicUtilities.helpers.inline import (play_keyboard, search_markup)
+from Music.MusicUtilities.helpers.inline import (primary_markup, search_markup)
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from sys import version as pyver
