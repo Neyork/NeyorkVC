@@ -1,4 +1,4 @@
-from typing import Callable, Dict, List
+from typing import Callable, Union, List
 
 from pyrogram import Client
 from pyrogram.types import Chat, Message
@@ -8,7 +8,7 @@ from Music import SUDOERS
 admins = {}
 
 
-admins: Dict[int, List[int]] = {}
+admins: Union[int, List[int]] = {}
 
 
 def set(chat_id: int, admins_: List[int]):
