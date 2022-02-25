@@ -1,4 +1,4 @@
-from typing import Dict, Union, List
+from typing import Callable, Union, List
 from Music import db
 
 chatsdb = db.chats
