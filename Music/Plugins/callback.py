@@ -549,7 +549,7 @@ Personal Playlist Playing."""
                     buttons = play_markup(videoid, user_id)
                     m = await CallbackQuery.message.reply_photo(
                     photo=thumb,
-                    reply_markup=InlineKeyboardMarkup(buttons),    
+                    choose_markup=InlineKeyboardMarkup(buttons),    
                     caption=(f"🎥 <b>__Playing:__ </b>[{title[:25]}]({url}) \n⏳ <b>__Duration:__</b> {duration} \n💡 <b>__Info:__</b> [More Information](https://t.me/{BOT_USERNAME}?start=info_{videoid})\n👤**__Requested by:__** {checking}")
                 )   
                     os.remove(thumb)
@@ -586,7 +586,7 @@ Personal Playlist Playing."""
                 pass
         else:
             await CallbackQuery.message.reply_text(
-                    text=msg, reply_markup=key
+                    text=msg, choose_markup=key
                 )
             await m.delete()
     if str(smex) == "group":
@@ -695,7 +695,7 @@ Group Playlist Playing."""
                     buttons = play_markup(videoid, user_id)
                     m = await CallbackQuery.message.reply_photo(
                     photo=thumb,
-                    reply_markup=InlineKeyboardMarkup(buttons),    
+                    choose_markup=InlineKeyboardMarkup(buttons),    
                     caption=(f"🎥 <b>__Playing:__ </b>[{title[:25]}]({url}) \n⏳ <b>__Duration:__</b> {duration} \n💡 <b>__Info:__</b> [More Information](https://t.me/{BOT_USERNAME}?start=info_{videoid})\n👤**__Requested by:__** {checking}")
                 )   
                     os.remove(thumb)
