@@ -83,18 +83,18 @@ from Music.MusicUtilities.database.assistant import (
     save_assistant,
 )
 from Music.MusicUtilities.helpers.inline import (
-    play_keyboard,
+    primary_markup,
     search_markup,
-    play_markup,
+    url_markup,
     playlist_markup,
     audio_markup,
 )
 from Music.MusicUtilities.helpers.inline import (
-    play_keyboard,
+    primary_markup,
     confirm_keyboard,
-    play_list_keyboard,
-    close_keyboard,
-    confirm_group_keyboard,
+    playlist_markup,
+    fetch_playlist,
+    choose_markup,
 )
 from Music.MusicUtilities.tgcallsrun import (
     music,
@@ -154,9 +154,9 @@ from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
 from Music.MusicUtilities.helpers.inline import (
-    play_keyboard,
+    primary_markup,
     search_markup,
-    play_markup,
+    url_markup,
     playlist_markup,
 )
 import requests
@@ -354,7 +354,7 @@ async def skipvc(_,CallbackQuery):
                 userid =(f2.read())
                 thumb = await gen_thumb(thumbnail, title, userid, theme, ctitle)
                 user_id = userid
-                buttons = play_markup(videoid, user_id)
+                buttons = url_markup(videoid, user_id)
                 await mystic.delete()
                 semx = await app.get_users(userid)
                 user_id = CallbackQuery.from_user.id
@@ -389,7 +389,7 @@ async def skipvc(_,CallbackQuery):
                 if videoid == "smex1":
                     buttons = audio_markup(videoid, user_id)
                 else:
-                    buttons = play_markup(videoid, user_id)
+                    buttons = url_markup(videoid, user_id)
                 user_id = CallbackQuery.from_user.id
                 user_name = CallbackQuery.from_user.first_name
                 rpk = "["+user_name+"](tg://user?id="+str(user_id)+")"    
@@ -546,7 +546,7 @@ Personal Playlist Playing."""
                     ctitle = CallbackQuery.message.chat.title
                     ctitle = await CHAT_TITLE(ctitle)
                     thumb = await gen_thumb(thumbnail, title, userid, theme, ctitle)  
-                    buttons = play_markup(videoid, user_id)
+                    buttons = url_markup(videoid, user_id)
                     m = await CallbackQuery.message.reply_photo(
                     photo=thumb,
                     reply_markup=InlineKeyboardMarkup(buttons),    
@@ -692,7 +692,7 @@ Group Playlist Playing."""
                     ctitle = CallbackQuery.message.chat.title
                     ctitle = await CHAT_TITLE(ctitle)
                     thumb = await gen_thumb(thumbnail, title, userid, theme, ctitle)
-                    buttons = play_markup(videoid, user_id)
+                    buttons = url_markup(videoid, user_id)
                     m = await CallbackQuery.message.reply_photo(
                     photo=thumb,
                     reply_markup=InlineKeyboardMarkup(buttons),    

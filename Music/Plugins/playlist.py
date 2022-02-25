@@ -54,11 +54,11 @@ from Music.MusicUtilities.database.playlist import (
     delete_playlist,
 )
 from Music.MusicUtilities.helpers.inline import (
-    play_keyboard,
-    confirm_keyboard,
-    play_list_keyboard,
-    close_keyboard,
-    confirm_group_keyboard,
+    primary_markup,
+    choose_markup,
+    playlist_markup,
+    fetch_playlist,
+    check_markup,
 )
 from Music.MusicUtilities.database.theme import (
     _get_theme,
@@ -82,9 +82,9 @@ from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
 from Music.MusicUtilities.helpers.inline import (
-    play_keyboard,
+    primary_markup,
     search_markup,
-    play_markup,
+    url_markup,
     playlist_markup,
 )
 from pyrogram import filters

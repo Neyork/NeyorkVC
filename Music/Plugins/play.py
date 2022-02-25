@@ -59,12 +59,12 @@ from Music.MusicUtilities.database.chats import (
     get_served_chats,
 )
 from Music.MusicUtilities.helpers.inline import (
-    play_keyboard,
+    primary_markup,
     search_markup,
-    play_markup,
+    url_markup,
     playlist_markup,
     audio_markup,
-    play_list_keyboard,
+    playlist_markup,
 )
 from Music.MusicUtilities.database.blacklistchat import (
     blacklisted_chats,
@@ -101,7 +101,7 @@ from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
 from Music.MusicUtilities.helpers.inline import (
-    play_keyboard,
+    primary_markup,
     search_markup2,
     search_markup,
 )
@@ -427,7 +427,7 @@ async def play(_, message: Message):
             f28 = open(f'search/{_chat_}videoid.txt', 'w')
             f28.write(f"{videoid}") 
             f28.close()
-            buttons = play_markup(videoid, user_id)
+            buttons = url_markup(videoid, user_id)
         else:
             f28 = open(f'search/{_chat_}videoid.txt', 'w')
             f28.write(f"{videoid}") 
@@ -458,7 +458,7 @@ async def play(_, message: Message):
             f28 = open(f'search/{_chat_}videoid.txt', 'w')
             f28.write(f"{videoid}") 
             f28.close()
-            buttons = play_markup(videoid, user_id)
+            buttons = url_markup(videoid, user_id)
         else:
             f28 = open(f'search/{_chat_}videoid.txt', 'w')
             f28.write(f"{videoid}") 
@@ -565,7 +565,7 @@ async def startyuplay(_,CallbackQuery):
     await mystic.delete()
     if await is_active_chat(chat_id):
         position = await put(chat_id, file=file)
-        buttons = play_markup(videoid, user_id)
+        buttons = url_markup(videoid, user_id)
         _chat_ = ((str(file)).replace("_","", 1).replace("/","", 1).replace(".","", 1))
         cpl=(f"downloads/{_chat_}final.png")     
         shutil.copyfile(thumb, cpl) 
@@ -601,7 +601,7 @@ async def startyuplay(_,CallbackQuery):
             ),
             stream_type=StreamType().local_stream,
         )
-        buttons = play_markup(videoid, user_id)
+        buttons = url_markup(videoid, user_id)
         await mystic.delete()
         m = await CallbackQuery.message.reply_photo(
         photo=thumb,
