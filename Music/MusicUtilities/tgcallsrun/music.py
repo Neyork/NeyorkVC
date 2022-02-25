@@ -1,5 +1,5 @@
 import os
-from typing import Dict
+from typing import Callable, List, Union
 import random
 from pytgcalls import PyTgCalls
 from pytgcalls.types import Update
