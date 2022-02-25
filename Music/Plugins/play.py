@@ -365,7 +365,7 @@ async def play(_, message: Message):
             await LOG_CHAT(message, what)
             user_name = message.from_user.first_name
             thumb ="cache/photo_2021-11-20_01-01-55.jpg"
-            buttons = choose_markup(user_name, user_id)
+            buttons = url_markup(user_name, user_id)
             hmo = await message.reply_photo(
             photo=thumb, 
             caption=("**Usage:** /play [Music Name or Youtube Link or Reply to Audio]\n\nIf you want to play Playlists! Select the one from Below."),    
@@ -398,7 +398,7 @@ async def play(_, message: Message):
             return await mystic.edit_text(f"❌ Soung Not Found.\n**Possible Reason:**{e}")
         thumb ="cache/photo_2021-11-17_22-43-02.jpg"
         await mystic.delete()   
-        buttons = choose_markup(videoid, duration_min, message.from_user.id)
+        buttons = url_markup(videoid, duration_min, message.from_user.id)
         hmo = await message.reply_photo(
             photo=thumb, 
             caption=(f"**List Of Result**\n\n『1』<b>{title1[:25]}</b>\n┣ 🔥 __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID1})__</u>\n\n『2』<b>{title2[:25]}</b>\n┣ 🔥 __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID2})__</u>\n\n『3』<b>{title3[:25]}</b>\n┣ 🔥 __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID3})__</u>\n\n『4』<b>{title4[:25]}</b>\n┣ 🔥 __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID4})__</u>\n\n『5』<b>{title5[:25]}</b>\n┣ 🔥 __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID5})__</u>"),    
@@ -424,7 +424,7 @@ async def play(_, message: Message):
             f28 = open(f'search/{_chat_}videoid.txt', 'w')
             f28.write(f"{videoid}") 
             f28.close()
-            buttons = choose_markup(videoid, user_id)
+            buttons = url_markup(videoid, user_id)
         else:
             f28 = open(f'search/{_chat_}videoid.txt', 'w')
             f28.write(f"{videoid}") 
@@ -455,12 +455,12 @@ async def play(_, message: Message):
             f28 = open(f'search/{_chat_}videoid.txt', 'w')
             f28.write(f"{videoid}") 
             f28.close()
-            buttons = play_markup(videoid, user_id)
+            buttons = url_markup(videoid, user_id)
         else:
             f28 = open(f'search/{_chat_}videoid.txt', 'w')
             f28.write(f"{videoid}") 
             f28.close()
-            buttons = choose_markup(videoid, user_id)
+            buttons = url_markup(videoid, user_id)
         await message.reply_photo(
         photo=thumb,
         reply_markup=InlineKeyboardMarkup(buttons),    
@@ -598,7 +598,7 @@ async def startyuplay(_,CallbackQuery):
             ),
             stream_type=StreamType().local_stream,
         )
-        buttons = choose_markup(videoid, user_id)
+        buttons = url_markup(videoid, user_id)
         await mystic.delete()
         m = await CallbackQuery.message.reply_photo(
         photo=thumb,
