@@ -401,8 +401,7 @@ async def play(_, message: Message):
             return await mystic.edit_text(f"❌ Soung Not Found.\n**Possible Reason:**{e}")
         thumb ="cache/photo_2021-11-17_22-43-02.jpg"
         await mystic.delete()   
-        buttons = url_markup(
-            videoid, duration_min, user_id, query, query_type
+        buttons = url_markup(duration_min, user_id, query, query_type
         )
         hmo = await message.reply_photo(
             photo=thumb, 
