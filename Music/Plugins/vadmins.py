@@ -94,6 +94,7 @@ async def skip(client, m: Message):
             await m.reply(
                 f"""
 ⏭️ **Memutar {op[2]} selanjutnya**
+
 🏷 **Nama:** [{op[0]}]({op[1]})
 🎧 **Atas permintaan:** {m.from_user.mention()}
 """,
