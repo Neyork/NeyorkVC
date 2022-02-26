@@ -1,4 +1,4 @@
-from typing import Dict, List, Union
+from typing import Client, List, Union
 
 from Music import db
 
@@ -31,7 +31,7 @@ async def remove_nonadmin_chat(user_id: int):
 authuserdb = db.authuser
 
 
-async def get_authuser_count() -> dict:
+async def get_authuser_count() -> Client:
     chats = authuserdb.find({"chat_id": {"$lt": 0}})
     if not chats:
         return {}
@@ -44,7 +44,7 @@ async def get_authuser_count() -> dict:
     return {"chats_count": chats_count, "notes_count": notes_count}
 
 
-async def _get_authusers(chat_id: int) -> Dict[str, int]:
+async def _get_authusers(chat_id: int) -> Client[str, int]:
     _notes = await authuserdb.find_one({"chat_id": chat_id})
     if not _notes:
         return {}
@@ -58,7 +58,7 @@ async def get_authuser_names(chat_id: int) -> List[str]:
     return _notes
 
 
-async def get_authuser(chat_id: int, name: str) -> Union[bool, dict]:
+async def get_authuser(chat_id: int, name: str) -> Union[bool, Client]:
     name = name
     _notes = await _get_authusers(chat_id)
     if name in _notes:
@@ -67,7 +67,7 @@ async def get_authuser(chat_id: int, name: str) -> Union[bool, dict]:
         return False
 
 
-async def save_authuser(chat_id: int, name: str, note: dict):
+async def save_authuser(chat_id: int, name: str, note: Client):
     name = name
     _notes = await _get_authusers(chat_id)
     _notes[name] = note

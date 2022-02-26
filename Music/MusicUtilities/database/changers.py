@@ -1,4 +1,4 @@
-from typing import Dict, List, Union
+from typing import Client, List, Union
 
 
 async def int_to_alpha(user_id: int) -> str:

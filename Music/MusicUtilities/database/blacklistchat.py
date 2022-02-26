@@ -1,4 +1,4 @@
-from typing import Dict, List, Union
+from typing import Client, List, Union
 from Music import db
 
 blacklist_chatdb = db.blacklistChat

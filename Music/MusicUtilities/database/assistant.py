@@ -1,9 +1,9 @@
-from typing import Dict, Union, List
+from typing import Client, Union, List
 from Music import db
 
 assisdb = db.assis
 
-async def get_assistant_count() -> dict:
+async def get_assistant_count() -> Client:
     chats = assisdb.find({"chat_id": {"$lt": 0}})
     if not chats:
         return {}
@@ -21,13 +21,13 @@ async def get_as_names(chat_id: int) -> List[str]:
         _notes.append(note)
     return _notes
 
-async def _get_assistant(chat_id: int) -> Dict[str, int]:
+async def _get_assistant(chat_id: int) -> Client[str, int]:
     _notes = await assisdb.find_one({"chat_id": chat_id})
     if not _notes:
         return {}
     return _notes["notes"]
 
-async def get_assistant(chat_id: int, name: str) -> Union[bool, dict]:
+async def get_assistant(chat_id: int, name: str) -> Union[bool, Client]:
     name = name.lower().strip()
     _notes = await _get_assistant(chat_id)
     if name in _notes:
@@ -35,7 +35,7 @@ async def get_assistant(chat_id: int, name: str) -> Union[bool, dict]:
     else:
         return False
 
-async def save_assistant(chat_id: int, name: str, note: dict):
+async def save_assistant(chat_id: int, name: str, note: Client):
     name = name.lower().strip()
     _notes = await _get_assistant(chat_id)
     _notes[name] = note
