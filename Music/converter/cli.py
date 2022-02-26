@@ -8,62 +8,6 @@ app = Client(
     bot_token=BOT_TOKEN,
 )
 
-
-if not STRING1:
-    ASS_CLI_1 = None
-else:
-    ASS_CLI_1 = Client(
-        api_id=API_ID,
-        api_hash=API_HASH,
-        session_name=STRING1,
-        plugins=Client(root="Music.Plugins.Multi-Assistant"),
-    )
-
-
-if not STRING2:
-    ASS_CLI_2 = None
-else:
-    ASS_CLI_2 = Client(
-        api_id=API_ID,
-        api_hash=API_HASH,
-        session_name=STRING2,
-        plugins=Client(root="Music.Plugins.Multi-Assistant"),
-    )
-
-
-if not STRING3:
-    ASS_CLI_3 = None
-else:
-    ASS_CLI_3 = Client(
-        api_id=API_ID,
-        api_hash=API_HASH,
-        session_name=STRING3,
-        plugins=Client(root="Music.Plugins.Multi-Assistant"),
-    )
-
-
-if not STRING4:
-    ASS_CLI_4 = None
-else:
-    ASS_CLI_4 = Client(
-        api_id=API_ID,
-        api_hash=API_HASH,
-        session_name=STRING4,
-        plugins=Client(root="Music.Plugins.Multi-Assistant"),
-    )
-
-
-if not STRING5:
-    ASS_CLI_5 = None
-else:
-    ASS_CLI_5 = Client(
-        api_id=API_ID,
-        api_hash=API_HASH,
-        session_name=STRING5,
-        plugins=Client(root="Music.Plugins.Multi-Assistant"),
-    )
-
-
 if not LOG_SESSION:
     LOG_CLIENT = None
 else:
