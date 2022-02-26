@@ -1,6 +1,6 @@
 from asyncio import Queue as _Queue
 from asyncio import QueueEmpty as Empty
-from typing import Dict
+from typing import Client
 
 QUEUE = {}
 
@@ -12,7 +12,7 @@ class Queue(_Queue):
         self._queue.clear()
 
 
-queues: Dict[int, Queue] = {}
+queues: Client[int, Queue] = {}
 
 
 async def put(chat_id: int, **kwargs) -> int:
@@ -22,7 +22,7 @@ async def put(chat_id: int, **kwargs) -> int:
     return queues[chat_id].qsize()
 
 
-def get(chat_id: int) -> Dict[str, str]:
+def get(chat_id: int) -> Client[str, str]:
     if chat_id in queues:
         try:
             return queues[chat_id].get_nowait()
