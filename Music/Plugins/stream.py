@@ -14,7 +14,7 @@ from pytgcalls.types.input_stream.quality import (
     MediumQualityVideo,
 )
 from youtubesearchpython import VideosSearch
-from Music.config import SUPPORT_GROUP, UPDATES_CHANNEL
+from Music.config import GROUP, CHANNEL
 from Music import BOT_NAME, BOT_USERNAME, app
 from Music.MusicUtilities.tgcallsrun.music import pytgcalls as call_py
 from Music.MusicUtilities.helpers.filters import command
