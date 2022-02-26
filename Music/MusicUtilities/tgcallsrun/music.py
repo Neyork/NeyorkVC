@@ -13,7 +13,6 @@ from Music.MusicUtilities.database.queue import (is_active_chat, add_active_chat
 from Music.MusicUtilities.tgcallsrun import queues
 from Music.config import LOG_GROUP_ID
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from Music.MusicUtilities.helpers.inline import play_keyboard
 from Music.MusicUtilities.database.assistant import (_get_assistant, get_assistant, save_assistant)
 import os
 from os import path
@@ -27,7 +26,7 @@ from Music.MusicUtilities.helpers.gets import (get_url, themes, random_assistant
 from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
-from Music.MusicUtilities.helpers.inline import (play_keyboard, search_markup, play_markup, playlist_markup, audio_markup)
+from Music.MusicUtilities.helpers.inline import play_keyboard, audio_markup, search_markup, play_markup
 from Music.MusicUtilities.tgcallsrun import (convert, download)
 from pyrogram import filters
 from typing import Union
@@ -56,6 +55,15 @@ async def on_closed(client: PyTgCalls, chat_id: int) -> None:
     await remove_active_chat(chat_id)
 
 
+@pytgcalls.on_left()
+async def left_handler(_, chat_id: int):
+    try:
+        queues.clear(chat_id)
+    except QueueEmpty:
+        pass
+    await remove_active_chat(chat_id)
+
+
 @pytgcalls.on_stream_end()
 async def on_stream_end(client: PyTgCalls, update: Update) -> None:
     chat_id = update.chat_id
@@ -71,7 +79,7 @@ async def on_stream_end(client: PyTgCalls, update: Update) -> None:
             f3 = (afk[2])
             finxx = (f"{f1}{f2}{f3}")
             if str(finxx) != "raw":  
-                mystic = await app.send_message(chat_id, "Downloading Next Music From Playlist...")
+                mystic = await app.send_message(chat_id, "Downloading Next Music From Playlist....")
                 url = (f"https://www.youtube.com/watch?v={afk}")
                 ctitle = (await app.get_chat(chat_id)).title
                 logger_text=f"""Playing Next From Playlist
@@ -82,12 +90,12 @@ Title :- {ctitle}
 Downloading....
 
 {url}"""
-                okay = await smexy.send_message(LOG_GROUP_ID, f"{logger_text}", disable_web_page_preview=True)
+                okay = await app.send_message(LOG_GROUP_ID, f"{logger_text}", disable_web_page_preview=True)
                 try:
                     with yt_dlp.YoutubeDL(ytdl_opts) as ytdl:
                         x = ytdl.extract_info(url, download=False)
                 except Exception as e:
-                    return await mystic.edit(f"❌ Failed to download this video.\n\n**Reason**:{e}") 
+                    return await mystic.edit(f"Failed to download this video.\n\n**Reason**:{e}") 
                 
                 chat_title = ctitle                
                 videoid = afk
@@ -107,21 +115,21 @@ Downloading....
                             flex[str(bytesx)] = 1
                         if flex[str(bytesx)] == 1:
                             flex[str(bytesx)] += 1
-                            mystic.edit(f"Downloading {title[:50]}\n\n**File Size:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec")
+                            mystic.edit(f"Downloading {title[:50]}\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec")
                         if per > 500:    
                             if flex[str(bytesx)] == 2:
                                 flex[str(bytesx)] += 1
-                                mystic.edit(f"Downloading {title[:50]}...\n\n**File Size:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec")
+                                mystic.edit(f"Downloading {title[:50]}...\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec")
                                 print(f"[{videoid}] Downloaded {percentage} at a speed of {speed} in {chat_title} | ETA: {eta} seconds")
                         if per > 800:    
                             if flex[str(bytesx)] == 3:
                                 flex[str(bytesx)] += 1
-                                mystic.edit(f"Downloading {title[:50]}....\n\n**File Size:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec")
+                                mystic.edit(f"Downloading {title[:50]}....\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec")
                                 print(f"[{videoid}] Downloaded {percentage} at a speed of {speed} in {chat_title} | ETA: {eta} seconds")
                         if per == 1000:    
                             if flex[str(bytesx)] == 4:
                                 flex[str(bytesx)] = 1
-                                mystic.edit(f"Downloading {title[:50]}.....\n\n**File Size:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec") 
+                                mystic.edit(f"Downloading {title[:50]}.....\n\n**FileSize:** {size}\n**Downloaded:** {percentage}\n**Speed:** {speed}\n**ETA:** {eta} sec") 
                                 print(f"[{videoid}] Downloaded {percentage} at a speed of {speed} in {chat_title} | ETA: {eta} seconds")
                 loop = asyncio.get_event_loop()
                 xx = await loop.run_in_executor(None, download, url, my_hook)
@@ -150,7 +158,7 @@ Downloading....
                 await app.send_photo(chat_id,
                 photo= thumb,
                 reply_markup=InlineKeyboardMarkup(buttons),    
-                caption=(f"🎥 <b>__Started Playing:__ </b>[{title[:25]}]({url}) \n⏳ <b>__Duration:__</b> {duration} Mins\n💡 <b>__Info:__</b> [More Information](https://t.me/{BOT_USERNAME}?start=info_{videoid})\n👤**__Requested by:__** {semx.mention}")
+                caption=(f"🎥<b>__Started Playing:__ </b>[{title[:25]}]({url}) \n⏳<b>__Duration:__</b> {duration} Mins\n💡<b>__Info:__</b> [Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{videoid})\n👤**__Requested by:__** {semx.mention}")
             )   
                 os.remove(thumb)
             else:      
@@ -180,7 +188,11 @@ Downloading....
                 await app.send_photo(chat_id,
                 photo=f"downloads/{_chat_}final.png",
                 reply_markup=InlineKeyboardMarkup(buttons),
-                caption=f"🎥 <b>__Started Playing:__</b> {title} \n⏳ <b>__Duration:__</b> {duration} \n👤 <b>__Requested by:__ </b> {username}",
+                caption=f"""
+<b>▶️ Sekarang memutar:</b> {title}
+<b>⌚ Durasi:</b> {duration}
+<b>🎧 Atas permintaan:</b> {username}
+""",
                 )
                 return
            

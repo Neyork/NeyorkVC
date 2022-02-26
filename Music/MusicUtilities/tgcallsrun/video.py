@@ -11,7 +11,7 @@ from pytgcalls.types.input_stream.quality import (
 from pytgcalls.types.stream import StreamVideoEnded
 
 from Music import app
-from Music.config import SUPPORT_GROUP, UPDATES_CHANNEL
+from Music.config import GROUP, CHANNEL
 from Music.MusicUtilities.tgcallsrun.music import pytgcalls as call_py
 
 from Music.MusicUtilities.tgcallsrun.queues import (
@@ -24,8 +24,8 @@ from Music.MusicUtilities.tgcallsrun.queues import (
 keyboard = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton("ᴅᴏɴᴀsɪ", url=f"https://t.me/{SUPPORT_GROUP}"),
-            InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{UPDATES_CHANNEL}"),
+            InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{GROUP}"),
+            InlineKeyboardButton("ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{CHANNEL}"),
         ]
     ]
 )
