@@ -56,7 +56,7 @@ def get_url(message_1: Message) -> Union[str, None]:
     return text[offset:offset + length]
 random_assistant = ["5", "1", "2", "3", "4"]
 
-themes = ["Black", "Grey", "Green", "Purple", "Red", "Lightred", "Blue", "Lightblue"]
+themes = ["1", "2", "3", "4", "5", "6"]
 
 def bytes(size: float) -> str:
     """humanize size"""
