@@ -8,6 +8,7 @@ from Music import BOT_NAME, ASSNAME, app, client
 from Music.MusicUtilities.database.functions import clean_restart_stage
 from Music.MusicUtilities.database.queue import (get_active_chats, remove_active_chat)
 from Music.MusicUtilities.tgcallsrun import run
+from Music.MusicUtilities.helpers.decorators import nothingmuch as startapp
 from pytgcalls import idle
 from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
 import time
@@ -29,7 +30,7 @@ print(f"[INFO]: ASSISTANT STARTED AS {ASSNAME}!")
 async def load_start():
     restart_data = await clean_restart_stage()
     if restart_data:
-        print("[INFO]: SENDING RESTART STATUS TO Neyork SERVER")
+        print("[INFO]: SENDING RESTART STATUS")
         try:
             await app.edit_message_text(
                 restart_data["chat_id"],
@@ -51,9 +52,10 @@ async def load_start():
         except Exception as e:
             print("Error came while clearing db")
             pass     
-    await app.send_message(LOG_GROUP_ID, "Neyork Music Bot Started")
-    await client.send_message(LOG_GROUP_ID, "Assistant Of Neyork Music Started")
-    print("[INFO]: STARTED THE Neyork BOT AND SENDING THE INFO TO Neyork SERVER")
+    await startapp()
+    await app.send_message(LOG_GROUP_ID, "Bot Started")
+    await client.send_message(LOG_GROUP_ID, "Assistant Started")
+    print("[INFO]: STARTED")
     
    
 loop = asyncio.get_event_loop()
@@ -63,4 +65,4 @@ run()
 idle()
 loop.close()
 
-print("[LOG] CLOSING THE YUI MUSIC BOT")
+print("[LOG] CLOSING BOT")
