@@ -1,15 +1,15 @@
-from typing import Client, Union, List
+from typing import Dict, Union, List
 from Music import db
 
 notesdb = db.notes
 
-async def _get_theme(chat_id: int) -> Client[str, int]:
+async def _get_theme(chat_id: int) -> Dict[str, int]:
     _notes = await notesdb.find_one({"chat_id": chat_id})
     if not _notes:
         return {}
     return _notes["notes"]
 
-async def get_theme(chat_id: int, name: str) -> Union[bool, Client]:
+async def get_theme(chat_id: int, name: str) -> Union[bool, dict]:
     name = name.lower().strip()
     _notes = await _get_theme(chat_id)
     if name in _notes:
@@ -18,7 +18,7 @@ async def get_theme(chat_id: int, name: str) -> Union[bool, Client]:
         return False
 
 
-async def save_theme(chat_id: int, name: str, note: Client):
+async def save_theme(chat_id: int, name: str, note: dict):
     name = name.lower().strip()
     _notes = await _get_theme(chat_id)
     _notes[name] = note

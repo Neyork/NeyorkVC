@@ -1,4 +1,4 @@
-from typing import Client, List, Union
+from typing import Dict, List, Union
 from Music import db
 
 
@@ -19,7 +19,7 @@ async def start_restart_stage(chat_id: int, message_id: int):
     )
 
 
-async def clean_restart_stage() -> Client:
+async def clean_restart_stage() -> dict:
     data = await restart_stagedb.find_one({"something": "something"})
     if not data:
         return {}

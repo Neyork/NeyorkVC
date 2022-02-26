@@ -1,10 +1,10 @@
-from typing import Client, Union, List
+from typing import Dict, Union, List
 from Music import db
 
 playlistdb = db.playlist
 
 
-async def get_playlist_count() -> Client:
+async def get_playlist_count() -> dict:
     chats = playlistdb.find({"chat_id": {"$lt": 0}})
     if not chats:
         return {}
@@ -17,7 +17,7 @@ async def get_playlist_count() -> Client:
     return {"chats_count": chats_count, "notes_count": notes_count}
 
 
-async def _get_playlists(chat_id: int) -> Client[str, int]:
+async def _get_playlists(chat_id: int) -> Dict[str, int]:
     _notes = await playlistdb.find_one({"chat_id": chat_id})
     if not _notes:
         return {}
@@ -31,7 +31,7 @@ async def get_note_names(chat_id: int) -> List[str]:
     return _notes
 
 
-async def get_playlist(chat_id: int, name: str) -> Union[bool, Client]:
+async def get_playlist(chat_id: int, name: str) -> Union[bool, dict]:
     name = name
     _notes = await _get_playlists(chat_id)
     if name in _notes:
@@ -40,7 +40,7 @@ async def get_playlist(chat_id: int, name: str) -> Union[bool, Client]:
         return False
 
 
-async def save_playlist(chat_id: int, name: str, note: Client):
+async def save_playlist(chat_id: int, name: str, note: dict):
     name = name
     _notes = await _get_playlists(chat_id)
     _notes[name] = note

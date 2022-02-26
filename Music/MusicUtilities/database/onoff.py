@@ -1,5 +1,5 @@
 from Music import db
-from typing import Client, List, Union
+from typing import Dict, List, Union
 
 onoffdb = db.onoffper
 
