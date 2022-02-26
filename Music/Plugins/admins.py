@@ -60,11 +60,11 @@ from pytgcalls.types.input_stream import InputStream
 from Music.MusicUtilities.helpers.thumbnails import gen_thumb
 from Music.MusicUtilities.helpers.chattitle import CHAT_TITLE
 from Music.MusicUtilities.helpers.ytdl import ytdl_opts 
-from Music.MusicUtilities.helpers.Inline import (
-    primary_markup,
+from Music.MusicUtilities.helpers.inline import (
+    play_keyboard,
     search_markup,
-    url_markup,
-    url_markup2,
+    play_markup,
+    playlist_markup,
     audio_markup,
 )
 from Music.MusicUtilities.tgcallsrun import (convert, download)
@@ -247,7 +247,7 @@ async def stop_cmd(_, message):
                 userid =(f2.read())
                 thumb = await gen_thumb(thumbnail, title, userid, theme, ctitle)
                 user_id = userid
-                buttons = url_markup(videoid, duration, user_id, query, query_type)
+                buttons = play_markup(videoid, user_id)
                 await mystic.delete()
                 semx = await app.get_users(userid)
                 await message.reply_photo(
@@ -277,9 +277,9 @@ async def stop_cmd(_, message):
                 user_id = 1
                 videoid = str(videoid)
                 if videoid == "smex1":
-                    buttons = url_markup(videoid, duration, user_id, query, query_type)
+                    buttons = audio_markup(videoid, user_id)
                 else:
-                    buttons = url_markup(videoid, duration, user_id, query, query_type)
+                    buttons = play_markup(videoid, user_id)
                 await message.reply_photo(
                 photo=f"downloads/{_chat_}final.png",
                 reply_markup=InlineKeyboardMarkup(buttons),
