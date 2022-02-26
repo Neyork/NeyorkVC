@@ -2,7 +2,7 @@ import asyncio
 import yt_dlp
 import psutil
 
-from Music.config import SUPPORT_GROUP, UPDATES_CHANNEL
+from Music.config import GROUP, CHANNEL
 from Music import (
     ASSID,
     BOT_ID,
