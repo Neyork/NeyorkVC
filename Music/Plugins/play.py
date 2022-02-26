@@ -401,15 +401,39 @@ async def play(_, message: Message):
             return await mystic.edit_text(f"❌ Soung Not Found.\n**Possible Reason:**{e}")
         thumb ="cache/photo_2021-11-17_22-43-02.jpg"
         await mystic.delete()   
-        buttons = url_markup(duration_min, user_id, query, query_type
-        )
-        hmo = await message.reply_photo(
-            photo=thumb, 
-            caption=(f"**List Of Result**\n\n『1』<b>{title1[:25]}</b>\n┣ 🔥 __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID1})__</u>\n\n『2』<b>{title2[:25]}</b>\n┣ 🔥 __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID2})__</u>\n\n『3』<b>{title3[:25]}</b>\n┣ 🔥 __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID3})__</u>\n\n『4』<b>{title4[:25]}</b>\n┣ 🔥 __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID4})__</u>\n\n『5』<b>{title5[:25]}</b>\n┣ 🔥 __Powered By Neyork__\n┗ 🔗 <u>__[Get Additional Information](https://t.me/{BOT_USERNAME}?start=info_{ID5})__</u>"),    
-            reply_markup=InlineKeyboardMarkup(buttons),
-        )  
-        disable_web_page_preview=True
-        return   
+        url_markup(duration, user_id, query):
+    buttons = [
+        [
+            InlineKeyboardButton(
+                text="❮",
+                callback_data=f"slider B|{query_type}|{query}|{user_id}",
+            ),
+            InlineKeyboardButton(
+                text="🎵",
+                callback_data=f"MusicStream {videoid}|{duration}|{user_id}",
+            ),
+            InlineKeyboardButton(
+                text="🎥",
+                callback_data=f"Choose {videoid}|{duration}|{user_id}",
+            ),
+            InlineKeyboardButton(
+                text="❯",
+                callback_data=f"slider F|{query_type}|{query}|{user_id}",
+            ),
+        ],
+        [
+            InlineKeyboardButton(
+                text="🔎 More Results",
+                callback_data=f"Search {query}|{user_id}",
+            ),
+            InlineKeyboardButton(
+                text="🗑 Close Search",
+                callback_data=f"forceclose {query}|{user_id}",
+            ),
+        ],
+    ]
+    return buttons
+
     if await is_active_chat(chat_id):
         position = await put(chat_id, file=file)
         _chat_ = ((str(file)).replace("_","", 1).replace("/","", 1).replace(".","", 1))
