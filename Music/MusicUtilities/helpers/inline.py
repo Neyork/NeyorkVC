@@ -6,12 +6,12 @@ from pyrogram.types import (
     Message,
 )
 from Music import BOT_NAME
-from Music.config import SUPPORT_GROUP, UPDATES_CHANNEL
+from Music.config import GROUP, CHANNEL
 
 def play_markup(videoid, user_id):
     buttons = [
         [
-            InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ​​", url=f"https://t.me/{SUPPORT_GROUP}"),
+            InlineKeyboardButton(text="ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{CHANNEL}"),
             InlineKeyboardButton(text="ᴍᴇɴᴜ", callback_data=f"other {videoid}|{user_id}"),
         ],
         [      
@@ -43,7 +43,7 @@ def others_markup(videoid, user_id):
         ],
         [
             InlineKeyboardButton(
-                text="⌫", callback_data=f"goback {videoid}|{user_id}"
+                text="⪻", callback_data=f"goback {videoid}|{user_id}"
             ),
             InlineKeyboardButton(text="ᴛᴜᴛᴜᴘ", callback_data=f"close2"),
         ],
@@ -111,7 +111,7 @@ def search_markup(
                 text="⁵", callback_data=f"Music2 {ID5}|{duration5}|{user_id}"
             ),
         ],
-        [InlineKeyboardButton(text="⌦", callback_data=f"popat 1|{query}|{user_id}")],
+        [InlineKeyboardButton(text="⪼", callback_data=f"popat 1|{query}|{user_id}")],
         [
             InlineKeyboardButton(
                 text="ᴛᴜᴛᴜᴘ", callback_data=f"ppcl2 smex|{user_id}"
@@ -156,7 +156,7 @@ def search_markup2(
             ),
         ],
         [
-            InlineKeyboardButton(text="⌫", callback_data=f"popat 2|{query}|{user_id}"),
+            InlineKeyboardButton(text="⪻", callback_data=f"popat 2|{query}|{user_id}"),
         ],
         [InlineKeyboardButton(text="ᴛᴜᴛᴜᴘ", callback_data=f"ppcl2 smex|{user_id}")],
     ]
@@ -226,8 +226,6 @@ def playlist_markup(user_name, user_id):
     buttons= [
             [
                 InlineKeyboardButton(text=f"ɢʀᴏᴜᴘs", callback_data=f'play_playlist {user_id}|group'),
-            ],
-            [
                 InlineKeyboardButton(text=f"{user_name[:8]}", callback_data=f'play_playlist {user_id}|personal'),
             ],
             [
@@ -238,7 +236,7 @@ def playlist_markup(user_name, user_id):
 
 
 def start_pannel():
-    if not UPDATES_CHANNEL and not SUPPORT_GROUP:
+    if not CHANNEL and not GROUP:
         buttons = [
             [
                 InlineKeyboardButton(
@@ -247,7 +245,7 @@ def start_pannel():
             ],
         ]
         return f"🎛  **This is {BOT_NAME}**", buttons
-    if not UPDATES_CHANNEL and SUPPORT_GROUP:
+    if not CHANNEL and GROUP:
         buttons = [
             [
                 InlineKeyboardButton(
@@ -256,12 +254,12 @@ def start_pannel():
             ],
             [
                 InlineKeyboardButton(
-                    text="✨ sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_GROUP}"
+                    text="✨ sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{GROUP}"
                 ),
             ],
         ]
         return f"🎛  **This is {MUSIC_BOT_NAME}*", buttons
-    if UPDATES_CHANNEL and not SUPPORT_GROUP:
+    if CHANNEL and not GROUP:
         buttons = [
             [
                 InlineKeyboardButton(
@@ -270,12 +268,12 @@ def start_pannel():
             ],
             [
                 InlineKeyboardButton(
-                    text="✨ ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{SUPPORT_GROUP}"
+                    text="✨ ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{GROUP}"
                 ),
             ],
         ]
         return f"🎛  **This is {MUSIC_BOT_NAME}**", buttons
-    if UPDATES_CHANNEL and SUPPORT_GROUP:
+    if CHANNEL and GROUP:
         buttons = [
             [
                 InlineKeyboardButton(
@@ -284,10 +282,10 @@ def start_pannel():
             ],
             [
                 InlineKeyboardButton(
-                    text="✨ ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{UPDATES_CHANNEL}"
+                    text="✨ ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{CHANNEL}"
                 ),
                 InlineKeyboardButton(
-                    text="✨ sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_GROUP}"
+                    text="✨ sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{GROUP}"
                 ),
             ],
         ]
@@ -295,7 +293,7 @@ def start_pannel():
 
 
 def private_panel():
-    if not UPDATES_CHANNEL and not SUPPORT_GROUP:
+    if not CHANNEL and not GROUP:
         buttons = [
             [
                 InlineKeyboardButton(
@@ -305,7 +303,7 @@ def private_panel():
             ],
         ]
         return f"🎛  **This is {BOT_NAME}**", buttons
-    if not UPDATES_CHANNEL and SUPPORT_GROUP:
+    if not CHANNEL and GROUP:
         buttons = [
             [
                 InlineKeyboardButton(
@@ -315,12 +313,12 @@ def private_panel():
             ],
             [
                 InlineKeyboardButton(
-                    text="✨ sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_GROUP}"
+                    text="✨ sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{GROUP}"
                 ),
             ],
         ]
         return f"🎛  **This is {BOT_NAME}*", buttons
-    if UPDATES_CHANNEL and not SUPPORT_GROUP:
+    if CHANNEL and not GROUP:
         buttons = [
             [
                 InlineKeyboardButton(
@@ -330,12 +328,12 @@ def private_panel():
             ],
             [
                 InlineKeyboardButton(
-                    text="✨ ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{SUPPORT_GROUP}"
+                    text="✨ ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{GROUP}"
                 ),
             ],
         ]
         return f"🎛  **This is {BOT_NAME}**", buttons
-    if UPDATES_CHANNEL and SUPPORT_GROUP:
+    if CHANNEL and GROUP:
         buttons = [
             [
                 InlineKeyboardButton(
@@ -345,10 +343,10 @@ def private_panel():
             ],
             [
                 InlineKeyboardButton(
-                    text="✨ ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{UPDATES_CHANNEL}"
+                    text="✨ ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{CHANNEL}"
                 ),
                 InlineKeyboardButton(
-                    text="✨ sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_GROUP}"
+                    text="✨ sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{GROUP}"
                 ),
             ],
         ]
