@@ -8,7 +8,4 @@ app = Client(
     bot_token=BOT_TOKEN,
 )
 
-if not LOG_SESSION:
-    LOG_CLIENT = None
-else:
-    LOG_CLIENT = Client(LOG_SESSION, API_ID, API_HASH)
+userbot = Client(SESSION_NAME, API_ID, API_HASH)
