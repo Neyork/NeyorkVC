@@ -513,7 +513,7 @@ Saya perlu menjadi admin dengan beberapa izin:
             f28 = open(f"search/{_chat_}videoid.txt", "w")
             f28.write(f"{videoid}")
             f28.close()
-            buttons = audio_markup(videoid, user_id)
+            buttons = url_markup2(videoid, duration_min, message.from_user.id)
         checking = (
             f"[{message.from_user.first_name}](tg://user?id={message.from_user.id})"
         )
@@ -556,7 +556,7 @@ Saya perlu menjadi admin dengan beberapa izin:
             f28 = open(f"search/{_chat_}videoid.txt", "w")
             f28.write(f"{videoid}")
             f28.close()
-            buttons = audio_markup(videoid, user_id)
+            buttons = url_markup2(videoid, duration_min, message.from_user.id)
         await message.reply_photo(
             photo=thumb,
             reply_markup=InlineKeyboardMarkup(buttons),
@@ -691,7 +691,9 @@ async def startyuplay(_, CallbackQuery):
     await mystic.delete()
     if await is_active_chat(chat_id):
         position = await put(chat_id, file=file)
-        buttons = play_markup(videoid, user_id)
+        buttons = url_markup(
+            videoid, duration_min, message.from_user.id, query, 0
+        )
         _chat_ = (str(file)).replace("_", "", 1).replace("/", "", 1).replace(".", "", 1)
         cpl = f"downloads/{_chat_}final.png"
         shutil.copyfile(thumb, cpl)
