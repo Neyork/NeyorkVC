@@ -1,6 +1,10 @@
 <h2 align="centre">NeyorkVC</h2>
 
-<h3>Requirements 📝</h3>
+<p align="center">
+  <img src="https://telegra.ph/file/0b359345c3d25e50c0bfd.jpg">
+</p>
+
+<h3>Requirements </h3>
 
 - FFmpeg (Latest)
 - NodeJS [nodesource.com](https://nodesource.com/) (NodeJS 17+)
@@ -19,13 +23,6 @@
 
 This bot is based on the original work done by [Rojserbest](http://github.com/rojserbest). Without his hardwork YukkiMusicPlayer won t exist. 
 YukkiMusicPlayer is a modified version of [Callsmusic](https://github.com/callsmusic/callsmusic) for fit the needs of some users
-
-- [StarkGang](https://github.com/StarkGang/)
-- [SpEcHiDe](https://github.com/SpEcHiDe/)
-- [The Hamker Cat](https://github.com/thehamkercat)
-- [Laky (for PyTgCalls)](https://github.com/Laky-64)
-- [Dan (for pyrogram)](https://github.com/delivrance)
-- [VegetaxD (For Yukki Repo)](http://github.com/VegetaxD)
 
 #### Open Source codes used in this project 
 - https://github.com/callsmusic/callsmusic : Source code used here as base
