@@ -832,3 +832,63 @@ async def play_playlist_cmd(_, message):
     reply_markup=InlineKeyboardMarkup(buttons),
     )
     return
+
+
+@app.on_callback_query(filters.regex(pattern=r"slider"))
+async def slider_query_results(_, CallbackQuery):
+    callback_data = CallbackQuery.data.strip()
+    callback_request = callback_data.split(None, 1)[1]
+    what, type, query, user_id = callback_request.split("|")
+    if CallbackQuery.from_user.id != int(user_id):
+        return await CallbackQuery.answer(
+            "Search Your Own Music. You re not allowed to use this button.",
+            show_alert=True,
+        )
+    what = str(what)
+    type = int(type)
+    if what == "F":
+        if type == 9:
+            query_type = 0
+        else:
+            query_type = int(type + 1)
+        await CallbackQuery.answer("Getting Next Result", show_alert=True)
+        (
+            title,
+            duration_min,
+            duration_sec,
+            thumb,
+            videoid,
+        ) = get_yt_info_query_slider(query, query_type)
+        buttons = url_markup(
+            videoid, duration_min, user_id, query, query_type
+        )
+        med = InputMediaPhoto(
+            media=thumb,
+            caption=f"📎Title: **{title}\n\n⏳Duration:** {duration_min} Mins\n\n__[Get Additional Information About Video](https://t.me/{BOT_USERNAME}?start=info_{videoid})__",
+        )
+        return await CallbackQuery.edit_message_media(
+            media=med, reply_markup=InlineKeyboardMarkup(buttons)
+        )
+    if what == "B":
+        if type == 0:
+            query_type = 9
+        else:
+            query_type = int(type - 1)
+        await CallbackQuery.answer("Getting Previous Result", show_alert=True)
+        (
+            title,
+            duration_min,
+            duration_sec,
+            thumb,
+            videoid,
+        ) = get_yt_info_query_slider(query, query_type)
+        buttons = url_markup(
+            videoid, duration_min, user_id, query, query_type
+        )
+        med = InputMediaPhoto(
+            media=thumb,
+            caption=f"📎Title: **{title}\n\n⏳Duration:** {duration_min} Mins\n\n__[Get Additional Information About Video](https://t.me/{BOT_USERNAME}?start=info_{videoid})__",
+        )
+        return await CallbackQuery.edit_message_media(
+            media=med, reply_markup=InlineKeyboardMarkup(buttons)
+        )
