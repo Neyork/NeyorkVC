@@ -46,7 +46,7 @@ def start_pannel():
             InlineKeyboardButton("📚 ᴄᴏᴍᴍᴀɴᴅ​ 📚", url="https://telegra.ph/Neyork-02-02"),
         ],
         [
-            InlineKeyboardButton("Owner Source 🧛", url="https://t.me/QDevQ"),
+            InlineKeyboardButton("Neyork", url="https://t.me/lIPyl"),
         ],
     ]
     return (
@@ -69,7 +69,7 @@ pstart_markup = InlineKeyboardMarkup(
             InlineKeyboardButton("📚 ᴄᴏᴍᴍᴀɴᴅ ​📚", url="https://telegra.ph/Neyork-02-02"),
         ],
         [
-            InlineKeyboardButton("Owner Source 🧛", url="https://t.me/QDevQ"),
+            InlineKeyboardButton("Neyork", url="https://t.me/lIPyl"),
         ],
     ]
 )
