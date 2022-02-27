@@ -76,6 +76,61 @@ def audio_markup(videoid, user_id):
     ]
     return buttons
 
+def url_markup(videoid, duration, user_id, query, query_type):
+    buttons = [
+        [
+            InlineKeyboardButton(
+                text="❮",
+                callback_data=f"slider B|{query_type}|{query}|{user_id}",
+            ),
+            InlineKeyboardButton(
+                text="🎵",
+                callback_data=f"MusicStream {videoid}|{duration}|{user_id}",
+            ),
+            InlineKeyboardButton(
+                text="🎥",
+                callback_data=f"Choose {videoid}|{duration}|{user_id}",
+            ),
+            InlineKeyboardButton(
+                text="❯",
+                callback_data=f"slider F|{query_type}|{query}|{user_id}",
+            ),
+        ],
+        [
+            InlineKeyboardButton(
+                text="🔎 More Results",
+                callback_data=f"Search {query}|{user_id}",
+            ),
+            InlineKeyboardButton(
+                text="🗑 Close Search",
+                callback_data=f"forceclose {query}|{user_id}",
+            ),
+        ],
+    ]
+    return buttons
+
+
+def url_markup2(videoid, duration, user_id):
+    buttons = [
+        [
+            InlineKeyboardButton(
+                text="🎵 Play Music",
+                callback_data=f"MusicStream {videoid}|{duration}|{user_id}",
+            ),
+            InlineKeyboardButton(
+                text="🎥 Play Video",
+                callback_data=f"Choose {videoid}|{duration}|{user_id}",
+            ),
+        ],
+        [
+            InlineKeyboardButton(
+                text="🗑 Close Search",
+                callback_data=f"forceclose {videoid}|{user_id}",
+            )
+        ],
+    ]
+    return buttons
+
 
 def search_markup(
     ID1,
@@ -175,7 +230,7 @@ start_keyboard = InlineKeyboardMarkup(
     [
         [
             InlineKeyboardButton(
-                "📚 ᴅᴀꜰᴛᴀʀ ᴘᴇʀɪɴᴛᴀʜ​ 📚", url="https://telegra.ph/Neyork-02-02"
+                "📚 ᴅᴀꜰᴛᴀʀ ᴘᴇʀɪɴᴛᴀʜ​ 📚", url="https://telegra.ph/ҡʏʏ-ᴍᴇᴍ-ᴇx-01-21-2"
             )
         ],
         [InlineKeyboardButton("ᴛᴜᴛᴜᴘ", callback_data="close2")],
