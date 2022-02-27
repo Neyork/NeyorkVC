@@ -129,10 +129,7 @@ loop = asyncio.get_event_loop()
 @app.on_message(
     filters.command(["play", f"play@{BOT_USERNAME}"]) & filters.group
 )
-@checker
-@logging
-@PermissionCheck
-@AssistantAdd
+@authorized_users_only
 async def play(_, message: Message):
     await message.delete()
     if message.chat.id not in db_mem:
