@@ -86,7 +86,7 @@ Kembalikan ke Akun Pengguna Dari Hak Admin.
 """
             )
         query = message.text.split(None, 1)[1]
-        mystic = await message.reply_text("**🔎 Pencarian**")
+        mystic = await message.reply_text("**انتظر جاري البحث... 🔎**")
         try:
             a = VideosSearch(query, limit=5)
             result = (a.result()).get("result")

@@ -21,7 +21,7 @@ async def asupan(client, message):
             message.chat.id, video=results, caption=f"This the sexy video bro {rpk}"
         )
     except Exception:
-        await message.reply_text("❌ There is something wrong...")
+        await message.reply_text("❌ هناك شيء خاطئ...")
 
 
 @Client.on_message(command(["wibu"]))
@@ -40,7 +40,7 @@ async def wibu(client, message):
             message.chat.id, video=results, caption=f"This is the real wibu bro {rpk}"
         )
     except Exception:
-        await message.reply_text("❌ There is something wrong...")
+        await message.reply_text("❌ هناك شيء خاطئ...")
 
 
 @Client.on_message(command(["chika"]))
@@ -59,7 +59,7 @@ async def chika(client, message):
             message.chat.id, video=results, caption=f"She is beautiful right {rpk} ?"
         )
     except Exception:
-        await message.reply_text("❌ There is something wrong...")
+        await message.reply_text("❌ هناك شيء خاطئ...")
 
 
 @Client.on_message(command(["truth"]))
@@ -69,7 +69,7 @@ async def truth(client, message):
         results = f"{resp['message']}"
         return await message.reply_text(results)
     except Exception:
-        await message.reply_text("❌ There is something wrong...")
+        await message.reply_text("❌ هناك شيء خاطئ...")
 
 
 @Client.on_message(command(["dare"]))
@@ -79,4 +79,4 @@ async def dare(client, message):
         results = f"{resp['message']}"
         return await message.reply_text(results)
     except Exception:
-        await message.reply_text("❌ There is something wrong...")
+        await message.reply_text("❌ هناك شيء خاطئ...")
