@@ -119,7 +119,7 @@ async def skip(client, m: Message):
             await m.reply(OP)
 
 
-@app.on_message(command(["vstop"]) & filters.group)
+@app.on_message(command(["vend"]) & filters.group)
 @authorized_users_only
 async def stop(client, m: Message):
     chat_id = m.chat.id
@@ -127,7 +127,7 @@ async def stop(client, m: Message):
         try:
             await call_py.leave_group_call(chat_id)
             clear_queue(chat_id)
-            await m.reply("✅ **Streaming telah berakhir.**")
+            await m.reply("✅ **تم أنتهاء البث داخل المحادثه الصوتيه.**")
         except Exception as e:
             await m.reply(f"**Error:**\n\n`{e}`")
     else:
@@ -238,7 +238,7 @@ async def cbresume(_, query: CallbackQuery):
         try:
             await call_py.resume_stream(chat_id)
             await query.edit_message_text(
-                "▷ Streaming telah dilanjutkan", reply_markup=bttn
+                "تم استئناف البث ▷ ", reply_markup=bttn
             )
         except Exception as e:
             await query.edit_message_text(f"**Error:**\n\n`{e}`", reply_markup=bcl)
@@ -264,7 +264,7 @@ async def cbstop(_, query: CallbackQuery):
             await call_py.leave_group_call(chat_id)
             clear_queue(chat_id)
             await query.edit_message_text(
-                "✅ **Streaming telah berakhir**", reply_markup=bcl
+                "✅ **تم أنتهاء البث داخل المحادثه الصوتيه**", reply_markup=bcl
             )
         except Exception as e:
             await query.edit_message_text(f"**Error:**\n\n`{e}`", reply_markup=bcl)
