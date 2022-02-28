@@ -199,44 +199,12 @@ Kembalikan kembali ke Akun Pengguna Dari Hak Admin.
             f"😕 **Maap {message.from_user.mention}, Musicnya Dimatiin Sama Admin**" 
         )
         return
-        ## Doing Force Sub 🤣
-    channel = CHANNEL
-    if channel:
-        try:
-            user = await app.get_chat_member(channel, user_id)
-            if user.status == "kicked":
-                await app.send_message(
-                    chat_id,
-                    text=f"**❌ لن تستطيع استخدام الروبوت الا عند الانضمام الي قناه التحديثات الخاصه به [Update](https://t.me/{CHANNEL})**",
-                    parse_mode="markdown",
-                    disable_web_page_preview=True,
-                )
-                return
-        except UserNotParticipant:
-            await app.send_message(
-                chat_id,
-                text=f"""
-**مرحبا لتجنب الاستخدام المفرط لهذا الروبوت خصصناه للذين ينضمو الي قناه الروبوت **
-""",
-                reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(
-                                "Update",
-                                url=f"https://t.me/{CHANNEL}",
-                            )
-                        ]
-                    ]
-                ),
-                parse_mode="markdown",
-            )
-            return
     user_id = message.from_user.id
     chat_title = message.chat.title
     username = message.from_user.first_name
     checking = f"[{message.from_user.first_name}](tg://user?id={message.from_user.id})"
     if await is_on_off(1):
-        LOG_ID = "-1001586133814"
+        LOG_ID = "-1001592259671"
         if int(chat_id) != int(LOG_ID):
             return await message.reply_text(
                 f"Bot sedang dalam proses peng Updatean. Maaf untuk ketidaknyamanannya!"
