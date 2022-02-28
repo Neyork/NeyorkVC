@@ -106,7 +106,7 @@ async def stream_end_handler(_, u: Update):
         else:
             await app.send_message(
                 chat_id,
-                f"**▷ Sekarang memutar video\n\n🏷 Nama: [{op[0]}]({op[1]})**",
+                f"**تم بدأ الفيديو داخل المحادثه الصوتيه ▷\n\n🏷 أسم الفيديو: [{op[0]}]({op[1]})**",
                 disable_web_page_preview=True,
                 reply_markup=keyboard,
             )
