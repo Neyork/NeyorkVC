@@ -14,7 +14,7 @@ async def authorised(message):
 async def unauthorised(message: Message):
     chatID = message.chat.id
     text = (
-        "You don't have the required permission to perform this action."
+        "ليس لديك الإذن المطلوب لتنفيذ هذا الإجراء."
         + f"\n__REQUIRES ADMIN WITH MANAGE VC RIGHTS__"
     )
     try:
