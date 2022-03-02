@@ -20,7 +20,7 @@ async def lyricssex(_,CallbackQuery):
     try:
         id, user_id = callback_request.split("|") 
     except Exception as e:
-        return await CallbackQuery.message.edit(f"❌ Error Occured\n✅ **Possible reason could be**:{e}")
+        return await CallbackQuery.message.edit(f"❌ حدث خطأ\n✅ **يمكن أن يكون السبب المحتمل**:{e}")
     url = (f"https://www.youtube.com/watch?v={id}")
     print(url)
     try:
@@ -28,7 +28,7 @@ async def lyricssex(_,CallbackQuery):
         for result in results.result()["result"]:
             title = (result["title"])
     except Exception as e:
-        return await CallbackQuery.answer("❌ Sound not found, Youtube issues...", show_alert=True)   
+        return await CallbackQuery.answer("❌ الصوت غير موجود ، مشاكل يوتيوب...", show_alert=True)   
     x = "OXaVabSRKQLqwpiYOn-E4Y7k3wj-TNdL5RfDPXlnXhCErbcqVvdCF-WnMR5TBctI"
     y = lyricsgenius.Genius(x)
     print(title)
@@ -58,16 +58,16 @@ async def lyricssex(_,CallbackQuery):
     
 @Client.on_message(filters.command("lyrics"))
 async def lrsearch(_, message: Message):  
-    m = await message.reply_text("🔎 Searching Lyrics")
+    m = await message.reply_text("🔎 البحث عن كلمات")
     query = message.text.split(None, 1)[1]
     x = "OXaVabSRKQLqwpiYOn-E4Y7k3wj-TNdL5RfDPXlnXhCErbcqVvdCF-WnMR5TBctI"
     y = lyricsgenius.Genius(x)
     y.verbose = False
     S = y.search_song(query, get_full_info=False)
     if S is None:
-        return await m.edit("❌ Lyrics not found :p")
+        return await m.edit("❌ كلمات غير موجودة :p")
     xxx = f"""
-**Lyrics Search Powered By Barlo Music Player**
+**كلمات البحث مدعوم من مشغل موسيقى Neyork**
 
 **Searched Song:-** __{query}__
 

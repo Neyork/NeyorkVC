@@ -76,7 +76,7 @@ async def getspy(_,CallbackQuery):
     try:
         if userLastDownloadTime > datetime.now():
             wait_time = round((userLastDownloadTime - datetime.now()).total_seconds() / 60, 2)
-            return await CallbackQuery.message.reply_text(f"Okay {Name}, Fast AF Boiii.. `Wait for {wait_time} min(s) before next download request")
+            return await CallbackQuery.message.reply_text(f"Okay {Name}, Fast AF Boiii.. `Wait for {wait_time} min(s) قبل طلب التنزيل التالي")
     except:
         pass
     url = (f"https://www.youtube.com/watch?v={videoid}")
@@ -87,7 +87,7 @@ async def getspy(_,CallbackQuery):
         user_time[userid] = now + \
                                      timedelta(minutes=youtube_next_fetch)
     except Exception:
-        return await CallbackQuery.message.reply_text("Failed To Fetch Data...")
+        return await CallbackQuery.message.reply_text("فشل إحضار البيانات...")
     j = 0
     a = 0
     b = 0
@@ -153,7 +153,7 @@ async def getspy(_,CallbackQuery):
             return await CallbackQuery.message.reply_text("Video Format Not Found.")
     universal = InlineKeyboardButton(text="🗑 Close Menu", callback_data=f'close2')
     if j == 0:
-        return await CallbackQuery.message.reply_text("Video Format Not Found..")
+        return await CallbackQuery.message.reply_text("تنسيق الفيديو غير موجود..")
     elif j == 1:
         key = InlineKeyboardMarkup(
             [
@@ -254,7 +254,7 @@ async def getspy(_,CallbackQuery):
             ]
         )    
     else:
-        return await CallbackQuery.message.reply_text("Video Format Not Found....")
+        return await CallbackQuery.message.reply_text("تنسيق الفيديو غير موجود....")
     await CallbackQuery.edit_message_reply_markup(reply_markup=key)
 
     
@@ -306,7 +306,7 @@ upl = InlineKeyboardMarkup(
 def inl_mark(videoid, user_id):
     buttons= [
             [
-                InlineKeyboardButton(text="Download or Upload Failed......", callback_data=f'down')
+                InlineKeyboardButton(text="فشل التنزيل أو التحميل......", callback_data=f'down')
             ],
             [
                 InlineKeyboardButton(text="『⇐』 Go Back", callback_data=f'good {videoid}|{user_id}'),
@@ -339,7 +339,7 @@ async def boom(_,CallbackQuery):
     except Exception as e:
         buttons = inl_mark(videoid, user_id)
         await CallbackQuery.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup(buttons)) 
-    mystic = await CallbackQuery.edit_message_text("Download Started\n\nDownloading speed could be slow. Please hold on..", reply_markup = inl)
+    mystic = await CallbackQuery.edit_message_text("Download Started\n\nقد تكون سرعة التنزيل بطيئة. انتظر من فضلك..", reply_markup = inl)
     fetched = f"""
 **Track Downloaded**
 
@@ -444,16 +444,16 @@ __Youtube Inline Download Powered By Music__ """
 def p_mark(link, channel):
     buttons= [
             [
-                InlineKeyboardButton(text="Watch on Youtube", url=f'{link}')
+                InlineKeyboardButton(text="شاهد علي اليوتيوب", url=f'{link}')
             ],
             [ 
-                InlineKeyboardButton(text="Visit Youtube Channel", url=f'{channel}')
+                InlineKeyboardButton(text="قم بزياره قناه اليوتيوب", url=f'{channel}')
             ],
         ]
     return buttons    
     
 async def send_file(CallbackQuery, med, filename, videoid, user_id, link, channel):
-    await CallbackQuery.edit_message_text("Upload Started\n\nUploading speed could be slow. Please hold on..", reply_markup = upl)
+    await CallbackQuery.edit_message_text("Upload Started\n\nقد تكون سرعة التحميل بطيئة. انتظر من فضلك..", reply_markup = upl)
     try:
         await app.send_chat_action(chat_id=CallbackQuery.message.chat.id, action="upload_document")
         buttons = p_mark(link, channel)
@@ -479,7 +479,7 @@ def probe(vid_file_path):
     @vid_file_path : The absolute (full) path of the video file, string.
     """
     if type(vid_file_path) != str:
-        raise Exception('Give ffprobe a full file path of the file')
+        raise Exception('امنح ffprobe مسار ملف كامل للملف')
 
     command = ["ffprobe",
                "-loglevel", "quiet",
@@ -496,7 +496,7 @@ def probe(vid_file_path):
 
 def duration(vid_file_path):
     """
-    Video's duration in seconds, return a float number
+    مدة الفيديو بالثواني ، تُرجع عددًا عائمًا
     """
     _json = probe(vid_file_path)
 
@@ -550,7 +550,7 @@ async def downloadvideocli(command_to_exec):
     e_response = stderr.decode().strip()
     t_response = stdout.decode().strip()
     print(e_response)
-    filename = t_response.split("Merging formats into")[-1].split('"')[1]
+    filename = t_response.split("دمج التنسيقات في")[-1].split('"')[1]
     return filename
 
 

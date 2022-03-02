@@ -18,10 +18,10 @@ async def asupan(client, message):
         resp = requests.get("https://tede-api.herokuapp.com/api/asupan/ptl").json()
         results = f"{resp['url']}"
         return await client.send_video(
-            message.chat.id, video=results, caption=f"This the sexy video bro {rpk}"
+            message.chat.id, video=results, caption=f"هذا الفيديو شمال و عيب يا علق {rpk}"
         )
     except Exception:
-        await message.reply_text("❌ There is something wrong...")
+        await message.reply_text("❌ هناك شيء خاطئ...")
 
 
 @Client.on_message(command(["wibu"]))
@@ -37,10 +37,10 @@ async def wibu(client, message):
         resp = requests.get("https://tede-api.herokuapp.com/api/asupan/wibu").json()
         results = f"{resp['url']}"
         return await client.send_video(
-            message.chat.id, video=results, caption=f"This is the real wibu bro {rpk}"
+            message.chat.id, video=results, caption=f"هذا هو حقيقي ويبو وإخوانه {rpk}"
         )
     except Exception:
-        await message.reply_text("❌ There is something wrong...")
+        await message.reply_text("❌ هناك شيء خاطئ...")
 
 
 @Client.on_message(command(["chika"]))
@@ -56,10 +56,10 @@ async def chika(client, message):
         resp = requests.get("https://tede-api.herokuapp.com/api/chika").json()
         results = f"{resp['url']}"
         return await client.send_video(
-            message.chat.id, video=results, caption=f"She is beautiful right {rpk} ?"
+            message.chat.id, video=results, caption=f"إنها حقًا جميلة {rpk} ?"
         )
     except Exception:
-        await message.reply_text("❌ There is something wrong...")
+        await message.reply_text("❌ هناك شيء خاطئ...")
 
 
 @Client.on_message(command(["truth"]))
@@ -69,7 +69,7 @@ async def truth(client, message):
         results = f"{resp['message']}"
         return await message.reply_text(results)
     except Exception:
-        await message.reply_text("❌ There is something wrong...")
+        await message.reply_text("❌ هناك شيء خاطئ...")
 
 
 @Client.on_message(command(["dare"]))
@@ -79,4 +79,4 @@ async def dare(client, message):
         results = f"{resp['message']}"
         return await message.reply_text(results)
     except Exception:
-        await message.reply_text("❌ There is something wrong...")
+        await message.reply_text("❌ هناك شيء خاطئ...")

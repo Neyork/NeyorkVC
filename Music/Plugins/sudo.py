@@ -18,7 +18,7 @@ from pyrogram.types import Message
 async def useradd(_, message: Message):
     if not message.reply_to_message:
         if len(message.command) != 2:
-            await message.reply_text("❌ Reply to a user's message or give username/user_id.")
+            await message.reply_text("❌ الرد على رسالة المستخدم أو العطاء username/user_id.")
             return
         user = message.text.split(None, 1)[1]
         if "@" in user:
@@ -27,7 +27,7 @@ async def useradd(_, message: Message):
         from_user = message.from_user 
         sudoers = await get_sudoers()
         if user.id in sudoers:
-            return await message.reply_text("✅ Aleady a Sudo User.")
+            return await message.reply_text("✅ بالفعل مستخدم سودو.")
         added = await add_sudo(user.id)
         if added:
             await message.reply_text(f"✅ Added **{user.mention}** as a Super User for Neyork")
@@ -39,12 +39,12 @@ async def useradd(_, message: Message):
     mention = message.reply_to_message.from_user.mention
     sudoers = await get_sudoers()
     if user_id in sudoers:
-        return await message.reply_text("✅ Already a Sudo User.")
+        return await message.reply_text("✅ بالفعل مستخدم سودو.")
     added = await add_sudo(user_id)
     if added:
         await message.reply_text(f"✅ Added **{mention}** as a Super User for Neyork")
         return os.execvp("python3", ["python3", "-m", "Music"])
-    await edit_or_reply(message, text="❌ Something wrong happened, check logs.")  
+    await edit_or_reply(message, text="❌ حدث خطأ ما ، تحقق من السجلات.")  
     return    
           
               
@@ -52,7 +52,7 @@ async def useradd(_, message: Message):
 async def userdel(_, message: Message):
     if not message.reply_to_message:
         if len(message.command) != 2:
-            await message.reply_text("❌ Reply to a user's message or give username/user_id.")
+            await message.reply_text("❌ الرد على رسالة المستخدم أو العطاء username/user_id.")
             return
         user = message.text.split(None, 1)[1]
         if "@" in user:
@@ -76,7 +76,7 @@ async def userdel(_, message: Message):
     if removed:
         await message.reply_text(f"✅ Removed **{mention}** from Neyork's Sudo.")
         return os.execvp("python3", ["python3", "-m", "Music"])
-    await message.reply_text(f"❌ Something wrong happened.")
+    await message.reply_text(f"❌ حدث شيء خطأ.")
                 
                           
 @app.on_message(filters.command("msudolist"))

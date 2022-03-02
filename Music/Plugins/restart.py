@@ -27,7 +27,7 @@ async def theme_func(_, message):
         pass
     for x in served_chats:
         try:
-            await app.send_message(x, "Yukki has just restarted herself. Sorry for the issues.\n\nStart playing after 10-15 seconds again.")
+            await app.send_message(x, "لقد استأنفت نيورك نفسه للتو. آسف للقضايا.\n\nابدأ اللعب بعد 10-15 ثانية مرة أخرى.")
         except Exception:
             pass
     served_chatss = []

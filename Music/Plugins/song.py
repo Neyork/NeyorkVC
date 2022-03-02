@@ -142,15 +142,15 @@ async def startyuplay(_, CallbackQuery):
         id, duration, user_id = callback_request.split("|")
     except Exception as e:
         return await CallbackQuery.message.edit(
-            f"Error Occured\n**Possible reason could be**:{e}"
+            f"حدث خطأ\n**يمكن أن يكون السبب المحتمل**:{e}"
         )
     if duration == "None":
         return await CallbackQuery.message.reply_text(
-            f"Sorry!, Live Videos are not supported"
+            f"آسف !، لا يتم دعم مقاطع الفيديو الحية"
         )
     if CallbackQuery.from_user.id != int(user_id):
         return await CallbackQuery.answer(
-            "This is not for you! Search You Own Song nigga", show_alert=True
+            "هذا ليس لك! ابحث عن اغنية nigga الخاصة بك", show_alert=True
         )
     await CallbackQuery.message.delete()
     checking = f"[{CallbackQuery.from_user.first_name}](tg://user?id={userid})"
@@ -167,7 +167,7 @@ async def startyuplay(_, CallbackQuery):
             x = ytdl.extract_info(url, download=False)
     except Exception as e:
         return await CallbackQuery.message.reply_text(
-            f"Failed to download this video.\n\n**Reason**:{e}"
+            f"فشل تحميل هذا الفيديو.\n\n**Reason**:{e}"
         )
     title = x["title"]
     await CallbackQuery.answer(

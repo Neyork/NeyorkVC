@@ -31,9 +31,9 @@ async def blacklist_chat_func(_, message: Message):
     chat_id = int(message.text.strip().split()[1])
     if not await is_served_chat(chat_id):
         await add_served_chat(chat_id)
-        await message.reply_text("ADDED CHAT TO ALLOWED LIST")
+        await message.reply_text("الدردشة المضافة إلى القائمة المسموح بها")
     else:
-        await message.reply_text("ALREADY IN ALLOWED LIST")
+        await message.reply_text("في القائمة المسموح بها بالفعل")
     
 @app.on_message(filters.command(["disallow", "disal"]) & filters.user(SUDOERS))
 async def whitelist_chat_func(_, message: Message):
@@ -43,11 +43,11 @@ async def whitelist_chat_func(_, message: Message):
         )
     chat_id = int(message.text.strip().split()[1])
     if not await is_served_chat(chat_id):
-        await message.reply_text("Chat not allowed.")
+        await message.reply_text("الدردشة غير مسموح بها.")
         return
     try:
         await remove_served_chat(chat_id)
-        await message.reply_text("Chat diallowed.")
+        await message.reply_text("طلب الدردشة.")
         return
     except Exception as e:
       await message.reply_text("Error.")
@@ -74,6 +74,6 @@ async def blacklisted_chats_func(_, message: Message):
         count += 1
         text += f"**{count}. {title}** [`{served_chat}`]\n"
     if not text:
-        await message.reply_text("No Allowed Chats")  
+        await message.reply_text("لا يسمح للدردشات")  
     else:
         await message.reply_text(text)

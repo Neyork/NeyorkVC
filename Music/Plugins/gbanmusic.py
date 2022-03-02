@@ -30,11 +30,11 @@ async def ban_globally(_, message):
         from_user = message.from_user
         sudoers = await get_sudoers()
         if user.id == from_user.id:
-            return await message.reply_text("You want to block yourself?")
+            return await message.reply_text("تريد منع نفسك؟")
         elif user.id == BOT_ID:
-            await message.reply_text("Should i block myself?")
+            await message.reply_text("هل يجب أن أحجب نفسي؟")
         elif user.id in sudoers:
-            await message.reply_text("You want to block a sudo user?")
+            await message.reply_text("تريد منع مستخدم sudo؟")
         else:
             
             await add_gban_user(user.id)
@@ -42,7 +42,7 @@ async def ban_globally(_, message):
             chats = await get_served_chats()
             for chat in chats:
                 served_chats.append(int(chat["chat_id"]))
-            m = await message.reply_text(f"**Initializing Global Ban on {user.mention}**\n\nExpected Time : {len(served_chats)}")    
+            m = await message.reply_text(f"**بدء الحظر العالمي على {user.mention}**\n\nExpected Time : {len(served_chats)}")    
             number_of_chats = 0
             for sex in served_chats:
                 try:
@@ -54,7 +54,7 @@ async def ban_globally(_, message):
                 except Exception:
                     pass    
             ban_text = f"""
-__**New Global Ban List On Yui Music**__\n
+__**قائمة الحظر العالمية الجديدة على Yui Music**__\n
 **Origin:** {message.chat.title} [`{message.chat.id}`]
 **Sudo User:** {from_user.mention}
 **Banned User:** {user.mention}
@@ -72,11 +72,11 @@ __**New Global Ban List On Yui Music**__\n
     mention = message.reply_to_message.from_user.mention
     sudoers = await get_sudoers()
     if user_id == from_user_id:
-        await message.reply_text("You want to block yourself?")
+        await message.reply_text("تريد منع نفسك؟")
     elif user_id == BOT_ID:
-        await message.reply_text("Should i block myself?")
+        await message.reply_text("هل يجب أن أحجب نفسي؟")
     elif user_id in sudoers:
-        await message.reply_text("You want to block a sudo user?")             
+        await message.reply_text("تريد منع مستخدم sudo؟")             
     else:
         is_gbanned = await is_gbanned_user(user_id)
         if is_gbanned:
@@ -87,7 +87,7 @@ __**New Global Ban List On Yui Music**__\n
             chats = await get_served_chats()
             for chat in chats:
                 served_chats.append(int(chat["chat_id"]))
-            m = await message.reply_text(f"**Initializing Global Ban on {mention}**\n\nExpected Time : {len(served_chats)}")    
+            m = await message.reply_text(f"**بدء الحظر العالمي على {mention}**\n\nExpected Time : {len(served_chats)}")    
             number_of_chats = 0
             for sex in served_chats:
                 try:
@@ -99,7 +99,7 @@ __**New Global Ban List On Yui Music**__\n
                 except Exception:
                     pass    
             ban_text = f"""
-__**New Global Ban List On Yui Music**__\n
+__**قائمة الحظر العالمية الجديدة على Yui Music**__\n
 **Origin:** {message.chat.title} [`{message.chat.id}`]
 **Sudo User:** {from_user_mention}
 **Banned User:** {mention}
@@ -126,15 +126,15 @@ async def unban_globally(_, message):
         from_user = message.from_user
         sudoers = await get_sudoers()
         if user.id == from_user.id:
-            await message.reply_text("You want to unblock yourself?")
+            await message.reply_text("تريد رفع الحظر عن نفسك؟")
         elif user.id == BOT_ID:
-            await message.reply_text("Should i unblock myself?")
+            await message.reply_text("هل يجب علي إلغاء حظر نفسي؟")
         elif user.id in sudoers:
             await message.reply_text("Sudo users can't be blocked/unblocked.")         
         else:
             is_gbanned = await is_gbanned_user(user.id)
             if not is_gbanned:
-                await message.reply_text("He's already free, why bully him?")
+                await message.reply_text("إنه حر بالفعل ، لماذا تتنمر عليه؟")
             else:
                 await remove_gban_user(user.id)
                 await message.reply_text(f"Ungbanned!")
@@ -144,15 +144,15 @@ async def unban_globally(_, message):
     mention = message.reply_to_message.from_user.mention
     sudoers = await get_sudoers()
     if user_id == from_user_id:
-        await message.reply_text("You want to unblock yourself?")
+        await message.reply_text("تريد رفع الحظر عن نفسك؟")
     elif user_id == BOT_ID:
-        await message.reply_text("Should i unblock myself? But i'm not blocked.")
+        await message.reply_text("هل يجب علي إلغاء حظر نفسي؟ لكني لست محجوبًا.")
     elif user_id in sudoers:
         await message.reply_text("Sudo users can't be blocked/unblocked.")
     else:
         is_gbanned = await is_gbanned_user(user_id)
         if not is_gbanned:
-            await message.reply_text("He's already free, why bully him?")
+            await message.reply_text("إنه حر بالفعل ، لماذا تتنمر عليه؟")
         else:
             await remove_gban_user(user_id)     
             await message.reply_text(f"Ungbanned!")
@@ -172,4 +172,4 @@ async def chat_watcher_func(_, message):
             await message.chat.kick_member(userid)
         except Exception:
             return       
-        await message.reply_text(f"{checking} is globally banned by Yui Music and has been kicked out of the chat.\n\n**Possible Reason:** Potential Spammer and Abuser.")
+        await message.reply_text(f"{checking} تم حظره عالميًا بواسطة Yui Music وتم طرده من الدردشة.\n\n**Possible Reason:** مرسل البريد العشوائي والمتعاطي المحتمل.")
