@@ -11,7 +11,7 @@ from pytgcalls.types.input_stream.quality import (
 from pytgcalls.types.stream import StreamVideoEnded
 
 from Music import app
-from Music.config import GROUP, CHANNEL
+from Music.config import SUPPORT_GROUP, UPDATES_CHANNEL
 from Music.MusicUtilities.tgcallsrun.music import pytgcalls as call_py
 
 from Music.MusicUtilities.tgcallsrun.queues import (
@@ -24,8 +24,8 @@ from Music.MusicUtilities.tgcallsrun.queues import (
 keyboard = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{GROUP}"),
-            InlineKeyboardButton("ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{CHANNEL}"),
+            InlineKeyboardButton("ᴅᴏɴᴀsɪ", url=f"https://t.me/{SUPPORT_GROUP}"),
+            InlineKeyboardButton("sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{UPDATES_CHANNEL}"),
         ]
     ]
 )
@@ -106,7 +106,7 @@ async def stream_end_handler(_, u: Update):
         else:
             await app.send_message(
                 chat_id,
-                f"**تم بدأ الفيديو داخل المحادثه الصوتيه ▷\n\n🏷 أسم الفيديو: [{op[0]}]({op[1]})**",
+                f"**▷ Sekarang memutar video\n\n🏷 Nama: [{op[0]}]({op[1]})**",
                 disable_web_page_preview=True,
                 reply_markup=keyboard,
             )
