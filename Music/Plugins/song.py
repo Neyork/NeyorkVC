@@ -30,7 +30,7 @@ async def mpthree(_, message: Message):
     if message.sender_chat:
         return await message.reply_text(
             """
-لاسسف انت لست ادمن قوم بمرساله المالك ليعطيك ادمن.
+مش عارف اجبهالك ازاي بس هصدمك انت مش ادمن يبني كل المالك يمكن يشفق عليك بادمن 🙂😂.
 """
         )
     user_id = message.from_user.id
@@ -41,7 +41,7 @@ async def mpthree(_, message: Message):
     url = get_url(message)
     if url:
         query = message.text.split(None, 1)[1]
-        mystic = await message.reply_text("جاري العالحة")
+        mystic = await message.reply_text("اهدي شويه بحمل 😹❤️")
         ydl_opts = {"format": "bestaudio/best"}
         try:
             results = VideosSearch(query, limit=1)
@@ -61,9 +61,9 @@ async def mpthree(_, message: Message):
                 f"**__خطا في المدة__**\n\n**المدة المسموح بها: **90 minute(s)\n**المدة المستلمة:** {duration} minute(s)"
             )
         if duration == "None":
-            return await mystic.edit_text("آسف!  لا يتم دعم مقاطع الفيديو الحية")
+            return await mystic.edit_text("معلش!  بس انا مبدعمش النوع دا معلش احبوش انن")
         if views == "None":
-            return await mystic.edit_text("آسف!  لا يتم دعم مقاطع الفيديو الحية")
+            return await mystic.edit_text("معلش!  بس انا مبدعمش النوع دا معلش احبوش انن")
         thumb = await down_thumb(thumbnail, user_id)
         buttons = gets(videoid, user_id)
         m = await message.reply_text(
@@ -81,11 +81,11 @@ async def mpthree(_, message: Message):
                 """
 **يستخدم:**
 
-/song و /vsong [عنوان الأغنية أو رابط يوتيوب] - لتنزيل الفديوهات والاغاني
+/song و /vsong [اديني لينك من اليوتيوب او اسم الاغنيه يبني] -  عشان تحمل فيديوهات او اغاني
 """
             )
         query = message.text.split(None, 1)[1]
-        mystic = await message.reply_text("**جـاري الـبـحـث انـتـظـر : 🎧**")
+        mystic = await message.reply_text("**بحملك الاغنيه اتهد بقي : 🎸**")
         try:
             a = VideosSearch(query, limit=5)
             result = (a.result()).get("result")
@@ -124,7 +124,7 @@ async def mpthree(_, message: Message):
             query,
         )
         hmo = await message.reply_text(
-            f"**اخـتـار رقـم لـتـحـمـيل الفديو او الاغنيه المطلوبه💕 **\n\n¹ <b>{title1[:27]}</b>\n  ┗ 💡 <u>__[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID1})__</u>\n  ┗ ⚡ __Powered by {BOT_NAME}__\n\n² <b>{title2[:27]}</b>\n  ┗ 💡 <u>__[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID2})__</u>\n  ┗ ⚡ __Powered by {BOT_NAME}__\n\n³ <b>{title3[:27]}</b>\n  ┗ 💡 <u>__[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID3})__</u>\n  ┗ ⚡ __Powered by {BOT_NAME}__\n\n⁴ <b>{title4[:27]}</b>\n  ┗ 💡 <u>__[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID4})__</u>\n  ┗ ⚡ __Powered by {BOT_NAME}__\n\n⁵ <b>{title5[:27]}</b>\n  ┗ 💡 <u>__[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID5})__</u>\n  ┗ ⚡ __Powered by {BOT_NAME}__",    
+            f"اختار رقم من دول عشان احملك الاغنيه او الفيديو يلا انجر 🙂😹 \n\n¹ <b>{title1[:27]}</b>\n  ┗ 🎸 <u>[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID1})</u>\n  ┗ 🔥 Powered by {BOT_NAME}\n\n²  <b>{title2[:27]}</b>\n  ┗ 🎸 <u>[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID2})</u>\n  ┗ 🔥 Powered by {BOT_NAME}\n\n³ <b>{title3[:27]}</b>\n  ┗ 🎸 <u>[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID3})</u>\n  ┗ 🔥 Powered by {BOT_NAME}\n\n⁴ <b>{title4[:27]}</b>\n  ┗ 🎸<u>[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID4})</u>\n  ┗ 🔥 Powered by {BOT_NAME}\n\n⁵ <b>{title5[:27]}</b>\n  ┗ 🎸<u>[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID5})</u>\n  ┗ 🔥 Powered by {BOT_NAME}",    
             reply_markup=InlineKeyboardMarkup(buttons),
             disable_web_page_preview=True
         )  
@@ -142,15 +142,15 @@ async def startyuplay(_, CallbackQuery):
         id, duration, user_id = callback_request.split("|")
     except Exception as e:
         return await CallbackQuery.message.edit(
-            f"حدث خطأ\n**يمكن أن يكون السبب المحتمل**:{e}"
+            f"باظت خالص\nيمكن انت لعبت فحاجه و بوظت الدنيا انا عارفك موفراك:{e}"
         )
     if duration == "None":
         return await CallbackQuery.message.reply_text(
-            f"آسف !، لا يتم دعم مقاطع الفيديو الحية"
+            f"معلش!  بس انا مبدعمش النوع دا معلش احبوش انن"
         )
     if CallbackQuery.from_user.id != int(user_id):
         return await CallbackQuery.answer(
-            "هذا ليس لك! ابحث عن اغنية nigga الخاصة بك", show_alert=True
+            "مش ليك الامر دا ! ابحث علي الاغنيه nigga الخاصه بك", show_alert=True
         )
     await CallbackQuery.message.delete()
     checking = f"[{CallbackQuery.from_user.first_name}](tg://user?id={userid})"
@@ -201,11 +201,11 @@ async def chonga(_, CallbackQuery):
         id, query, user_id = callback_request.split("|")
     except Exception as e:
         return await CallbackQuery.message.edit(
-            f"حدث خطا\n**السسب المحتمل**:{e}"
+            f"باظت خالص\nيمكن انت لعبت فحاجه و بوظت الدنيا انا عارفك موفراك:{e}"
         )
     if CallbackQuery.from_user.id != int(user_id):
         return await CallbackQuery.answer(
-            "هذا ليست لك اتحكم في المطلوب لك وليس لغيرك", show_alert=True
+            "مش ليك الامر دا خليك ف اوامرك انت متلعب فحاجه غيرك يبا", show_alert=True
         )
     i = int(id)
     query = str(query)
@@ -244,7 +244,7 @@ async def chonga(_, CallbackQuery):
         ID10 = result[9]["id"]
     except Exception as e:
         return await mystic.edit_text(
-            f"لم يتم العثور على الاغنية.\\in**السبب:** {e}"
+            f"مش لاقي الاغنيه الله يحرقكم 🙂😂.\\in**السبب:** {e}"
         )
     if i == 1:
         buttons = search_markup2(
@@ -262,7 +262,7 @@ async def chonga(_, CallbackQuery):
             query,
         )
         await CallbackQuery.edit_message_text(
-            f"**الراجاء اختيار رقم للتحميل الفديو او الاغنيه**\n\n⁶ <b>{title6[:27]}</b>\n  ┗ 💡 <u>__[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID6})__</u>\n  ┗ ⚡ __Powered by {BOT_NAME}__\n\n⁷ <b>{title7[:27]}</b>\n  ┗ 💡 <u>__[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID7})__</u>\n  ┗ ⚡ __Powered by {BOT_NAME}__\n\n⁸ <b>{title8[:27]}</b>\n  ┗ 💡 <u>__[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID8})__</u>\n  ┗ ⚡ __Powered by {BOT_NAME}__\n\n⁹ <b>{title9[:27]}</b>\n  ┗ 💡 <u>__[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID9})__</u>\n  ┗ ⚡ __Powered by {BOT_NAME}__\n\n¹⁰ <b>{title10[:27]}</b>\n  ┗ 💡 <u>__[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID10})__</u>\n  ┗ ⚡ __Powered by {BOT_NAME}__",    
+            f"اختار رقم من دول عشان احملك الاغنيه يلا يبا خلصني 🙂🧑‍🦯\n\n⁶ <b>{title6[:27]}</b>\n  ┗ 🎸 <u>[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID6})</u>\n  ┗ 🔥 Powered by {BOT_NAME}\n\n⁷ <b>{title7[:27]}</b>\n  ┗ 🎸 <u>[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID7})</u>\n  ┗ 🔥 Powered by {BOT_NAME}\n\n⁸ <b>{title8[:27]}</b>\n  ┗ 🎸 <u>[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID8})</u>\n  ┗ 🔥 Powered by {BOT_NAME}\n\n⁹ <b>{title9[:27]}</b>\n  ┗ 🎸 <u>[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID9})</u>\n  ┗ 🔥 Powered by {BOT_NAME}\n\n¹⁰  <b>{title10[:27]}</b>\n  ┗ 🎸 <u>[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID10})</u>\n  ┗ 🔥 Powered by {BOT_NAME}",    
             reply_markup=InlineKeyboardMarkup(buttons),
             disable_web_page_preview=True
         )
@@ -283,7 +283,7 @@ async def chonga(_, CallbackQuery):
             query,
         )
         await CallbackQuery.edit_message_text(
-            f"**اخيار رقم للتحميل الفديو او الاغنيه المطلوبه**\n\n¹ <b>{title1[:27]}</b>\n  ┗ 💡 <u>__[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID1})__</u>\n  ┗ ⚡ __Powered by {BOT_NAME}__\n\n² <b>{title2[:27]}</b>\n  ┗ 💡 <u>__[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID2})__</u>\n  ┗ ⚡ __Powered by {BOT_NAME}__\n\n³ <b>{title3[:27]}</b>\n  ┗ 💡 <u>__[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID3})__</u>\n  ┗ ⚡ __Powered by {BOT_NAME}__\n\n⁴ <b>{title4[:27]}</b>\n  ┗ 💡 <u>__[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID4})__</u>\n  ┗ ⚡ __Powered by {BOT_NAME}__\n\n⁵ <b>{title5[:27]}</b>\n  ┗ 💡 <u>__[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID5})__</u>\n  ┗ ⚡ __Powered by {BOT_NAME}__",    
+            f"اختار رقم من دول يبني عشان احملك الاغنيه و اخلص 🌚🧑‍🦯\n\n¹ <b>{title1[:27]}</b>\n  ┗ 🎸 <u>[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID1})</u>\n  ┗ 🔥 Powered by {BOT_NAME}\n\n² <b>{title2[:27]}</b>\n  ┗ 🎸 <u>[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID2})</u>\n  ┗ 🔥 Powered by {BOT_NAME}\n\n³ <b>{title3[:27]}</b>\n  ┗ 🎸 <u>[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID3})</u>\n  ┗ 🔥 Powered by {BOT_NAME}\n\n⁴ <b>{title4[:27]}</b>\n  ┗ 🎸 <u>[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID4})</u>\n  ┗ 🔥 Powered by {BOT_NAME}\n\n⁵  <b>{title5[:27]}</b>\n  ┗ 🎸 <u>[More Information](https://t.me/{BOT_USERNAME}?start=info_{ID5})</u>\n  ┗ 🔥 Powered by {BOT_NAME}",    
             reply_markup=InlineKeyboardMarkup(buttons),
             disable_web_page_preview=True 
         )  
@@ -387,12 +387,12 @@ def gets(videoid, user_id):
     buttons = [
         [
             InlineKeyboardButton(
-                text="لتحميل اغنيهة💕", callback_data=f"gets audio|{videoid}|{user_id}"
+                text="لتحميل اغنيه 🎸", callback_data=f"gets audio|{videoid}|{user_id}"
             ),
             InlineKeyboardButton(
-                text="لتحميل فديو💕", callback_data=f"gets video|{videoid}|{user_id}"
+                text="لتحميل فديو 🎥", callback_data=f"gets video|{videoid}|{user_id}"
             ),
         ],
-        [InlineKeyboardButton(text="الغاء💕", callback_data=f"close2")],
+        [InlineKeyboardButton(text="الغاء ✖️", callback_data=f"close2")],
     ]
     return buttons

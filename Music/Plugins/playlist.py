@@ -108,14 +108,14 @@ async def pause_cmd(_, message):
     thumb ="cache/photo_2021-11-20_01-01-55.jpg"
     await message.reply_photo(
     photo=thumb, 
-    caption=("**__Music's Playlist Feature__**\n\nحدد قائمة التشغيل ، تريد التحقق!"),    
+    caption=("**__Music's Playlist Feature__**\n\nحدد انت عاوز ايه في قايمه التشغيل !"),    
     reply_markup=play_list_keyboard) 
     return 
 
 
 @app.on_message(filters.command("delmyplaylist"))
 async def pause_cmd(_, message):
-    usage = ("Usage:\n\n/delmyplaylist [أرقام بين 1-30] ( لحذف موسيقى معينة في قائمة التشغيل )\n\nor\n\n /delmyplaylist all ( لحذف قائمة التشغيل بأكملها )")
+    usage = ("Usage:\n\n/delmyplaylist [أرقام بين 1-30] ( لو عاوز تحذف اغنيه معينه في القايمه  )\n\nor\n\n /delmyplaylist all ( لو عاوز تحذف ام القايمه خالص وتخلصنا  )")
     if len(message.command) < 2:
         return await message.reply_text(usage)
     name = message.text.split(None, 1)[1].strip()
@@ -124,11 +124,11 @@ async def pause_cmd(_, message):
     if name not in options:
         return await message.reply_text(usage)
     if len(message.text) == 18:
-        return await message.reply_text(f"تأكيد!!\nانت متأكد أنك تريد حذف قائمة التشغيل بأكملها؟", reply_markup=confirm_keyboard)
+        return await message.reply_text(f"باكد عليك بس!!\nانت متاكد هتحذف القايمه كلها؟ ", reply_markup=confirm_keyboard)
     else:
          _playlist = await get_note_names(message.from_user.id)
     if not _playlist:
-        await message.reply_text("ليس لديك قائمة تشغيل على خادم الموسيقى")
+        await message.reply_text("انت معندكش قايمه تشغيل اساسا يعم بطل صياعه بق ")
     else:
         titlex = []
         j = 0
@@ -139,10 +139,10 @@ async def pause_cmd(_, message):
             if j == count:
                 deleted = await delete_playlist(message.from_user.id, note)
                 if deleted:
-                    return await message.reply_text(f"**تم حذف {count} الموسيقى في قائمة التشغيل**")
+                    return await message.reply_text(f"**حذفتلك {count} الاغاني من قايمه التشغيل**")
                 else:
-                    return await message.reply_text(f"**لا توجد مثل هذه الموسيقى المحفوظة في قائمة التشغيل.**")                                
-        await message.reply_text("ليس لديك مثل هذه الموسيقى في قائمة التشغيل.")                             
+                    return await message.reply_text(f"**مفيش شبه الاغنيه دي فقايمه الموسيقي يا معلم.**")                                
+        await message.reply_text("مفيش شبه الاغنيه دي فقايمه الموسيقي يا معلم")                             
 
         
 @app.on_message(filters.command("delgroupplaylist"))
@@ -159,11 +159,11 @@ async def delgroupplaylist(_, message):
     if name not in options:
         return await message.reply_text(usage)
     if len(message.text) == 21:
-        return await message.reply_text(f"تأكيد!!\nهل أنت متأكد أنك تريد حذف قائمة التشغيل بأكملها؟", reply_markup=confirm_group_keyboard)
+        return await message.reply_text(f"باكد عليك بس!!\nانت متاكد هتحذف القايمه كلها؟", reply_markup=confirm_group_keyboard)
     else:
          _playlist = await get_note_names(message.chat.id)
     if not _playlist:
-        await message.reply_text("لا تحتوي المجموعة على قائمة تشغيل على خادم الموسيقى")
+        await message.reply_text("مفيش قايمه تشغيل في المجموعه عندك هنا اعملك واحده يبا و عيش 🙂❤️")
     else:
         titlex = []
         j = 0
@@ -174,7 +174,7 @@ async def delgroupplaylist(_, message):
             if j == count:
                 deleted = await delete_playlist(message.chat.id, note)
                 if deleted:
-                    return await message.reply_text(f"**تم حذف {count} الموسيقى في قائمة تشغيل المجموعة**")
+                    return await message.reply_text(f"**حذفتلك {count} الاغنيه من قايمه تشغيل المجموعه**")
                 else:
-                    return await message.reply_text(f"**لا توجد مثل هذه الموسيقى المحفوظة في قائمة التشغيل الجماعية.**")                                
-        await message.reply_text("ليس لديك مثل هذه الموسيقى في قائمة التشغيل الجماعية.")
+                    return await message.reply_text(f"**مفيش ذي الاغنيه دي فقايمه تشغيل المجموعه هنا ضفها مشحوار.**")                                
+        await message.reply_text("مفيش شبه الاغنيه دي فقايمه الموسيقي يا معلم.")

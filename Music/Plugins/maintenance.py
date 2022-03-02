@@ -16,7 +16,7 @@ async def smex(_, message):
     if state == "enable":
         user_id = 1
         await add_on(user_id)
-        await message.reply_text("✅ تم تمكين الموسيقى للصيانة")
+        await message.reply_text("✅ حصل بدا تشغيل الصيانه")
     elif state == "disable":
         user_id = 1
         await add_off(user_id)

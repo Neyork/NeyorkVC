@@ -76,7 +76,7 @@ async def vplay(c: Client, message: Message):
     )
     if message.sender_chat:
         return await message.reply_text(
-            " **Admin Anonim!**\n\n»       ."
+            " **   **\n\n»       ."
         )
     try:
         aing = await c.get_me()

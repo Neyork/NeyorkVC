@@ -27,16 +27,16 @@ bcl = InlineKeyboardMarkup([[InlineKeyboardButton("ᴛᴜᴛᴜᴘ", callback_da
 async def cbmenu(_, query: CallbackQuery):
     if query.message.sender_chat:
         return await query.answer(
-            "أنت مسؤول مجهول! \ n \ n »رجوع إلى حساب المستخدم من حقوق المسؤول."
+            "انت مشرف محدش يعرفك! \ n \ n »دي من حق المعلم المشرف الجامد فنفسه كده."
         )
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer(
-            "💡 يمكن للمسؤولين الذين لديهم إذن إدارة الدردشة الصوتية فقط النقر فوق هذا الزر!",
+            "🦾 المشرف الي عنده صلاحيه اداره الكول هوا الي يدوس ع الزار متتعبونيش معاكم بق فل!",
             show_alert=True,
         )
     await query.edit_message_text(
-        f"⚙️ إعدادات من {query.message.chat.title} \ n \ n II: إيقاف البث مؤقتًا \ n ▷: استئناف البث \ n🔇: مساعد كتم الصوت \ n🔊: مساعد كتم الصوت \ n▢: إيقاف البث",
+        f"⚙️ إعدادات من {query.message.chat.title} \ n \ n II: وقف التشغيل شويه \ n ▷: كمل التشغيل \ n🔇: كتم صوت المساعد صحبي \ n🔊: كتم صوت المساعد صحبي \ n▢: وقف ام التشغيل خالص وريحنا",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
@@ -59,7 +59,7 @@ async def close(_, query: CallbackQuery):
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer(
-            "💡 يمكن للمسؤولين الذين لديهم إذن بإدارة الدردشة الصوتية فقط النقر فوق هذا الزر!",
+            "🦾 المشرف الي عنده صلاحيه اداره الكول هوا الي يدوس ع الزار متتعبونيش معاكم بق فل!",
             show_alert=True,
         )
     await query.message.delete()
@@ -81,14 +81,14 @@ async def skip(client, m: Message):
     if len(m.command) < 2:
         op = await skip_current_song(chat_id)
         if op == 0:
-            await m.reply("❌ لا شيء يلعب")
+            await m.reply("مفيش حاجه شغاله ✖️")
         elif op == 1:
             await m.reply(
-                "✅ __Antrian__ **فارغ.**\n\n**• غادر المساعد الدردشة الصوتية**"
+                "✅ __Antrian__ **فارغ.**\n\n**• نزل المساعد من الكول خلصه يبا**"
             )
         elif op == 2:
             await m.reply(
-                "🗑️ **تنظيف قائمة الانتظار**\n\n**• غادر المساعد الدردشة الصوتية**"
+                "🗑️ **بنضفلك قايمه الانتظار اهو احلا مسا عليك**\n\n**• نزل المساعد زميلي من الكول يبا**"
             )
         else:
             await m.reply(
@@ -102,7 +102,7 @@ async def skip(client, m: Message):
             )
     else:
         skip = m.text.split(None, 1)[1]
-        OP = "🗑 **تمت إزالة الأغنية من قائمة الانتظار:**"
+        OP = "🗑 **مسحتلك الاغنيه من القايمه يبا خلصه تؤمور بحاجه تاني؟:**"
         if chat_id in QUEUE:
             items = [int(x) for x in skip.split(" ") if x.isdigit()]
             items.sort(reverse=True)
@@ -126,11 +126,11 @@ async def stop(client, m: Message):
         try:
             await call_py.leave_group_call(chat_id)
             clear_queue(chat_id)
-            await m.reply("✅ **انتهى الدفق.**")
+            await m.reply("✔️ **ادينا وقفنا تشغيل لما نشوف اخرتها.**")
         except Exception as e:
             await m.reply(f"**Error:**\n\n`{e}`")
     else:
-        await m.reply("❌ **ليس في الدفق**")
+        await m.reply("✖️ **مفيش يبا حاجه شغاله**")
 
 
 @app.on_message(command(["vpause"]) & filters.group)
@@ -141,12 +141,12 @@ async def pause(client, m: Message):
         try:
             await call_py.pause_stream(chat_id)
             await m.reply(
-                "II **توقف الفيديو مؤقتًا.**\n\n• **لاستئناف الفيديو ، استخدم الأوامر** » /vresume"
+                "II **وقفنا ام الفيديو اهو.**\n\n• ** عشان تشغل تاني ، استخدم الأوامر يبا** » /vresume"
             )
         except Exception as e:
             await m.reply(f"**Error:**\n\n`{e}`")
     else:
-        await m.reply("❌ **ليس في الدفق**")
+        await m.reply("✖️ **مفيش يبا حاجه شغاله**")
 
 
 @app.on_message(command(["vresume"]) & filters.group)
@@ -157,12 +157,12 @@ async def resume(client, m: Message):
         try:
             await call_py.resume_stream(chat_id)
             await m.reply(
-                "▷ **تابع الفيديو.**\n\n• **لإيقاف مقطع فيديو مؤقتًا ، استخدم الأمر** » /vpause"
+                "▷ **كمل الي كنت مشغله.**\n\n• **عشان توقف الفيديو شويه ، استخدم الأمر دا يبا** » /vpause"
             )
         except Exception as e:
             await m.reply(f"**Error:**\n\n`{e}`")
     else:
-        await m.reply("❌ **ليس في الدفق**")
+        await m.reply("✖️ **مفيش يبا حاجه شغاله**")
 
 
 @app.on_message(command(["vmute"]) & filters.group)
@@ -173,12 +173,12 @@ async def mute(client, m: Message):
         try:
             await call_py.mute_stream(chat_id)
             await m.reply(
-                "🔇 **تم كتم صوت المساعد.**\n\n• **لتنشيط صوت المساعد ، استخدم الأمر**\n» /vunmute"
+                "🔇 **كتمت صوت المساعد زميلي.**\n\n• **لو عاوز تخليه يغني تاني ، دوس علي  الأمر دا**\n» /vunmute"
             )
         except Exception as e:
             await m.reply(f"**Error:**\n\n`{e}`")
     else:
-        await m.reply("❌ **ليس في الدفق**")
+        await m.reply("✖️ **مفيش يبا حاجه شغاله**")
 
 
 @app.on_message(command(["vunmute"]) & filters.group)
@@ -189,47 +189,47 @@ async def unmute(client, m: Message):
         try:
             await call_py.unmute_stream(chat_id)
             await m.reply(
-                "🔊 **تم تنشيط المساعد.**\n\n• **لتعطيل روبوتات المستخدم ، استخدم الأوامر**\n» /vmute"
+                "🔊 **المساعد رجع يتكلم تاني خلصانه.**\n\n• **لو عاوز توقف صوته تاني ، استخدم الامر دا **\n» /vmute"
             )
         except Exception as e:
             await m.reply(f"**Error:**\n\n`{e}`")
     else:
-        await m.reply("❌ **ليس في الدفق**")
+        await m.reply("✖️ **مفيش يبا حاجه شغاله**")
 
 
 @Client.on_callback_query(filters.regex("cbpause"))
 async def cbpause(_, query: CallbackQuery):
     if query.message.sender_chat:
         return await query.answer(
-            "أنتم **Admin Anonim** !\n\n» العودة إلى حساب المستخدم من حقوق المسؤول."
+            "طيب **انت ادمن محدش يعرفك اصلا** !\n\n» عشان توصل للحساب دا من حق الادمن عم الجروب."
         )
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer(
-            "💡 يمكن للمسؤولين الذين لديهم إذن بإدارة الدردشة الصوتية فقط النقر فوق هذا الزر!",
+            "🦾 المشرف الي عنده صلاحيه اداره الكول هوا الي يدوس ع الزار متتعبونيش معاكم بق فل!",
             show_alert=True,
         )
     chat_id = query.message.chat.id
     if chat_id in QUEUE:
         try:
             await call_py.pause_stream(chat_id)
-            await query.edit_message_text("II تم إيقاف البث مؤقتًا", reply_markup=bttn)
+            await query.edit_message_text("II وقفت التشغيل شويه", reply_markup=bttn)
         except Exception as e:
             await query.edit_message_text(f"**Error:**\n\n`{e}`", reply_markup=bcl)
     else:
-        await query.answer("❌ لا شيء يتدفق", show_alert=True)
+        await query.answer("✖️ مفيش حاجه شغاله يبني", show_alert=True)
 
 
 @Client.on_callback_query(filters.regex("cbresume"))
 async def cbresume(_, query: CallbackQuery):
     if query.message.sender_chat:
         return await query.answer(
-            "أنتم **مشرف مجهول** !\n\n» العودة إلى حساب المستخدم من حقوق المسؤول."
+            "طيب **انت ادمن محدش يعرفك اصلا** !\n\n» عشان توصل للحساب دا من حق الادمن عم الجروب."
         )
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer(
-            "💡 يمكن للمسؤولين الذين لديهم إذن بإدارة الدردشة الصوتية فقط النقر فوق هذا الزر!",
+            "🦾 المشرف الي عنده صلاحيه اداره الكول هوا الي يدوس ع الزار متتعبونيش معاكم بق فل!",
             show_alert=True,
         )
     chat_id = query.message.chat.id
@@ -237,24 +237,24 @@ async def cbresume(_, query: CallbackQuery):
         try:
             await call_py.resume_stream(chat_id)
             await query.edit_message_text(
-                "▷ تم استئناف البث", reply_markup=bttn
+                "▷ شغلنا من تاني", reply_markup=bttn
             )
         except Exception as e:
             await query.edit_message_text(f"**Error:**\n\n`{e}`", reply_markup=bcl)
     else:
-        await query.answer("❌ لا شيء يتدفق", show_alert=True)
+        await query.answer("✖️ مفيش حاجه شغاله يبني", show_alert=True)
 
 
 @Client.on_callback_query(filters.regex("cbstop"))
 async def cbstop(_, query: CallbackQuery):
     if query.message.sender_chat:
         return await query.answer(
-            "أنتم **مشرف مجهول** !\n\n» العودة إلى حساب المستخدم من حقوق المسؤول."
+            "طيب **انت ادمن محدش يعرفك اصلا** !\n\n» عشان توصل للحساب دا من حق الادمن عم الجروب."
         )
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer(
-            "💡 يمكن للمسؤولين الذين لديهم إذن بإدارة الدردشة الصوتية فقط النقر فوق هذا الزر!",
+            "🦾 المشرف الي عنده صلاحيه اداره الكول هوا الي يدوس ع الزار متتعبونيش معاكم بق فل!",
             show_alert=True,
         )
     chat_id = query.message.chat.id
@@ -263,24 +263,24 @@ async def cbstop(_, query: CallbackQuery):
             await call_py.leave_group_call(chat_id)
             clear_queue(chat_id)
             await query.edit_message_text(
-                "✅ **انتهى الدفق**", reply_markup=bcl
+                "✅ **خلص التشغيل يبا**", reply_markup=bcl
             )
         except Exception as e:
             await query.edit_message_text(f"**Error:**\n\n`{e}`", reply_markup=bcl)
     else:
-        await query.answer("❌ لا شيء يتدفق", show_alert=True)
+        await query.answer("✖️ مفيش حاجه شغاله يبني", show_alert=True)
 
 
 @Client.on_callback_query(filters.regex("cbmute"))
 async def cbmute(_, query: CallbackQuery):
     if query.message.sender_chat:
         return await query.answer(
-            "أنتم **مشرف مجهول** !\n\n» العودة إلى حساب المستخدم من حقوق المسؤول."
+            "طيب **انت ادمن محدش يعرفك اصلا** !\n\n» عشان توصل للحساب دا من حق الادمن عم الجروب."
         )
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer(
-            "💡 يمكن للمسؤولين الذين لديهم إذن بإدارة الدردشة الصوتية فقط النقر فوق هذا الزر!",
+            "🦾 المشرف الي عنده صلاحيه اداره الكول هوا الي يدوس ع الزار متتعبونيش معاكم بق فل!",
             show_alert=True,
         )
     chat_id = query.message.chat.id
@@ -288,24 +288,24 @@ async def cbmute(_, query: CallbackQuery):
         try:
             await call_py.mute_stream(chat_id)
             await query.edit_message_text(
-                "🔇 تم إيقاف المساعد بنجاح", reply_markup=bttn
+                "🔇 وقفتلك المساعد زميلي خلاص", reply_markup=bttn
             )
         except Exception as e:
             await query.edit_message_text(f"***Error:**\n\n`{e}`", reply_markup=bcl)
     else:
-        await query.answer("❌ لا شيء يتدفق", show_alert=True)
+        await query.answer("✖️ مفيش حاجه شغاله يبني", show_alert=True)
 
 
 @Client.on_callback_query(filters.regex("cbunmute"))
 async def cbunmute(_, query: CallbackQuery):
     if query.message.sender_chat:
         return await query.answer(
-            "أنتم **مشرف مجهول** !\n\n» العودة إلى حساب المستخدم من حقوق المسؤول."
+            "طيب **انت ادمن محدش يعرفك اصلا** !\n\n» عشان توصل للحساب دا من حق الادمن عم الجروب."
         )
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer(
-            "💡 يمكن للمسؤولين الذين لديهم إذن بإدارة الدردشة الصوتية فقط النقر فوق هذا الزر!",
+            "🦾 المشرف الي عنده صلاحيه اداره الكول هوا الي يدوس ع الزار متتعبونيش معاكم بق فل!",
             show_alert=True,
         )
     chat_id = query.message.chat.id
@@ -313,12 +313,12 @@ async def cbunmute(_, query: CallbackQuery):
         try:
             await call_py.unmute_stream(chat_id)
             await query.edit_message_text(
-                "🔊 بدا المساعد بنجاح", reply_markup=bttn
+                "🔊 بدا المساعد زميلي من تاني خلصانه", reply_markup=bttn
             )
         except Exception as e:
             await query.edit_message_text(f"**Error:**\n\n`{e}`", reply_markup=bcl)
     else:
-        await query.answer("❌ لا شيء يتدفق", show_alert=True)
+        await query.answer("✖️ مفيش حاجه شغاله يبني", show_alert=True)
 
 
 @app.on_message(command(["volume", "vol"]))
@@ -329,8 +329,8 @@ async def change_volume(client, m: Message):
     if chat_id in QUEUE:
         try:
             await call_py.change_volume_call(chat_id, volume=int(range))
-            await m.reply(f"✅ **تم ضبط الحجم على** `{range}`%")
+            await m.reply(f"✅ **ظبطلك الصوت يبا علي** `{range}`%")
         except Exception as e:
             await m.reply(f"**Error:**\n\n`{e}`")
     else:
-        await m.reply("❌ **ليس في الدفق**")
+        await m.reply("✖️ مفيش حاجه شغاله يبني")

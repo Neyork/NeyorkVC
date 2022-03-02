@@ -145,7 +145,7 @@ async def play(_, message: Message):
     if chat_id in BANNED_USERS:
         await app.send_message(
             chat_id,
-            text=f"**❌ لقد تم حظرك\nلاستخدام الروبوت عليك الانضمام إلي جروب الدعم [ɢʀᴏᴜᴘ](https://t.me/{SUPPORT_GROUP})**",
+            text=f"**❌مش هتعرف تشغل\nعشان تشغل البوت لازم تنضم للجروب بتاع الدعم يا زميلي  [ɢʀᴏᴜᴘ](https://t.me/{SUPPORT_GROUP})**",
             reply_to_message_id=message.message_id,
         )
         return
@@ -157,7 +157,7 @@ async def play(_, message: Message):
             if user.status == "kicked":
                 await app.send_message(
                     chat_id,
-                    text=f"**❌ لقد تم حظرك\nلاستخدام الروبوت عليك الانضمام إلي جروب الدعم [ɢʀᴏᴜᴘ](https://t.me/{SUPPORT_GROUP})**",
+                    text=f"**❌مش هتعرف تشغل\nعشان تشغل البوت لازم تنضم للجروب بتاع الدعم يا زميلي  [ɢʀᴏᴜᴘ](https://t.me/{SUPPORT_GROUP})**",
                     parse_mode="markdown",
                     disable_web_page_preview=True,
                 )
@@ -166,7 +166,7 @@ async def play(_, message: Message):
             await app.send_message(
                 chat_id,
                 text=f"""
-**مرحبا {rpk} لتجنب الإفراط في استخدام هذا الروبوت مصنوع خصيصا لأولئك الذين ينضمو الي جروب الدعم!**
+**مسا يا زميلي  {rpk} عشان مش كل من هب و دب يشغل لازم تنضم للجروب بتاع الدعم يقلبي و تنورنا هناك يروحي!**
 """,
                 reply_markup=InlineKeyboardMarkup(
                     [
@@ -182,7 +182,7 @@ async def play(_, message: Message):
             )
             return
     if message.sender_chat:
-        return await message.reply_text("❌ أنت مسؤول مجهول!\n✅ العودة إلى حساب المستخدم From Admin Rights.")  
+        return await message.reply_text("❌ ادمن محدش يعرفك!\n✅ ارجع إلى حساب المستخدم From Admin Rights.")  
     user_id = message.from_user.id
     chat_title = message.chat.title
     username = message.from_user.first_name
@@ -190,30 +190,30 @@ async def play(_, message: Message):
     if await is_on_off(1):
         LOG_ID = "-1001592259671"
         if int(chat_id) != int(LOG_ID):
-            return await message.reply_text(f">> ❌ البوت تحت الصيانه نأسف للعطل الفني !")
-        return await message.reply_text(f">> ❌ البوت تحت الصيانه نأسف للعطل الفني !")
+            return await message.reply_text(f">> ❌ انا في الصيانه سيبوني اعيش عشان مفتريش 🙂😂 !")
+        return await message.reply_text(f">> ❌ انا في الصيانه سيبوني اعيش عشان مفتريش 🙂😂 !")
     a = await app.get_chat_member(message.chat.id , BOT_ID)
     if a.status != "administrator":
-        await message.reply_text(f"أحتاج أن أكون مشرفًا مع بعض الأذونات:\n\n>> **can_manage_voice_chats:** لإدارة الدردشات الصوتية\n>> **can_delete_messages:** لحذف النفايات التي تم البحث عنها في الموسيقى\n>> **can_invite_users**: لدعوة المساعد للدردشة\n>> **can_restrict_members**: لحماية الموسيقى من مرسلي البريد العشوائي.")
+        await message.reply_text(f"اديني رول بكل الصلاحيات يبا:\n\n>> **can_manage_voice_chats:** عشان ادير الكول\n>> **can_delete_messages:** وحذف الرسايل بتاعه البحث\n>> **can_invite_users**: وادعي المساعد زميلي للكول\n>> **can_restrict_members**: وحمايه الموسيقي من ولاد المره الي بيبعبصو وخلاص🙂😹.")
         return
     if not a.can_manage_voice_chats:
         await message.reply_text(
-        "❌ ليس لدي الإذن المطلوب للقيام بهذا الإجراء."
+        "❌ معنديش صلاحيه اعمل الشغله الي بتقول عليها دي يا صحبي."
         + "\n**Permission:** __MANAGE VOICE CHATS__")
         return
     if not a.can_delete_messages:
         await message.reply_text(
-        "❌ ليس لدي الإذن المطلوب للقيام بهذا الإجراء."
+        "❌ معنديش صلاحيه اعمل الشغله الي بتقول عليها دي يا صحبي."
         + "\n**Permission:** __DELETE MESSAGES__")
         return
     if not a.can_invite_users:
         await message.reply_text(
-        "❌ ليس لدي الإذن المطلوب للقيام بهذا الإجراء."
+        "❌ معنديش صلاحيه اعمل الشغله الي بتقول عليها دي يا صحبي."
         + "\n**Permission:** __INVITE USERS VIA LINK__")
         return
     if not a.can_restrict_members:
         await message.reply_text(
-        "❌ ليس لدي الإذن المطلوب للقيام بهذا الإجراء."
+        "❌ معنديش صلاحيه اعمل الشغله الي بتقول عليها دي يا صحبي."
         + "\n**Permission:** __BAN USERS__")
         return
     try:
@@ -225,10 +225,10 @@ async def play(_, message: Message):
         if message.chat.username:
             try: 
                 await ASS_ACC.join_chat(f"{message.chat.username}")
-                await message.reply(f"✅ {ASSNAME} Joined Successfully",) 
+                await message.reply(f"✅ {ASSNAME} هيح انا جيت",) 
                 await remove_active_chat(chat_id)
             except Exception as e:
-                await message.reply_text(f"❌ __**فشل في انضمام الحساب المساعد الي مجموعتك**__\n\n**Reason**:{e}")
+                await message.reply_text(f"❌ __**في حاجه غلط الحساب المساعد منضمش للجروب**__\n\n**Reason**:{e}")
                 return
         else:
             try:
@@ -238,13 +238,13 @@ async def play(_, message: Message):
 
                 await ASS_ACC.join_chat(yxy.invite_link)
 
-                await message.reply(f"✅ {ASSNAME} تم الانضمام بنجاح",) 
+                await message.reply(f"✅ {ASSNAME} خلصانه اجدعان انا انضميت",) 
 
                 await remove_active_chat(chat_id)
             except UserAlreadyParticipant:
                 pass
             except Exception as e:
-                return await message.reply_text(f"❌ __**فشل في انضمام الحساب المساعد الي مجموعتك**__\n\n**Reason**:{e}")       
+                return await message.reply_text(f"❌ في حاجه غلط الحساب المساعد منضمش للجروب\n\nReason:{e}")       
     audio = (message.reply_to_message.audio or message.reply_to_message.voice) if message.reply_to_message else None
     url = get_url(message)
     await message.delete()
@@ -303,9 +303,9 @@ async def play(_, message: Message):
         if smex > DURATION_LIMIT:
             return await mystic.edit_text(f"❌ **__Duration Error__**\n\n**Allowed Duration: **90 minute(s)\n**Received Duration:** {duration} minute(s)")
         if duration == "None":
-            return await mystic.edit_text("❌ آسف ! لا يتم دعم مقاطع الفيديو الحية")
+            return await mystic.edit_text("معلش!  بس انا مبدعمش النوع دا معلش احبوش انا ✖️")
         if views == "None":
-            return await mystic.edit_text("❌ آسف ! لا يتم دعم مقاطع الفيديو الحية")
+            return await mystic.edit_text("معلش!  بس انا مبدعمش النوع دا معلش احبوش انا ✖️")
         semxbabes = (f"Downloading {title[:50]}")
         await mystic.edit(semxbabes)
         theme = random.choice(themes)
@@ -371,14 +371,14 @@ async def play(_, message: Message):
             buttons = playlist_markup(user_name, user_id)
             hmo = await message.reply_photo(
             photo=thumb, 
-            caption=("**Usage:** /play [اسم الموسيقى أو رابط يوتيوب أو الرد على الصوت]\n\nإذا كنت تريد أن تلعب قوائم التشغيل! حدد واحد من أدناه."),    
+            caption=("**Usage:** /play [اسم الاغنيه او لينك اليوتيوب يحبي]\n\n واختار من القائمه و استمتع و لو عندك مشكله انضم لجروب الدعم ."),    
             reply_markup=InlineKeyboardMarkup(buttons),
             ) 
             return
         what = "Query Given"
         await LOG_CHAT(message, what)
         query = message.text.split(None, 1)[1]
-        mystic = await message.reply_text("**🔄 جاري البحث انتظر...**")
+        mystic = await message.reply_text("**🔄 بحمل الاغنيه اهو...**")
         try:
             a = VideosSearch(query, limit=5)
             result = (a.result()).get("result")
@@ -398,7 +398,7 @@ async def play(_, message: Message):
             ID4 = (result[3]["id"])
             ID5 = (result[4]["id"])
         except Exception as e:
-            return await mystic.edit_text(f"❌ لم يتم العثور على Soung.\n**Possible Reason:**{e}")
+            return await mystic.edit_text(f"❌ مش لاقي اغنيه انن Soung.\n**Possible Reason:**{e}")
         thumb ="cache/photo_2021-11-17_22-43-02.jpg"
         await mystic.delete()   
         buttons = search_markup(ID1, ID2, ID3, ID4, ID5, duration1, duration2, duration3, duration4, duration5, user_id, query)
@@ -486,9 +486,9 @@ async def startyuplay(_,CallbackQuery):
     except Exception as e:
         return await CallbackQuery.message.edit(f"❌ Error Occured\n**Possible reason could be**:{e}")
     if duration == "None":
-        return await CallbackQuery.message.reply_text(f"❌ Sorry!, Live Videos are not supported")      
+        return await CallbackQuery.message.reply_text(f"❌ ويت يحبب! مقاطع الفيديو دي مش مدعومه ")      
     if CallbackQuery.from_user.id != int(user_id):
-        return await CallbackQuery.answer("❌ هذا ليس لك! ابحث عن الأغنية الخاصة بك", show_alert=True)
+        return await CallbackQuery.answer("❌ مش ليك يحبب! دور علي الأغنية الخاصة بيك", show_alert=True)
     await CallbackQuery.message.delete()
     checking = f"[{CallbackQuery.from_user.first_name}](tg://user?id={userid})"
     url = (f"https://www.youtube.com/watch?v={id}")
@@ -502,7 +502,7 @@ async def startyuplay(_,CallbackQuery):
         with yt_dlp.YoutubeDL(ytdl_opts) as ytdl:
             x = ytdl.extract_info(url, download=False)
     except Exception as e:
-        return await CallbackQuery.message.reply_text(f"❌ Failed to download this video.\n\n**Reason**:{e}") 
+        return await CallbackQuery.message.reply_text(f"❌ فشل تنزيل الفيديو ده.\n\n**Reason**:{e}") 
     title = (x["title"])
     await CallbackQuery.answer(f"Selected {title[:20]}.... \nProcessing...", show_alert=True)
     mystic = await CallbackQuery.message.reply_text(f"Downloading {title[:50]}")
@@ -625,7 +625,7 @@ async def popat(_,CallbackQuery):
     except Exception as e:
         return await CallbackQuery.message.edit(f"❌ Error Occured\n**Possible reason could be**:{e}")       
     if CallbackQuery.from_user.id != int(user_id):
-        return await CallbackQuery.answer("❌ هذا ليس لك! ابحث عن الأغنية الخاصة بك", show_alert=True)
+        return await CallbackQuery.answer("❌ مش ليك يحبب! دور علي الأغنية الخاصة بيك", show_alert=True)
     i=int(id)
     query = str(query)
     try:

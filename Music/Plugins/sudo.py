@@ -27,24 +27,24 @@ async def useradd(_, message: Message):
         from_user = message.from_user 
         sudoers = await get_sudoers()
         if user.id in sudoers:
-            return await message.reply_text("✅ بالفعل مستخدم سودو.")
+            return await message.reply_text("✅ حصل مستخدم معروف.")
         added = await add_sudo(user.id)
         if added:
-            await message.reply_text(f"✅ Added **{user.mention}** as a Super User for Neyork")
+            await message.reply_text(f"✅ Added **{user.mention}** as a مستخدم مميز عن المطور نيورك عم العالم")
             return os.execvp("python3", ["python3", "-m", "Music"])
-        await edit_or_reply(message, text="❌ Something wrong happened, check logs.")  
+        await edit_or_reply(message, text="في حاجه غلط ارجع للسجلات او اللوجز ✖️")  
         return
     from_user_id = message.from_user.id
     user_id = message.reply_to_message.from_user.id
     mention = message.reply_to_message.from_user.mention
     sudoers = await get_sudoers()
     if user_id in sudoers:
-        return await message.reply_text("✅ بالفعل مستخدم سودو.")
+        return await message.reply_text("✅ حصل مستخدم معروف.")
     added = await add_sudo(user_id)
     if added:
-        await message.reply_text(f"✅ Added **{mention}** as a Super User for Neyork")
+        await message.reply_text(f"✅ Added **{mention}** as a مستخدم مميز عن المطور نيورك عم العالم")
         return os.execvp("python3", ["python3", "-m", "Music"])
-    await edit_or_reply(message, text="❌ حدث خطأ ما ، تحقق من السجلات.")  
+    await edit_or_reply(message, text="في حاجه غلط ارجع للسجلات او اللوجز ✖️")  
     return    
           
               
@@ -60,23 +60,23 @@ async def userdel(_, message: Message):
         user = (await app.get_users(user))
         from_user = message.from_user      
         if user.id not in await get_sudoers():
-            return await message.reply_text(f"❌ Not a part of Neyork's Sudo.")        
+            return await message.reply_text(f"ليس جزء من المستخدمين المميزين ✖️ ")        
         removed = await remove_sudo(user.id)
         if removed:
-            await message.reply_text(f"✅ Removed **{user.mention}** from Neyork's Sudo.")
+            await message.reply_text(f"✅ مسحت **{user.mention}** من المستخدمين المميزين عند المعلم نيورك.")
             return os.execvp("python3", ["python3", "-m", "Music"])
-        await message.reply_text(f"❌ Something wrong happened.")
+        await message.reply_text(f"في حاجه غلط يا زميلي ✖️.")
         return
     from_user_id = message.from_user.id
     user_id = message.reply_to_message.from_user.id
     mention = message.reply_to_message.from_user.mention
     if user_id not in await get_sudoers():
-        return await message.reply_text(f"❌ Not a part of Neyork's Sudo.")        
+        return await message.reply_text(f"ليس جزء من المستخدمين المميزين ✖️")        
     removed = await remove_sudo(user_id)
     if removed:
-        await message.reply_text(f"✅ Removed **{mention}** from Neyork's Sudo.")
+        await message.reply_text(f"✅ مسحت {user.mention} من المستخدمين المميزين عند المعلم نيورك.")
         return os.execvp("python3", ["python3", "-m", "Music"])
-    await message.reply_text(f"❌ حدث شيء خطأ.")
+    await message.reply_text(f"في حاجه غلط يا زميلي ✖️.")
                 
                           
 @app.on_message(filters.command("msudolist"))
@@ -91,6 +91,6 @@ async def sudoers_list(_, message: Message):
             continue                     
         text += f"➤ {user}\n"
     if not text:
-        await message.reply_text("❌ No Sudo Users")  
+        await message.reply_text("مفيش مستخدمين مميزين يبا 🙂")  
     else:
         await message.reply_text(text) 

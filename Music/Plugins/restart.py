@@ -27,7 +27,7 @@ async def theme_func(_, message):
         pass
     for x in served_chats:
         try:
-            await app.send_message(x, "لقد استأنفت نيورك نفسه للتو. آسف للقضايا.\n\nابدأ اللعب بعد 10-15 ثانية مرة أخرى.")
+            await app.send_message(x, "انت طلعت ميتيني استني بق ارستر. عشان انا مضغوط .\n\nاستني و ابدا تشغيل بعد 10-15 ثانية .")
         except Exception:
             pass
     served_chatss = []
@@ -43,7 +43,7 @@ async def theme_func(_, message):
         except Exception as e:
             await message.reply_text(f"{e}")
             pass    
-    x = await message.reply_text(f"__Restarting Music!__")   
+    x = await message.reply_text(f"__برستر من تاني اهو!__")   
     await start_restart_stage(x.chat.id, x.message_id)
     os.execvp(f"python{str(pyver.split(' ')[0])[:3]}", [
               f"python{str(pyver.split(' ')[0])[:3]}", "-m", "Music"])

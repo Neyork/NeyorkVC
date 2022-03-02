@@ -50,7 +50,7 @@ def start_pannel():
         ],
     ]
     return (
-        "🎛 **{BOT_NAME} Merupakan salah satu dari bot telegram yang bisa memutar musik di grup**",
+        "🎛 **{BOT_NAME} دا بوت من بوتات التليجرام لتشغيل اغاني و فيديو و كدد**",
         buttons,
     )
 
@@ -83,11 +83,11 @@ async def welcome(_, message: Message):
         try:
             if member.id in OWNER:
                 return await message.reply_text(
-                    f"💡 ملكي [{member.mention}] انضم للتو إلى هذه المجموعة."
+                    f"❤️😹 حبيب قلبي [{member.mention}] وصل الجروب دلوقتي اوعا بق."
                 )
             if member.id in SUDOERS:
                 return await message.reply_text(
-                    f"💡 المسؤول عن البوت [{member.mention}] انضم للتو إلى هذه المجموعة."
+                    f"🌚 مطوري نور عيني [{member.mention}] نورت الجروب يروحقلبي."
                 )
             if member.id == ASSID:
                 await remove_active_chat(chat_id)
@@ -95,8 +95,8 @@ async def welcome(_, message: Message):
                 out = start_pannel()
                 await message.reply_text(
                     f"""
-👋 ** مرحبًا ، من الجيد أن تكون قادرًا على الانضمام إلى هذه المجموعة**
-💡 **لا تنس أن تجعلني مشرفًا في هذه المجموعة**
+👋 ** سامو عليكوو ، نورت الجروب يحبي و الله تع اشب شاي 😂**
+🌚 **اوعي تنسي تديني رول عيب ازعل 👮‍♂**
 """,
                     reply_markup=InlineKeyboardMarkup(out[1]),
                     disable_web_page_preview=True
@@ -150,7 +150,7 @@ async def start_command(_, message):
             else:
                 await message.reply_text(text)
         if name[0] == "i":
-            m = await message.reply_text("🔎 إحضار المعلومات!")
+            m = await message.reply_text("🔎 بجبلك المعلومات!")
             query = (str(name)).replace("info_", "", 1)
             query = f"https://www.youtube.com/watch?v={query}"
             results = VideosSearch(query, limit=1)
@@ -164,7 +164,7 @@ async def start_command(_, message):
                 link = result["link"]
                 published = result["publishedTime"]
             searched_text = f"""
-🔍 __**معلومات مسار الفيديو**__
+🔍 __**معلومات عن الفيديو**__
 ❇️ **لقب:** {title}
 ⏳ **مده التشغيل:** {duration} Mins
 👀 **المشاهدات:** `{views}`
@@ -217,7 +217,7 @@ async def okaybhai(_, CallbackQuery):
     await CallbackQuery.answer("Going Back ...")
     out = start_pannel()
     await CallbackQuery.edit_message_text(
-        text=f"شكرا لإضافتي {CallbackQuery.message.chat.title}.\n{BOT_NAME} Telah online.\n\nإذا كنت بحاجة إلى مساعدة أو كانت هناك مشكلة في الروبوت ، فيرجى الانضمام إلى مجموعتنا أو قناتنا.",
+        text=f"قلبي يات يالي ضفتني انت {CallbackQuery.message.chat.title}.\n{BOT_NAME} Telah online.\n\nلو عاوز مساعده او مش فاهم حاجه او حمار و مش عارف تشغلني او بوظت حاجه ف امي 😂 خش جروب الدعم و قول للمعلم نيورك.",
         reply_markup=InlineKeyboardMarkup(out[1]),
     )
 
@@ -252,12 +252,12 @@ async def EVE(_, CallbackQuery):
         await CallbackQuery.answer("Changes Saved")
         await add_nonadmin_chat(chat_id)
         await CallbackQuery.edit_message_text(
-            text=f"{text}\n\nيقوم المسؤولون بوضع الأوامر إلى **Everyone**\n\nالآن يمكن لأي شخص موجود في هذه المجموعة تخطي الموسيقى وإيقافها مؤقتًا واستئنافها وإيقافها.\n\nالتغييرات التي تم إجراؤها بواسطة @{checking}",
+            text=f"{text}\n\n المشرفين يقدرو يخلو ان **Everyone**\n\n  اي عضو في الجروب يقدر يوقف و يشغل و يغير الاغنيه الي شغاله .\n\nدي التغييرات الي عملها دا @{checking}",
             reply_markup=InlineKeyboardMarkup(buttons),
         )
     else:
         await CallbackQuery.answer(
-            "تم بالفعل تعيين وضع الأوامر على الجميع", show_alert=True
+            "حصل خلاص و عملنا الاوامر علي الكل خلصانه", show_alert=True
         )
 
 @app.on_callback_query(filters.regex("AMS"))
@@ -268,13 +268,13 @@ async def AMS(_, CallbackQuery):
     is_non_admin = await is_nonadmin_chat(chat_id)
     if not is_non_admin:
         await CallbackQuery.answer(
-            "تم بالفعل تعيين وضع الأوامر على ADMINS فقط", show_alert=True
+            "حصل يزميلي و خلينا الاوامر ع الادمنيه واتعشت علي كده 🙂😹", show_alert=True
         )
     else:
         await CallbackQuery.answer("Changes Saved")
         await remove_nonadmin_chat(chat_id)
         await CallbackQuery.edit_message_text(
-            text=f"{text}\n\nاضبط وضع الأوامر على **Admins**\n\nالآن يمكن للمشرفين الموجودين في هذه المجموعة فقط تخطي الموسيقى وإيقافها مؤقتًا واستئنافها وإيقافها.\n\nالتغييرات التي تم إجراؤها بواسطة @{checking}",
+            text=f"{text}\n\nظبطنا وضع الاوامر علي ان **Admins**\n\n ان المشرفين بس هما الي يتحكمو و يغيرو الاغنيه و يوقفو التشغيل و كده حلوين يبا  .\n\nالي عمل الشغله دي هوا دا @{checking}",
             reply_markup=InlineKeyboardMarkup(buttons),
         )
 
@@ -290,9 +290,9 @@ async def start_markup_check(_, CallbackQuery):
     c_id = CallbackQuery.message.chat.id
     chat_id = CallbackQuery.message.chat.id
     if command == "AQ":
-        await CallbackQuery.answer("بالفعل في أفضل جودة", show_alert=True)
+        await CallbackQuery.answer("انا زالفول اهو", show_alert=True)
     if command == "AV":
-        await CallbackQuery.answer("إعدادات البوت ...")
+        await CallbackQuery.answer("إعداداتي ...")
         text, buttons = volmarkup()
         _check = await get_assistant(c_id, "assistant")
         volume = _check["volume"]
@@ -301,7 +301,7 @@ async def start_markup_check(_, CallbackQuery):
             reply_markup=InlineKeyboardMarkup(buttons),
         )
     if command == "AU":
-        await CallbackQuery.answer("إعدادات البوت ...")
+        await CallbackQuery.answer("إعداداتي ...")
         text, buttons = usermarkup()
         is_non_admin = await is_nonadmin_chat(chat_id)
         if not is_non_admin:
@@ -318,11 +318,11 @@ async def start_markup_check(_, CallbackQuery):
         _check = await get_assistant(c_id, "assistant")
         volume = _check["volume"]
         await CallbackQuery.edit_message_text(
-            text=f"{text}\n\n**Group:** {c_title}\n**Group ID:** {c_id}\n**Volume Level:** {volume}%\n\nCheck {BOT_NAME}'s System Stats In the DashBoard Here! More Functions adding very soon! Keep on Checking Support Channel.",
+            text=f"{text}\n\n**Group:** {c_title}\n**Group ID:** {c_id}\n**Volume Level:** {volume}%\n\nCheck {BOT_NAME}'s الاحصائيات تحت النظر و المعلم نيورك بيجهز لمميزات اكتر لازم تراقي القناه بتاعه التحديثات عشان تعرف كل جديد يقلبي ❤️🙂",
             reply_markup=InlineKeyboardMarkup(buttons),
         )
     if command == "Custommarkup":
-        await CallbackQuery.answer("Bot Settings ...")
+        await CallbackQuery.answer("إعداداتي ...")
         text, buttons = custommarkup()
         _check = await get_assistant(c_id, "assistant")
         volume = _check["volume"]
@@ -337,9 +337,9 @@ async def start_markup_check(_, CallbackQuery):
         volume = 25
         try:
             await pytgcalls.change_volume_call(c_id, volume)
-            await CallbackQuery.answer("ضبط تغييرات الصوت ...")
+            await CallbackQuery.answer("ظبط الصوت و لو عاوز تغير حاجه ...")
         except:
-            return await CallbackQuery.answer("لا توجد مكالمة جماعية نشطة...")
+            return await CallbackQuery.answer("مفيش كول شغال يبا انت مصتبح ولا اي ...")
         await save_assistant(c_id, "assistant", assis)
         text, buttons = volmarkup()
         await CallbackQuery.edit_message_text(
@@ -353,9 +353,9 @@ async def start_markup_check(_, CallbackQuery):
         volume = 50
         try:
             await pytgcalls.change_volume_call(c_id, volume)
-            await CallbackQuery.answer("Setting Audio Changes ...")
+            await CallbackQuery.answer("بعملك تغيرات الصوت الي انت عاوزها اهو استني ...")
         except:
-            return await CallbackQuery.answer("No active Group Call...")
+            return await CallbackQuery.answer("مفيش كول شغال يبا انت مصتبح ولا اي ...")
         await save_assistant(c_id, "assistant", assis)
         text, buttons = volmarkup()
         await CallbackQuery.edit_message_text(
@@ -369,9 +369,9 @@ async def start_markup_check(_, CallbackQuery):
         volume = 100
         try:
             await pytgcalls.change_volume_call(c_id, volume)
-            await CallbackQuery.answer("ضبط تغييرات الصوت ...")
+            await CallbackQuery.answer("بعملك تغيرات الصوت الي انت عاوزها اهو استني ...")
         except:
-            return await CallbackQuery.answer("لا توجد مكالمة جماعية نشطة...")
+            return await CallbackQuery.answer("مفيش كول شغال يبا انت مصتبح ولا اي ...")
         await save_assistant(c_id, "assistant", assis)
         text, buttons = volmarkup()
         await CallbackQuery.edit_message_text(
@@ -385,9 +385,9 @@ async def start_markup_check(_, CallbackQuery):
         volume = 200
         try:
             await pytgcalls.change_volume_call(c_id, volume)
-            await CallbackQuery.answer("ضبط تغييرات الصوت ...")
+            await CallbackQuery.answer("بعملك تغيرات الصوت الي انت عاوزها اهو استني ...")
         except:
-            return await CallbackQuery.answer("لا توجد مكالمة جماعية نشطة...")
+            return await CallbackQuery.answer("مفيش كول شغال يبا انت مصتبح ولا اي ...")
         await save_assistant(c_id, "assistant", assis)
         text, buttons = volmarkup()
         await CallbackQuery.edit_message_text(
@@ -407,9 +407,9 @@ async def start_markup_check(_, CallbackQuery):
         }
         try:
             await pytgcalls.change_volume_call(c_id, volume)
-            await CallbackQuery.answer("ضبط تغييرات الصوت ...")
+            await CallbackQuery.answer("بعملك تغيرات الصوت الي انت عاوزها اهو استني ...")
         except:
-            return await CallbackQuery.answer("لا توجد مكالمة جماعية نشطة...")
+            return await CallbackQuery.answer("مفيش كول شغال يبا انت مصتبح ولا اي ...")
         await save_assistant(c_id, "assistant", assis)
         text, buttons = custommarkup()
         await CallbackQuery.edit_message_text(
@@ -429,9 +429,9 @@ async def start_markup_check(_, CallbackQuery):
         }
         try:
             await pytgcalls.change_volume_call(c_id, volume)
-            await CallbackQuery.answer("ضبط تغييرات الصوت ...")
+            await CallbackQuery.answer("بعملك تغيرات الصوت الي انت عاوزها اهو استني ...")
         except:
-            return await CallbackQuery.answer("لا توجد مكالمة جماعية نشطة...")
+            return await CallbackQuery.answer("مفيش كول شغال يبا انت مصتبح ولا اي ...")
         await save_assistant(c_id, "assistant", assis)
         text, buttons = custommarkup()
         await CallbackQuery.edit_message_text(
@@ -451,9 +451,9 @@ async def start_markup_check(_, CallbackQuery):
         }
         try:
             await pytgcalls.change_volume_call(c_id, volume)
-            await CallbackQuery.answer("ضبط تغييرات الصوت ...")
+            await CallbackQuery.answer("بعملك تغيرات الصوت الي انت عاوزها اهو استني ...")
         except:
-            return await CallbackQuery.answer("لا توجد مكالمة جماعية نشطة...")
+            return await CallbackQuery.answer("مفيش كول شغال يبا انت مصتبح ولا اي ...")
         await save_assistant(c_id, "assistant", assis)
         text, buttons = custommarkup()
         await CallbackQuery.edit_message_text(
@@ -473,9 +473,9 @@ async def start_markup_check(_, CallbackQuery):
         }
         try:
             await pytgcalls.change_volume_call(c_id, volume)
-            await CallbackQuery.answer("ضبط تغييرات الصوت ...")
+            await CallbackQuery.answer("بعملك تغيرات الصوت الي انت عاوزها اهو استني ...")
         except:
-            return await CallbackQuery.answer("لا توجد مكالمة جماعية نشطة...")
+            return await CallbackQuery.answer("مفيش كول شغال يبا انت مصتبح ولا اي ...")
         await save_assistant(c_id, "assistant", assis)
         text, buttons = custommarkup()
         await CallbackQuery.edit_message_text(
@@ -495,9 +495,9 @@ async def start_markup_check(_, CallbackQuery):
         }
         try:
             await pytgcalls.change_volume_call(c_id, volume)
-            await CallbackQuery.answer("ضبط تغييرات الصوت ...")
+            await CallbackQuery.answer("بعملك تغيرات الصوت الي انت عاوزها اهو استني ...")
         except:
-            return await CallbackQuery.answer("لا توجد مكالمة جماعية نشطة...")
+            return await CallbackQuery.answer("مفيش كول شغال يبا انت مصتبح ولا اي ...")
         await save_assistant(c_id, "assistant", assis)
         text, buttons = custommarkup()
         await CallbackQuery.edit_message_text(
@@ -517,9 +517,9 @@ async def start_markup_check(_, CallbackQuery):
         }
         try:
             await pytgcalls.change_volume_call(c_id, volume)
-            await CallbackQuery.answer("ضبط تغييرات الصوت ...")
+            await CallbackQuery.answer("بعملك تغيرات الصوت الي انت عاوزها اهو استني ...")
         except:
-            return await CallbackQuery.answer("لا توجد مكالمة جماعية نشطة...")
+            return await CallbackQuery.answer("مفيش كول شغال يبا انت مصتبح ولا اي ...")
         await save_assistant(c_id, "assistant", assis)
         text, buttons = custommarkup()
         await CallbackQuery.edit_message_text(
@@ -538,9 +538,9 @@ async def start_markup_check(_, CallbackQuery):
         else:
             j = 0
             await CallbackQuery.edit_message_text(
-                "إحضار المستخدمين المصرح لهم ... الرجاء الانتظار"
+                "بحضرلك الناس الي مسموح ليهم ... استني يعمنا الله يباركلك"
             )
-            msg = f"**قائمة المستخدمين المعتمدين[AUL]:**\n\n"
+            msg = f"**قايمه المستخدمين المؤسسجيه بمت😂[AUL]:**\n\n"
             for note in _playlist:
                 _note = await get_authuser(
                     CallbackQuery.message.chat.id, note

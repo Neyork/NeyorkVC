@@ -70,7 +70,7 @@ Ping: `⚡{resp} ms`
 async def stats_markup(_, CallbackQuery):
     command = CallbackQuery.matches[0].group(1)
     if command == "sys_stats":
-        await CallbackQuery.answer("الحصول على احصائيات النظام...", show_alert=True)
+        await CallbackQuery.answer("احصائيات النظام يعمنا...", show_alert=True)
         sc = platform.system()
         arch = platform.machine()
         ram = (
@@ -134,10 +134,10 @@ async def stats_markup(_, CallbackQuery):
         await CallbackQuery.edit_message_text(smex, reply_markup=stats4)
     if command == "assis_stats":
         await CallbackQuery.answer(
-            "الحصول على إحصائيات المساعد...", show_alert=True
+            "احصائيات الحساب المساعد زميلي...", show_alert=True
         )
         await CallbackQuery.edit_message_text(
-            "الحصول على إحصائيات المساعد .. الرجاء الانتظار...", reply_markup=stats6
+            "احصائيات الحساب المساعد زميلي .. استني بق اعم...", reply_markup=stats6
         )
         groups_ub = channels_ub = bots_ub = privates_ub = total_ub = 0
         async for i in userbot.iter_dialogs():
