@@ -33,12 +33,12 @@ Only for Sudo Users
 async def activevc(_, message: Message):
     global get_queue
     if await is_active_chat(message.chat.id):
-        mystic = await message.reply_text("Please Wait... Getting Queue..")
+        mystic = await message.reply_text("الرجاء الانتظار ... جاري الحصول على قائمة الانتظار..")
         dur_left = db_mem[message.chat.id]["left"]
         duration_min = db_mem[message.chat.id]["total"]
         got_queue = get_queue.get(message.chat.id)
         if not got_queue:
-            await mystic.edit(f"Nothing in Queue")
+            await mystic.edit(f"لا شيء في قائمة الانتظار")
         fetched = []
         for get in got_queue:
             fetched.append(get)
@@ -77,7 +77,7 @@ async def activevc(_, message: Message):
         else:
             await mystic.edit(msg)
     else:
-        await message.reply_text(f"Tidak ada dalam Antrian")
+        await message.reply_text(f"لا شيء في قائمة الانتظار")
 
 
 @app.on_message(filters.command("activevc") & filters.user(SUDOERS))
@@ -105,7 +105,7 @@ async def activevc(_, message: Message):
             text += f"<b>{j + 1}. {title}</b> [`{x}`]\n"
         j += 1
     if not text:
-        await message.reply_text("Tidak Ada Obrolan Suara Aktif")
+        await message.reply_text("لا توجد محادثات صوتية نشطة")
     else:
         await message.reply_text(
             f"**Active Voice Chats:-**\n\n{text}",
@@ -117,46 +117,46 @@ async def activevc(_, message: Message):
 async def basffy(_, message):
     if len(message.command) != 2:
         await message.reply_text(
-            "**Penggunaan:**\n/joinassistant [Nama Pengguna Obrolan atau ID Obrolan]"
+            "**Usage:**\n/joinassistant [Chat Username or Chat ID]"
         )
         return
     chat = message.text.split(None, 2)[1]
     try:
         await userbot.join_chat(chat)
     except Exception as e:
-        await message.reply_text(f"Gagal\n**Kemungkinan alasannya bisa**:{e}")
+        await message.reply_text(f"باءت بالفشل\n**يمكن أن يكون السبب المحتمل**:{e}")
         return
-    await message.reply_text("Bergabung.")
+    await message.reply_text("Joined.")
 
 
 @app.on_message(filters.command("leavebot") & filters.user(SUDOERS))
 async def baaaf(_, message):
     if len(message.command) != 2:
         await message.reply_text(
-            "**Penggunaan:**\n/leavebot [Nama Pengguna Obrolan atau ID Obrolan]"
+            "**Usage:**\n/leavebot [Chat Username or Chat ID]"
         )
         return
     chat = message.text.split(None, 2)[1]
     try:
         await app.leave_chat(chat)
     except Exception as e:
-        await message.reply_text(f"Gagal\n**Kemungkinan alasannya bisa**:{e}")
+        await message.reply_text(f"باءت بالفشل\n**يمكن أن يكون السبب المحتمل**:{e}")
         print(e)
         return
-    await message.reply_text("Bot telah berhasil meninggalkan obrolan")
+    await message.reply_text("غادر البوت الدردشة بنجاح")
 
 
 @app.on_message(filters.command("leaveassistant") & filters.user(SUDOERS))
 async def baujaf(_, message):
     if len(message.command) != 2:
         await message.reply_text(
-            "**Penggunaan:**\n/leave [Nama Pengguna Obrolan atau ID Obrolan]"
+            "**Usage:**\n/leave [Chat Username or Chat ID]"
         )
         return
     chat = message.text.split(None, 2)[1]
     try:
         await userbot.leave_chat(chat)
     except Exception as e:
-        await message.reply_text(f"Gagal\n**Kemungkinan alasannya bisa**:{e}")
+        await message.reply_text(f"باءت بالفشل\n**يمكن أن يكون السبب المحتمل**:{e}")
         return
-    await message.reply_text("Keluar.")
+    await message.reply_text("Left.")

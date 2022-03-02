@@ -27,16 +27,16 @@ bcl = InlineKeyboardMarkup([[InlineKeyboardButton("ᴛᴜᴛᴜᴘ", callback_da
 async def cbmenu(_, query: CallbackQuery):
     if query.message.sender_chat:
         return await query.answer(
-            "Anda adalah **Admin Anonim** !\n\n» kembali ke akun pengguna dari hak admin."
+            "أنت مسؤول مجهول! \ n \ n »رجوع إلى حساب المستخدم من حقوق المسؤول."
         )
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer(
-            "💡 Hanya admin dengan izin mengelola obrolan suara yang dapat mengetuk tombol ini !",
+            "💡 يمكن للمسؤولين الذين لديهم إذن إدارة الدردشة الصوتية فقط النقر فوق هذا الزر!",
             show_alert=True,
         )
     await query.edit_message_text(
-        f"⚙️ **Pengaturan dari** {query.message.chat.title}\n\nII : Jeda Streaming\n▷ : Lanjutkan Streaming\n🔇 : Bisukan Assistant\n🔊 : Bunyikan Assistant\n▢ : Hentikan Streaming",
+        f"⚙️ إعدادات من {query.message.chat.title} \ n \ n II: إيقاف البث مؤقتًا \ n ▷: استئناف البث \ n🔇: مساعد كتم الصوت \ n🔊: مساعد كتم الصوت \ n▢: إيقاف البث",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
@@ -59,7 +59,7 @@ async def close(_, query: CallbackQuery):
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer(
-            "💡 Hanya admin dengan izin mengelola obrolan suara yang dapat mengetuk tombol ini !",
+            "💡 يمكن للمسؤولين الذين لديهم إذن بإدارة الدردشة الصوتية فقط النقر فوق هذا الزر!",
             show_alert=True,
         )
     await query.message.delete()
@@ -81,29 +81,28 @@ async def skip(client, m: Message):
     if len(m.command) < 2:
         op = await skip_current_song(chat_id)
         if op == 0:
-            await m.reply("❌ Tidak ada yang sedang diputar")
+            await m.reply("❌ لا شيء يلعب")
         elif op == 1:
             await m.reply(
-                "✅ __Antrian__ **kosong.**\n\n**• Assistant meninggalkan obrolan suara**"
+                "✅ __Antrian__ **فارغ.**\n\n**• غادر المساعد الدردشة الصوتية**"
             )
         elif op == 2:
             await m.reply(
-                "🗑️ **Membersihkan Antrian**\n\n**• Assistant meninggalkan obrolan suara**"
+                "🗑️ **تنظيف قائمة الانتظار**\n\n**• غادر المساعد الدردشة الصوتية**"
             )
         else:
             await m.reply(
                 f"""
-⏭️ **Memutar {op[2]} selanjutnya**
-
-🏷 **Nama:** [{op[0]}]({op[1]})
-🎧 **Atas permintaan:** {m.from_user.mention()}
+⏭️ **تحريف {op[2]} التالي**
+🏷 **اسم:** [{op[0]}]({op[1]})
+🎧 **عند الطلب:** {m.from_user.mention()}
 """,
                 disable_web_page_preview=True,
                 reply_markup=keyboard,
             )
     else:
         skip = m.text.split(None, 1)[1]
-        OP = "🗑 **Lagu dihapus dari antrian:**"
+        OP = "🗑 **تمت إزالة الأغنية من قائمة الانتظار:**"
         if chat_id in QUEUE:
             items = [int(x) for x in skip.split(" ") if x.isdigit()]
             items.sort(reverse=True)
@@ -119,7 +118,7 @@ async def skip(client, m: Message):
             await m.reply(OP)
 
 
-@app.on_message(command(["vend"]) & filters.group)
+@app.on_message(command(["vstop"]) & filters.group)
 @authorized_users_only
 async def stop(client, m: Message):
     chat_id = m.chat.id
@@ -127,11 +126,11 @@ async def stop(client, m: Message):
         try:
             await call_py.leave_group_call(chat_id)
             clear_queue(chat_id)
-            await m.reply("✅ **تم أنتهاء البث داخل المحادثه الصوتيه.**")
+            await m.reply("✅ **انتهى الدفق.**")
         except Exception as e:
             await m.reply(f"**Error:**\n\n`{e}`")
     else:
-        await m.reply("❌ **Tidak ada dalam streaming**")
+        await m.reply("❌ **ليس في الدفق**")
 
 
 @app.on_message(command(["vpause"]) & filters.group)
@@ -142,12 +141,12 @@ async def pause(client, m: Message):
         try:
             await call_py.pause_stream(chat_id)
             await m.reply(
-                "II **Video dijeda.**\n\n• **Untuk melanjutkan video, gunakan Perintah** » /vresume"
+                "II **توقف الفيديو مؤقتًا.**\n\n• **لاستئناف الفيديو ، استخدم الأوامر** » /vresume"
             )
         except Exception as e:
             await m.reply(f"**Error:**\n\n`{e}`")
     else:
-        await m.reply("❌ **Tidak ada dalam streaming**")
+        await m.reply("❌ **ليس في الدفق**")
 
 
 @app.on_message(command(["vresume"]) & filters.group)
@@ -158,12 +157,12 @@ async def resume(client, m: Message):
         try:
             await call_py.resume_stream(chat_id)
             await m.reply(
-                "▷ **Video dilanjutkan.**\n\n• **Untuk menjeda video, gunakan Perintah** » /vpause"
+                "▷ **تابع الفيديو.**\n\n• **لإيقاف مقطع فيديو مؤقتًا ، استخدم الأمر** » /vpause"
             )
         except Exception as e:
             await m.reply(f"**Error:**\n\n`{e}`")
     else:
-        await m.reply("❌ **Tidak ada dalam streaming**")
+        await m.reply("❌ **ليس في الدفق**")
 
 
 @app.on_message(command(["vmute"]) & filters.group)
@@ -174,12 +173,12 @@ async def mute(client, m: Message):
         try:
             await call_py.mute_stream(chat_id)
             await m.reply(
-                "🔇 **Assistant dibisukan.**\n\n• **Untuk mengaktifkan suara Assistant, gunakan Perintah**\n» /vunmute"
+                "🔇 **تم كتم صوت المساعد.**\n\n• **لتنشيط صوت المساعد ، استخدم الأمر**\n» /vunmute"
             )
         except Exception as e:
             await m.reply(f"**Error:**\n\n`{e}`")
     else:
-        await m.reply("❌ **Tidak ada dalam streaming**")
+        await m.reply("❌ **ليس في الدفق**")
 
 
 @app.on_message(command(["vunmute"]) & filters.group)
@@ -190,47 +189,47 @@ async def unmute(client, m: Message):
         try:
             await call_py.unmute_stream(chat_id)
             await m.reply(
-                "🔊 **Assistant diaktifkan.**\n\n• **Untuk menonaktifkan bot pengguna, gunakan Perintah**\n» /vmute"
+                "🔊 **تم تنشيط المساعد.**\n\n• **لتعطيل روبوتات المستخدم ، استخدم الأوامر**\n» /vmute"
             )
         except Exception as e:
             await m.reply(f"**Error:**\n\n`{e}`")
     else:
-        await m.reply("❌ **Tidak ada dalam streaming**")
+        await m.reply("❌ **ليس في الدفق**")
 
 
 @Client.on_callback_query(filters.regex("cbpause"))
 async def cbpause(_, query: CallbackQuery):
     if query.message.sender_chat:
         return await query.answer(
-            "Anda adalah **Admin Anonim** !\n\n» kembali ke akun pengguna dari hak admin."
+            "أنتم **Admin Anonim** !\n\n» العودة إلى حساب المستخدم من حقوق المسؤول."
         )
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer(
-            "💡 Hanya admin dengan izin mengelola obrolan suara yang dapat mengetuk tombol ini!",
+            "💡 يمكن للمسؤولين الذين لديهم إذن بإدارة الدردشة الصوتية فقط النقر فوق هذا الزر!",
             show_alert=True,
         )
     chat_id = query.message.chat.id
     if chat_id in QUEUE:
         try:
             await call_py.pause_stream(chat_id)
-            await query.edit_message_text("II Streaming telah dijeda", reply_markup=bttn)
+            await query.edit_message_text("II تم إيقاف البث مؤقتًا", reply_markup=bttn)
         except Exception as e:
             await query.edit_message_text(f"**Error:**\n\n`{e}`", reply_markup=bcl)
     else:
-        await query.answer("❌ Tidak ada yang sedang streaming", show_alert=True)
+        await query.answer("❌ لا شيء يتدفق", show_alert=True)
 
 
 @Client.on_callback_query(filters.regex("cbresume"))
 async def cbresume(_, query: CallbackQuery):
     if query.message.sender_chat:
         return await query.answer(
-            "Anda adalah **Admin Anonim** !\n\n» kembali ke akun pengguna dari hak admin."
+            "أنتم **مشرف مجهول** !\n\n» العودة إلى حساب المستخدم من حقوق المسؤول."
         )
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer(
-            "💡 Hanya admin dengan izin mengelola obrolan suara yang dapat mengetuk tombol ini !",
+            "💡 يمكن للمسؤولين الذين لديهم إذن بإدارة الدردشة الصوتية فقط النقر فوق هذا الزر!",
             show_alert=True,
         )
     chat_id = query.message.chat.id
@@ -238,24 +237,24 @@ async def cbresume(_, query: CallbackQuery):
         try:
             await call_py.resume_stream(chat_id)
             await query.edit_message_text(
-                "تم استئناف البث ▷ ", reply_markup=bttn
+                "▷ تم استئناف البث", reply_markup=bttn
             )
         except Exception as e:
             await query.edit_message_text(f"**Error:**\n\n`{e}`", reply_markup=bcl)
     else:
-        await query.answer("❌ Tidak ada yang sedang streaming", show_alert=True)
+        await query.answer("❌ لا شيء يتدفق", show_alert=True)
 
 
 @Client.on_callback_query(filters.regex("cbstop"))
 async def cbstop(_, query: CallbackQuery):
     if query.message.sender_chat:
         return await query.answer(
-            "Anda adalah **Admin Anonim** !\n\n» kembali ke akun pengguna dari hak admin."
+            "أنتم **مشرف مجهول** !\n\n» العودة إلى حساب المستخدم من حقوق المسؤول."
         )
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer(
-            "💡 Hanya admin dengan izin mengelola obrolan suara yang dapat mengetuk tombol ini !",
+            "💡 يمكن للمسؤولين الذين لديهم إذن بإدارة الدردشة الصوتية فقط النقر فوق هذا الزر!",
             show_alert=True,
         )
     chat_id = query.message.chat.id
@@ -264,24 +263,24 @@ async def cbstop(_, query: CallbackQuery):
             await call_py.leave_group_call(chat_id)
             clear_queue(chat_id)
             await query.edit_message_text(
-                "✅ **تم أنتهاء البث داخل المحادثه الصوتيه**", reply_markup=bcl
+                "✅ **انتهى الدفق**", reply_markup=bcl
             )
         except Exception as e:
             await query.edit_message_text(f"**Error:**\n\n`{e}`", reply_markup=bcl)
     else:
-        await query.answer("❌ Tidak ada yang sedang streaming", show_alert=True)
+        await query.answer("❌ لا شيء يتدفق", show_alert=True)
 
 
 @Client.on_callback_query(filters.regex("cbmute"))
 async def cbmute(_, query: CallbackQuery):
     if query.message.sender_chat:
         return await query.answer(
-            "Anda adalah **Admin Anonim** !\n\n» kembali ke akun pengguna dari hak admin."
+            "أنتم **مشرف مجهول** !\n\n» العودة إلى حساب المستخدم من حقوق المسؤول."
         )
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer(
-            "💡 Hanya admin dengan izin mengelola obrolan suara yang dapat mengetuk tombol ini !",
+            "💡 يمكن للمسؤولين الذين لديهم إذن بإدارة الدردشة الصوتية فقط النقر فوق هذا الزر!",
             show_alert=True,
         )
     chat_id = query.message.chat.id
@@ -289,24 +288,24 @@ async def cbmute(_, query: CallbackQuery):
         try:
             await call_py.mute_stream(chat_id)
             await query.edit_message_text(
-                "🔇 Assistant berhasil dimatikan", reply_markup=bttn
+                "🔇 تم إيقاف المساعد بنجاح", reply_markup=bttn
             )
         except Exception as e:
             await query.edit_message_text(f"***Error:**\n\n`{e}`", reply_markup=bcl)
     else:
-        await query.answer("❌ Tidak ada yang sedang streaming", show_alert=True)
+        await query.answer("❌ لا شيء يتدفق", show_alert=True)
 
 
 @Client.on_callback_query(filters.regex("cbunmute"))
 async def cbunmute(_, query: CallbackQuery):
     if query.message.sender_chat:
         return await query.answer(
-            "Anda adalah **Admin Anonim** !\n\n» kembali ke akun pengguna dari hak admin."
+            "أنتم **مشرف مجهول** !\n\n» العودة إلى حساب المستخدم من حقوق المسؤول."
         )
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
         return await query.answer(
-            "💡 Hanya admin dengan izin mengelola obrolan suara yang dapat mengetuk tombol ini !",
+            "💡 يمكن للمسؤولين الذين لديهم إذن بإدارة الدردشة الصوتية فقط النقر فوق هذا الزر!",
             show_alert=True,
         )
     chat_id = query.message.chat.id
@@ -314,12 +313,12 @@ async def cbunmute(_, query: CallbackQuery):
         try:
             await call_py.unmute_stream(chat_id)
             await query.edit_message_text(
-                "🔊 Assistant berhasil dibunyikan", reply_markup=bttn
+                "🔊 بدا المساعد بنجاح", reply_markup=bttn
             )
         except Exception as e:
             await query.edit_message_text(f"**Error:**\n\n`{e}`", reply_markup=bcl)
     else:
-        await query.answer("❌ Tidak ada yang sedang streaming", show_alert=True)
+        await query.answer("❌ لا شيء يتدفق", show_alert=True)
 
 
 @app.on_message(command(["volume", "vol"]))
@@ -330,8 +329,8 @@ async def change_volume(client, m: Message):
     if chat_id in QUEUE:
         try:
             await call_py.change_volume_call(chat_id, volume=int(range))
-            await m.reply(f"✅ **Volume disetel ke** `{range}`%")
+            await m.reply(f"✅ **تم ضبط الحجم على** `{range}`%")
         except Exception as e:
             await m.reply(f"**Error:**\n\n`{e}`")
     else:
-        await m.reply("❌ **Tidak ada dalam streaming**")
+        await m.reply("❌ **ليس في الدفق**")

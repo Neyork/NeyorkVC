@@ -38,11 +38,11 @@ from Music.MusicUtilities.database.functions import start_restart_stage
 async def update(_, message: Message):
     m = subprocess.check_output(["git", "pull"]).decode("UTF-8")
     if str(m[0]) != "A":
-        x = await message.reply_text("Ditemukan Pembaruan!  Mendorong Sekarang.")
+        x = await message.reply_text("Found Updates! Pushing Now.")
         await start_restart_stage(x.chat.id, x.message_id)
         os.execvp("python3", ["python3", "-m", "Music"])
     else:
-        await message.reply_text("Sudah Up To Date Dengan Versi Terbaru")
+        await message.reply_text("Already Up To Date With Latest Version")
         
 async def aexec(code, client, message):
     exec(
@@ -62,11 +62,11 @@ async def edit_or_reply(msg: Message, **kwargs):
     filters.user(OWNER)
     & ~filters.forwarded
     & ~filters.via_bot
-    & filters.command("ev")
+    & filters.command("exec")
 )
 async def executor(client, message):
     if len(message.command) < 2:
-        return await edit_or_reply(message, text="__Beri aku beberapa perintah untuk dieksekusi.__")
+        return await edit_or_reply(message, text="__Nigga Give me some command to execute.__")
     try:
         cmd = message.text.split(" ", maxsplit=1)[1]
     except IndexError:

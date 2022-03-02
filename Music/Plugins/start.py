@@ -2,7 +2,7 @@ import asyncio
 import yt_dlp
 import psutil
 
-from Music.config import GROUP, CHANNEL
+from Music.config import SUPPORT_GROUP, UPDATES_CHANNEL
 from Music import (
     ASSID,
     BOT_ID,
@@ -46,7 +46,7 @@ def start_pannel():
             InlineKeyboardButton("📚 ᴄᴏᴍᴍᴀɴᴅ​ 📚", url="https://telegra.ph/Neyork-02-02"),
         ],
         [
-            InlineKeyboardButton("Neyork", url="https://t.me/lIPyl"),
+            InlineKeyboardButton("Owner Source 🧛", url="https://t.me/QDevQ"),
         ],
     ]
     return (
@@ -69,7 +69,7 @@ pstart_markup = InlineKeyboardMarkup(
             InlineKeyboardButton("📚 ᴄᴏᴍᴍᴀɴᴅ ​📚", url="https://telegra.ph/Neyork-02-02"),
         ],
         [
-            InlineKeyboardButton("Neyork", url="https://t.me/lIPyl"),
+            InlineKeyboardButton("Owner Source 🧛", url="https://t.me/QDevQ"),
         ],
     ]
 )
