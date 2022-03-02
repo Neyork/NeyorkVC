@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://telegra.ph/file/fab6ae633aa3b4c7a49ee.jpg">
+</p>
+
 <h2 align="centre">NeyorkVC</h2>
 
 <h3>Requirements 📝</h3>
