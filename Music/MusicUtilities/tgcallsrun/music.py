@@ -74,7 +74,7 @@ async def on_stream_end(client: PyTgCalls, update: Update) -> None:
                 mystic = await app.send_message(chat_id, "Downloading Next Music From Playlist...")
                 url = (f"https://www.youtube.com/watch?v={afk}")
                 ctitle = (await app.get_chat(chat_id)).title
-                logger_text=f"""Playing Next From Playlist
+                logger_text=f"""تشغيل التالي من قائمة التشغيل
 
 Group :- {chat_id}
 Title :- {ctitle}
@@ -87,7 +87,7 @@ Downloading....
                     with yt_dlp.YoutubeDL(ytdl_opts) as ytdl:
                         x = ytdl.extract_info(url, download=False)
                 except Exception as e:
-                    return await mystic.edit(f"❌ Failed to download this video.\n\n**Reason**:{e}") 
+                    return await mystic.edit(f"❌ فشل تحميل هذا الفيديو.\n\n**Reason**:{e}") 
                 
                 chat_title = ctitle                
                 videoid = afk
