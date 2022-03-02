@@ -21,20 +21,20 @@ Client(
 ).start()
 
 
-print(f"[INFO]: BOT STARTED AS {BOT_NAME}!")
-print(f"[INFO]: ASSISTANT STARTED AS {ASSNAME}!")
+print(f"[INFO]: بدا البوت AS {BOT_NAME}!")
+print(f"[INFO]: بدا الحساب المساعد AS {ASSNAME}!")
 
 
 
 async def load_start():
     restart_data = await clean_restart_stage()
     if restart_data:
-        print("[INFO]: SENDING RESTART STATUS TO Neyork SERVER")
+        print("[INFO]: إرسال حالة إعادة التشغيل إلى خادم Neyork")
         try:
             await app.edit_message_text(
                 restart_data["chat_id"],
                 restart_data["message_id"],
-                "**Restarted the Bot Successfully.**",
+                "**تم اعاده تشغيل البوت بنجاح.**",
             )
         except Exception:
             pass
@@ -44,16 +44,16 @@ async def load_start():
         for chat in chats:
             served_chats.append(int(chat["chat_id"]))
     except Exception as e:
-        print("Error came while clearing db")
+        print("حدث خطأ أثناء مسح ديسيبل")
     for served_chat in served_chats:
         try:
             await remove_active_chat(served_chat)                                         
         except Exception as e:
-            print("Error came while clearing db")
+            print("حدث خطأ أثناء مسح ديسيبل")
             pass     
-    await app.send_message(LOG_GROUP_ID, "Neyork Music Bot Started")
-    await client.send_message(LOG_GROUP_ID, "Assistant Of Neyork Music Started")
-    print("[INFO]: STARTED THE Neyork BOT AND SENDING THE INFO TO Neyork SERVER")
+    await app.send_message(LOG_GROUP_ID, "تم بدا بوت نيورك للموسيقي بنجاح")
+    await client.send_message(LOG_GROUP_ID, "تم بدا الحساب المساعد ل بوت نيورك  بنجاح")
+    print("[INFO]: تم تنصيب بوت نيورك علي سورس نيورك بنجاح")
     
    
 loop = asyncio.get_event_loop()

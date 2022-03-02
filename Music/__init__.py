@@ -44,7 +44,7 @@ aiohttpsession = ClientSession()
 
 initialize()
 
-print("[INFO]: INITIALIZING DATABASE")
+print("[INFO]: تهيئة قاعدة البيانات")
 MONGODB_CLI = MongoClient(MONGO_DB_URI)
 db = MONGODB_CLI.wbb
 SUDOERS = SUDO_USERS
@@ -53,7 +53,7 @@ OWNER = OWNER_ID
 
 async def load_sudoers():
     global SUDOERS
-    print("[INFO]: LOADING SUDO USERS")
+    print("[INFO]: تحميل مستخدمي سودو")
     sudoersdb = db.sudoers
     sudoers = await sudoersdb.find_one({"sudo": "sudo"})
     sudoers = [] if not sudoers else sudoers["sudoers"]
@@ -64,7 +64,7 @@ async def load_sudoers():
                 {"sudo": "sudo"}, {"$set": {"sudoers": sudoers}}, upsert=True
             )
     SUDOERS = (SUDOERS + sudoers) if sudoers else SUDOERS
-    print("[INFO]: LOADED SUDO USERS")
+    print("[INFO]: مستخدمو SUDO المحملون")
 
 
 loop = asyncio.get_event_loop()
@@ -80,7 +80,7 @@ ASSID = 0
 ASSNAME = ""
 ASSUSERNAME = ""
 ASSMENTION = ""
-print("[INFO]: INITIALIZING BOT CLIENT")
+print("[INFO]: بدء تشغيل قاعده البوت")
 app = Client(
     "MusicBot",
     API_ID,
@@ -120,10 +120,10 @@ def init_db():
 init_db()
 
 
-print("[INFO]: STARTING BOT CLIENT")
+print("[INFO]: بدا قاعده البوت")
 app.start()
-print("[INFO]: STARTING ASSISTANT CLIENT")
+print("[INFO]: بدا قاعده الحساب المساعد")
 client.start()
-print("[INFO]: LOADING BOT/ASSISTANT PROFILE INFO")
+print("[INFO]: تحميل معلومات ملف تعريف الروبوت / المساعد")
 all_info(app, client)
-print("[INFO]: LOADED BOT/ASSISTANT PROFILE INFO")
+print("[INFO]: معلومات ملف تعريف الروبوت / المساعد المحملة")
