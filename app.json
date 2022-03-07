@@ -12,7 +12,7 @@
         "OWNER_ID": {
             "description": "fill with your telegram id as the owner of the bot",
             "required": true,
-            "value": "2084559061"
+            "value": "853014134"
         },
         "ASS_ID": {
             "description": "fill with telegram id of account",
@@ -37,17 +37,17 @@
         "SUPPORT_GROUP": {
             "description": "Isi dengan username group tanpa @",
             "required": true,
-            "value": ""
+            "value": "NeyorkSupport"
         },
          "UPDATES_CHANNEL": {
             "description": "Isi dengan username channel tanpa @",
             "required": true,
-            "value": ""
+            "value": "NeyorkUpdate"
         },
         "SUDO_USERS": {
             "description": "fill with the user id who can access all function in your bot (separate with space).",
             "required": true,
-            "value": "2084559061"
+            "value": "853014134"
         },
         "DURATION_LIMIT": {
             "description": "filled, don't change this !",
@@ -57,7 +57,7 @@
         "BOT_TOKEN": {
             "description": "fill with your bot token get from @BotFather on telegram",
             "required": false,
-            "value": "2072760204:AAFYjm0_GDFQOwAgDNacj_t7J9M47egah80"
+            "value": "2072760204:AAEcpdhIsmGE6LTebiSHC2UwFHJymtt1GP4"
         },
         "MONGO_DB_URI": {
             "description": "fill with the mongodb url get from mongodb.cloud.com (don't use mine below !)",
