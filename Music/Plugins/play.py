@@ -219,7 +219,7 @@ async def play(_, message: Message):
     try:
         b = await app.get_chat_member(message.chat.id , ASSID) 
         if b.status == "kicked":
-            await message.reply_text(f"❌ {ASSNAME}(@{ASSUSERNAME}) is banned in your chat **{chat_title}**\n\nUnban it first to use Music")
+            await message.reply_text(f"❌ {ASSNAME}(@{ASSUSERNAME}) تم حظره في الدردشة الخاصة بك **{chat_title}**\n\nقم بإلغاء الحظر أولاً لاستخدام الموسيقى")
             return
     except UserNotParticipant:
         if message.chat.username:
@@ -411,7 +411,7 @@ async def play(_, message: Message):
         return   
     if await is_active_chat(chat_id):
         position = await put(chat_id, file=file)
-        _chat_ = ((str(file)).replace("_","", 1).replace("/","", 1).replace(".","", 1))
+        _chat_ = ((str(file)).replace("!",".", 1).replace("/","!", 1).replace(".","!", 1))
         cpl=(f"downloads/{_chat_}final.png")     
         shutil.copyfile(thumb, cpl) 
         f20 = open(f'search/{_chat_}title.txt', 'w')
@@ -452,7 +452,7 @@ async def play(_, message: Message):
             ),
             stream_type=StreamType().local_stream,
         )
-        _chat_ = ((str(file)).replace("_","", 1).replace("/","", 1).replace(".","", 1))                                                                                           
+        _chat_ = ((str(file)).replace("!",".", 1).replace("/","!", 1).replace(".","!", 1))                                                                                           
         checking = f"[{message.from_user.first_name}](tg://user?id={message.from_user.id})"
         if fucksemx != 1:
             f28 = open(f'search/{_chat_}videoid.txt', 'w')
@@ -566,7 +566,7 @@ async def startyuplay(_,CallbackQuery):
     if await is_active_chat(chat_id):
         position = await put(chat_id, file=file)
         buttons = play_markup(videoid, user_id)
-        _chat_ = ((str(file)).replace("_","", 1).replace("/","", 1).replace(".","", 1))
+        _chat_ = ((str(file)).replace("!",".", 1).replace("/","!", 1).replace(".","!", 1))
         cpl=(f"downloads/{_chat_}final.png")     
         shutil.copyfile(thumb, cpl) 
         f20 = open(f'search/{_chat_}title.txt', 'w')

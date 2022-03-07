@@ -265,7 +265,7 @@ async def stop_cmd(_, message):
                         ),
                     ),
                 )
-                _chat_ = ((str(afk)).replace("_","", 1).replace("/","", 1).replace(".","", 1))
+                _chat_ = ((str(afk)).replace("!",".", 1).replace("/","!", 1).replace(".","!", 1))
                 f2 = open(f'search/{_chat_}title.txt', 'r')        
                 title =(f2.read())
                 f3 = open(f'search/{_chat_}duration.txt', 'r')        
